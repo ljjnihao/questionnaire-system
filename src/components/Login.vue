@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <el-container  v-bind:style="{ 'background-image': 'url(' + require('../assets/imgs/背景.jpg') + ')' }">
+    <el-container  v-bind:style="{ 'background-image': 'url(' + require('../assets/imgs/login_bg.jpg') + ')'}">
       <el-header style="text-align: left; font-size: 20px; padding: 0px !important">
         <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" @select="handleSelect">
           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
@@ -14,7 +14,7 @@
 
       <el-main>
         <el-row class="content">
-          <el-col :xs="24" :sm="{span: 6,offset: 16}">
+          <el-col :xs="24" :sm="{span: 6,offset: 12}">
             <div style="text-align: left">
                 <span class="title" style="font-size: 40px">欢迎使用,</span>
             </div>
@@ -84,7 +84,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-container {
-  background-size: 100% 100%;
+  /* background-size: 100% 100%; */
+  background-repeat: no-repeat;
   height: 100%;
   position: absolute;
   width: 100%
