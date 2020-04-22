@@ -3,7 +3,7 @@
     <el-container  v-bind:style="{ 'background-image': 'url(' + require('../assets/imgs/背景.jpg') + ')' }">
       <el-header style="text-align: left; font-size: 20px">
         <el-row :gutter="20">
-            <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" background-color="transparent">
+            <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" background-color="transparent" active-text-color="white">
                 <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
                 <el-menu-item index="1" style="font-size: 20px">首页</el-menu-item>
                 <el-menu-item index="2" style="font-size: 20px; float: right">
@@ -48,6 +48,7 @@ export default {
   name: 'Index',
   data () {
     return {
+      activeIndex: '1',
       username: '',
       password: '',
       secPassword: ''

@@ -6,20 +6,8 @@ import Login from '@/components/Login'
 import Create from '@/components/Create'
 
 Vue.use(Router)
-// Router.beforeEach((to, from, next) => {
-//   const token = sessionStorage.getItem('token')
-//   if (to.path === '/') {
-//     next()
-//   } else {
-//     if (token !== 'null' && token != null) {
-//       next()
-//     } else {
-//       next('/login')
-//     }
-//   }
-// })
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -43,3 +31,29 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('user-token')
+  // console.log(token)
+  if (to.path === '/' || to.path === '/register' || to.path === '/login') {
+    //* when route to index, check whether token exists, if so, route to create
+    if (token !== '' && token !== null) {
+      const uid = localStorage.getItem('user-id')
+      next(`/create/${uid}`)
+    } else {
+      next()
+    }
+  } else {
+    /* when route to other pages, check token
+       safely route if exists
+       otherwise， route to index
+    */
+    if (token !== '' && token != null) {
+      next()
+    } else {
+      next('/login')
+    }
+  }
+})
+
+export default router

@@ -59,6 +59,7 @@
 export default {
   data () {
     return {
+      activeIndex: '1',
       UID: this.$router.params.uid
     }
   }

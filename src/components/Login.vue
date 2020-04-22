@@ -2,7 +2,7 @@
   <div class="register">
     <el-container  v-bind:style="{ 'background-image': 'url(' + require('../assets/imgs/login_bg.jpg') + ')'}">
       <el-header style="text-align: left; font-size: 20px; padding: 0px !important">
-        <el-menu :default-active="activeIndex" class="el-menu" mode="horizontal" @select="handleSelect">
+        <el-menu class="el-menu" mode="horizontal">
           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
           <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
           <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     login () {
-      this.$axios.post('https://af48ab.toutiao15.com/auth', {
+      this.$axios.post('https://afo3wm.toutiao15.com/loginWIthPassword', {
         username: this.formForLogin.username,
         password: this.formForLogin.password
       })
