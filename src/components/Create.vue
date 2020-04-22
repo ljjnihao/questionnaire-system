@@ -2,13 +2,12 @@
   <div class="Create">
     <el-container>
       <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#000000">
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" text-color="#000000">
           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
           <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
           <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
           <el-menu-item index="3" style="font-size: 20px">消息中心</el-menu-item>
           <el-menu-item index="4" style="font-size: 20px">个人信息</el-menu-item>
-          <el-menu-item index="5">
             <div class="demo-image">
               <div class="block">
                 {{ fit }}
@@ -18,7 +17,7 @@
                   ></el-image>
               </div>
             </div>
-          </el-menu-item>
+          <!-- </el-menu-item> -->
         </el-menu>
       </el-header>
       <el-container>
@@ -35,6 +34,7 @@
             <el-col :span="8"><div class="grid-content bg-purple" style="position: relative;left: 350px">
               <el-button type="primary" plain icon="el-icon-view">预览</el-button>
               <el-button type="primary" icon="el-icon-check">完成编辑</el-button>
+              <el-button type="primary" @click="logout">logout test</el-button>
             </div></el-col>
           </el-row>
         </el-header>
@@ -62,12 +62,16 @@ export default {
       activeIndex: '1',
       UID: this.$router.params.uid
     }
+  },
+  methods: {
+    logout () {
+      //! don't use arrow function here
+      console.log(this.$router)
+      localStorage.setItem('user-token', '')
+      localStorage.setItem('user-id', '')
+      this.$router.push({path: `/login`})
+    }
   }
-  // methods: {
-  //   handleSelect(key, keyPath) {
-  //     console.log(key, keyPath);
-  //   }
-  // }
 }
 </script>
 

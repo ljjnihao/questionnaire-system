@@ -21,17 +21,17 @@
             <div style="text-align: left">
                 <span class="title" style="font-size: 40px; font-weight: bold">在线问卷调研系统</span>
             </div>
-            <el-form label-width="auto" :model="formForLogin" :label-position="left">
+            <el-form label-width="auto" :model="formForLogin">
                 <el-form-item label="账号：" style="font-weight: bold; margin-top: 30px">
                     <el-input v-model="formForLogin.username" placeholder="请输入账号"></el-input>
                 </el-form-item>
                 <el-form-item label="密码：" style="font-weight: bold; margin-top: 30px">
-                    <el-input v-model="formForLogin.password" placeholder="请输入密码" show-password="false"></el-input>
+                    <el-input v-model="formForLogin.password" placeholder="请输入密码" show-password=""></el-input>
                 </el-form-item>
             </el-form>
             <el-button type="primary" round @click="login">登录</el-button>
             <div class="go-to-register">
-                <el-checkbox v-model="checked">记住密码</el-checkbox>
+                <el-checkbox v-model="rememPw">记住密码</el-checkbox>
                 <span style="float: right"><router-link to="/findPassword">忘记密码</router-link></span>
             </div>
             <div class="go-to-register">
@@ -54,21 +54,27 @@ export default {
         username: '',
         password: ''
       },
-      checked: true,
-      UID: ''
+      rememPw: true,
+      UID: '',
+      token: ''
     }
   },
   methods: {
     login () {
       this.$axios.post('https://afo3wm.toutiao15.com/loginWIthPassword', {
         username: this.formForLogin.username,
-        password: this.formForLogin.password
+        encodedpassword: this.$md5(this.formForLogin.password)
       })
         .then((response) => {
           console.log(response.data)
           if (response.data.success) {
             this.UID = response.data.UID
             const uid = this.UID
+            this.token = response.data.token
+            if (this.rememPw) {
+              localStorage.setItem('user-token', this.token)
+              localStorage.setItem('user-id', uid)
+            }
             // ! Use a closure to capture the correct "this" or using arrow function
             this.$router.push({path: `/create/${uid}`})
           }
