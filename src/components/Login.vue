@@ -14,8 +14,8 @@
       </el-header>
 
       <el-main>
-        <el-row class="content">
-          <el-col :xs="24" :sm="{span: 6,offset: 12}">
+        <el-row class="content" >
+          <el-col :xs="24" :sm="24" :md="24" :lg="{span: 8, offset: 16}" :xl="{span: 8, offset: 12}">
             <div style="text-align: left">
               <span class="title" style="font-size: 40px">欢迎使用,</span>
             </div>
