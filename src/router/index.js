@@ -4,6 +4,8 @@ import Index from '@/components/Index'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Create from '@/components/Create'
+import FillQuestionnaire from '@/components/FillQuestionnaire'
+import DataAnalysis from '@/components/DataAnalysis'
 
 Vue.use(Router)
 
@@ -28,6 +30,16 @@ const router = new Router({
       path: '/create/:UID',
       name: 'create',
       component: Create
+    },
+    {
+      path: '/FillQuestionnaire',
+      name: 'FillQuestionnaire',
+      component: FillQuestionnaire
+    },
+    {
+      path: '/DataAnalysis',
+      name: 'DataAnalysis',
+      component: DataAnalysis
     }
   ]
 })
