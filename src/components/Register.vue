@@ -18,7 +18,7 @@
           <el-col :xs="24" :sm="{span: 6,offset: 9}">
             <span class="title">用户注册</span>
             <el-row class="inputs">
-              <el-form :model="formForRegister" status-icon :rules="rules" ref="formForRegister">
+              <el-form :model="formForRegister" status-icon :rules="rules" ref="formForRegister" v-loading="loading" element-loading-text="注册中">
                 <el-form-item style="margin-top: 30px" prop="username">
                   <el-input
                     v-model="formForRegister.username"
@@ -116,11 +116,13 @@ export default {
         password: [{ validator: checkPw, trigger: 'blur' }],
         secPassword: [{ validator: checkPw2, trigger: 'blur' }],
         username: [{ validator: checkName, trigger: 'blur' }]
-      }
+      },
+      loading: false
     }
   },
   methods: {
     register (form) {
+      this.loading = true
       this.$refs[form].validate(valid => {
         if (!valid) {
           this.$alert('密码或用户名不符合要求', '注册失败', {
@@ -133,17 +135,17 @@ export default {
               encodedPassword: this.$md5(this.formForRegister.password)
             })
             .then(response => {
+              this.loading = false
               console.log(response)
               if (response.data.success) {
                 this.UID = response.data.UID
-                const uid = this.UID
                 this.token = response.data.token
                 localStorage.setItem('user-token', this.token)
-                localStorage.setItem('user-id', uid)
+                localStorage.setItem('user-id', this.UID)
                 this.$alert('从问调网开始，制作你的问卷吧！', '注册成功', {
                   confirmButtonText: '确定',
                   callback: action => {
-                    this.$router.push({ path: `/create/${uid}` })
+                    this.$router.push({ path: `/create/${this.UID}` })
                   }
                 })
               } else {

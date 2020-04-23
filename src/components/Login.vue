@@ -15,7 +15,7 @@
 
       <el-main>
         <el-row class="content">
-          <el-col :xs="24" :sm="{span: 6,offset: 12}">
+          <el-col :xs="24" :sm="24" :md="24" :lg="{span: 8, offset: 16}" :xl="{span: 8, offset: 12}">
             <div style="text-align: left">
               <span class="title" style="font-size: 40px">欢迎使用,</span>
             </div>
@@ -78,14 +78,13 @@ export default {
           console.log(response.data)
           if (response.data.success) {
             this.UID = response.data.UID
-            const uid = this.UID
             this.token = response.data.token
             if (this.rememPw) {
               localStorage.setItem('user-token', this.token)
-              localStorage.setItem('user-id', uid)
+              localStorage.setItem('user-id', this.UID)
             }
             // ! Use a closure to capture the correct "this" or using arrow function
-            this.$router.push({ path: `/create/${uid}` })
+            this.$router.push({ path: `/create/${this.UID}` })
           } else {
             this.$message('用户名或密码错误')
           }
@@ -101,7 +100,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .el-container {
-  /* background-size: 100% 100%; */
+  background-size: 100% 100% no-repeat;
   background-repeat: no-repeat;
   height: 100%;
   position: absolute;
