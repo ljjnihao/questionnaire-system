@@ -132,7 +132,7 @@ export default {
       questionnaireData: '',
       radio: '',
       answerSet: [],
-      answerUID: this.$md5(returnCitySN['cip']).substring(0, 24),
+      answerUID: this.$md5(localStorage.getItem('Ip')).substring(0, 24),
       questionID: []
     }
   },
