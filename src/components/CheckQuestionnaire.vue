@@ -1,5 +1,5 @@
 <template>
-  <div class="DataAnalysis">
+  <div class="CheckQuestionnaire">
     <el-container>
       <el-header>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#000000">
@@ -42,7 +42,7 @@
     </el-container>
     <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu default-active="1">
+        <el-menu default-active="2">
           <el-menu-item index="1">
             <span slot="title" class="asidefont">回收概况</span>
           </el-menu-item>
@@ -55,40 +55,30 @@
         </el-menu>
       </el-aside>
       <el-main class="display-flex">
-          <div id="main" style="width: 590px;height:500px;"></div>
+          <span class="QuestionNaireTitle">{{QTitle}}       回收量：{{RecoveryNum}}</span>
+          <el-table :data="tableData" max-height="590" style="width: 500px" class="QuestionNaireTable">
+            <el-table-column prop="date" label="查看" width="100">
+            </el-table-column>
+            <el-table-column prop="name" label="序号" width="100">
+            </el-table-column>
+            <el-table-column prop="address" label="提交时间" width="300">
+            </el-table-column>
+          </el-table>
       </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
-var echarts = require('echarts')
 export default {
   data () {
     return {
       activeIndex: '2',
-      title: '问卷标题',
-      QuestionNaireId: '10001',
+      QTitle: '问卷标题',
+      RecoveryNum: null,
       qid: this.$router.history.current.params.QID,
       UID: this.$router.history.current.params.UID,
-      option: {
-        title: {
-          text: 'ECharts 入门示例'
-        },
-        tooltip: {},
-        legend: {
-          data:[]
-        },
-        xAxis: {
-          data: []
-        },
-        yAxis: {},
-        series: [{
-          name: '销量',
-          type: 'line',
-          data: [5, 20, 36, 10, 10, 20]
-        }]
-       }
+      tableData: []
     }
   },
   methods: {
@@ -99,13 +89,15 @@ export default {
   created: function () {
   },
   mounted: function () {
-    let myChart = echarts.init(document.getElementById('main'))
-    myChart.setOption(this.option)
   }
 }
 </script>
 
 <style scoped>
+  .QuestionNaireTable{
+    position: relative;
+    left: 10%;
+  }
   .QuestionNaireTitle{
     float:left;
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="DataAnalysis">
+  <div class="RecoveryProfile">
     <el-container>
       <el-header>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#000000">
@@ -41,7 +41,7 @@
       </el-header>
     </el-container>
     <el-container>
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+      <el-aside width="200px" style="background-color: #F3F5F6">
         <el-menu default-active="1">
           <el-menu-item index="1">
             <span slot="title" class="asidefont">回收概况</span>
@@ -55,7 +55,8 @@
         </el-menu>
       </el-aside>
       <el-main class="display-flex">
-          <div id="main" style="width: 590px;height:500px;"></div>
+        <span id="myChartTitle">{{title}}<span id="totalrecovery">回收总量：{{total}}</span> </span>      
+        <div id="main" style="width: 100%;height:400px;position:relative;top:10px;"></div>
       </el-main>
     </el-container>
   </div>
@@ -68,25 +69,25 @@ export default {
     return {
       activeIndex: '2',
       title: '问卷标题',
-      QuestionNaireId: '10001',
       qid: this.$router.history.current.params.QID,
       UID: this.$router.history.current.params.UID,
+      total: '',
       option: {
         title: {
-          text: 'ECharts 入门示例'
+          text: '问卷回收量'
         },
         tooltip: {},
         legend: {
-          data:[]
+          data: ['回收量']
         },
         xAxis: {
           data: []
         },
         yAxis: {},
         series: [{
-          name: '销量',
+          name: '回收量',
           type: 'line',
-          data: [5, 20, 36, 10, 10, 20]
+          data: []
         }]
        }
     }
@@ -97,15 +98,61 @@ export default {
     }
   },
   created: function () {
-  },
-  mounted: function () {
-    let myChart = echarts.init(document.getElementById('main'))
-    myChart.setOption(this.option)
+    let url = 'https://afo3wm.toutiao15.com/getAnswersNum'
+    let request = {
+      questionnaireID: this.qid
+    }
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+    this.$axios.post(url, request).then(response => {
+      this.total = response.data.total
+      this.title = response.data.title
+      for (let i = 0; i < response.data.status.length; i++) {
+        this.option.xAxis.data.push(response.data.status[i].date.substring(0, 10))
+        this.option.series[0].data.push(response.data.status[i].number)
+      }
+      console.log(this.option)
+      let myChart = echarts.init(document.getElementById('main'))
+      this.$nextTick(() => {
+        myChart.setOption(this.option)
+        loading.close() 
+      }  
+    )
+    })
+      .catch((error) => {
+        console.log(error)
+        this.$message({
+          showClose: true,
+          message: '与远程服务器的连接发生错误',
+          type: 'error'
+        })
+      })
   }
 }
 </script>
 
 <style scoped>
+  #main{
+    background-color: white;
+  }
+  #myChartTitle{
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+  }
+  #totalrecovery{
+    position: relative;
+    left: 20px;
+    top: 4px;
+    font-size: 10px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: row;
+  }
   .QuestionNaireTitle{
     float:left;
   }
@@ -113,6 +160,7 @@ export default {
     display: flex;
     flex-direction: column;
     float: left;
+    background-color: #F3F5F6;
   }
   .asidefont{
     font-size: 22px;

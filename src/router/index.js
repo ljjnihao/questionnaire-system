@@ -6,6 +6,8 @@ import Login from '@/components/Login'
 import Create from '@/components/Create'
 import FillQuestionnaire from '@/components/FillQuestionnaire'
 import DataAnalysis from '@/components/DataAnalysis'
+import RecoveryProfile from '@/components/RecoveryProfile'
+import CheckQuestionnaire from '@/components/CheckQuestionnaire'
 
 Vue.use(Router)
 
@@ -37,9 +39,19 @@ const router = new Router({
       component: FillQuestionnaire
     },
     {
-      path: '/DataAnalysis',
+      path: '/DataAnalysis/:UID/:QID',
       name: 'DataAnalysis',
       component: DataAnalysis
+    },
+    {
+      path: '/RecoveryProfile/:UID/:QID',
+      name: 'RecoveryProfile',
+      component: RecoveryProfile
+    },
+    {
+      path: '/CheckQuestionnaire/:UID/:QID',
+      name: 'CheckQuestionnaire',
+      component: CheckQuestionnaire
     }
   ]
 })
