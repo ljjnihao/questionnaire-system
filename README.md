@@ -29,9 +29,10 @@ npm install (or if using yarn: yarn)
 npm run lint -- --fix (or for yarn: yarn run lint --fix)
 npm run dev
 
-npm install element-ui / (or if using yarn: yarn add )
+npm install element-ui --save / (or if using yarn: yarn add --save )
 npm install axios
-npm install md5
+npm install 
+npm install echart
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
