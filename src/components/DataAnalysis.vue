@@ -77,7 +77,7 @@ export default {
         },
         tooltip: {},
         legend: {
-          data:[]
+          data: []
         },
         xAxis: {
           data: []
@@ -88,7 +88,7 @@ export default {
           type: 'line',
           data: [5, 20, 36, 10, 10, 20]
         }]
-       }
+      }
     }
   },
   methods: {

@@ -46,17 +46,11 @@ const router = new Router({
       component: DataAnalysis
     },
     {
-<<<<<<< HEAD
       path: '/issue',
       name: 'issue',
       component: Issue
     },
-    // ! keep it at last
     {
-      path: '*',
-      name: '404',
-      component: NotFound
-=======
       path: '/RecoveryProfile/:UID/:QID',
       name: 'RecoveryProfile',
       component: RecoveryProfile
@@ -65,7 +59,12 @@ const router = new Router({
       path: '/CheckQuestionnaire/:UID/:QID',
       name: 'CheckQuestionnaire',
       component: CheckQuestionnaire
->>>>>>> b4dee5df93ba4b481a7284593b0f7b09ca66898c
+    },
+    // ! keep it at last
+    {
+      path: '*',
+      name: '404',
+      component: NotFound
     }
   ]
 })
