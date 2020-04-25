@@ -6,6 +6,8 @@ import Login from '@/components/Login'
 import Create from '@/components/Create'
 import FillQuestionnaire from '@/components/FillQuestionnaire'
 import DataAnalysis from '@/components/DataAnalysis'
+import Issue from '@/components/Issue'
+import NotFound from '@/components/NotFound'
 
 Vue.use(Router)
 
@@ -32,14 +34,25 @@ const router = new Router({
       component: Create
     },
     {
-      path: '/FillQuestionnaire',
-      name: 'FillQuestionnaire',
+      path: '/fillQuestionnaire/:questionnaireID',
+      name: 'fillQuestionnaire',
       component: FillQuestionnaire
     },
     {
       path: '/DataAnalysis',
       name: 'DataAnalysis',
       component: DataAnalysis
+    },
+    {
+      path: '/issue',
+      name: 'issue',
+      component: Issue
+    },
+    // ! keep it at last
+    {
+      path: '*',
+      name: '404',
+      component: NotFound
     }
   ]
 })
@@ -56,14 +69,19 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    /* when route to other pages, check token
-       safely route if exists
-       otherwise， route to index
-    */
-    if (token !== '' && token != null) {
+    // don't need to authenticate if filling questionnaire
+    if (/fillQuestionnaire*/g.test(to.path)) {
       next()
     } else {
-      next('/login')
+      /* when route to other pages, check token
+        safely route if exists
+        otherwise， route to index
+      */
+      if (token !== '' && token != null) {
+        next()
+      } else {
+        next('/login')
+      }
     }
   }
 })
