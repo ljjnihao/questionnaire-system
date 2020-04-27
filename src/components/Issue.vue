@@ -1,13 +1,13 @@
 <template>
-  <div class="creat">
+  <div class="issue">
     <el-container>
       <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#000000">
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" text-color="#000000">
           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
           <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">消息中心</el-menu-item>
-          <el-menu-item index="4" style="font-size: 20px">个人信息</el-menu-item>
+          <el-menu-item index="2" style="font-size: 20px" route="">我的问卷</el-menu-item>
+          <el-menu-item index="3" style="font-size: 20px" route="">消息中心</el-menu-item>
+          <el-menu-item index="4" style="font-size: 20px" route="">个人信息</el-menu-item>
           <div class="demo-image">
                <el-image style="border-radius: 100%;width: 50px;height: 50px; float: right; margin-right: 100px" :src="url"></el-image>
           </div>
@@ -23,14 +23,14 @@
           </el-steps>
         </el-col>
         <el-col :span="3" :offset="3">
-          <el-button type="primary" plain icon="el-icon-view" size="medium" style="margin-top:10px">预览</el-button>
+          <el-button type="primary" plain icon="el-icon-view" size="medium" style="margin-top:10px" @click="preview">预览</el-button>
         </el-col>
       </el-header>
-      <el-main style="padding: 0px; margin-top: 10px">
+      <el-main style="padding: 0px; margin-top: 10px; text-align: center">
         <el-row class="content" style="background-color: rgba(242,242,242,1)">
           <el-col  :xs="12" :sm="12" :md="12" :lg="20" :xl="20">
             <div style="margin-top: 250px; font-size: 40px">开启发布后,即可分享问卷</div>
-            <el-button type="primary" icon="el-icon-check" style="height: 80px;width: 300px;font-size: 40px;margin-top: 30px">发布问卷</el-button>
+            <el-button type="primary" icon="el-icon-check" style="height: 80px;width: 300px;font-size: 40px;margin-top: 30px" @click="publish">发布问卷</el-button>
           </el-col>
           <el-col :xs="12" :sm="12" :md="12" :lg="4" :xl="4" style="background-color: #ffffff; height: 100%">
             <div style="border-bottom:1px solid rgba(240,240,240,1); height: 60px">
@@ -92,6 +92,7 @@
 </template>
 <script>
 export default {
+  name: 'Issue',
   data () {
     return {
       switch1: false,
@@ -101,10 +102,38 @@ export default {
       startDate: '',
       startTime: '',
       endDate: '',
-      endTime: ''
+      endTime: '',
+      QID: this.$route.params.questionnaireID,
+      link: ''
     }
   },
   methods: {
+    preview () {
+      this.$router.push({path: `/fillQuestionnaire/${this.QID}`})
+    },
+    publish () {
+      this.loading = true
+      this.$axios
+        .post('https://afo3wm.toutiao15.com/publishWithDate', {
+          questionnaireID: this.QID,
+          startDate: this.startDate,
+          endDate: this.endDate
+        })
+        .then(response => {
+          this.loading = false
+          console.log(response.data)
+          if (response.data.state) {
+            console.log('success')
+            // this.$router.push({ path: `/issue2/${this.QID}` })
+          } else {
+            this.$message('发布失败')
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+          this.$router.push('/non-existing')
+        })
+    }
   }
 }
 </script>

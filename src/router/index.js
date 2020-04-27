@@ -48,9 +48,10 @@ const router = new Router({
       // for local test: localhost/#/DataAnalysis/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     {
-      path: '/issue',
+      path: '/issue/:questionnaireID',
       name: 'issue',
       component: Issue
+      // for local test: localhost/#/issue/5e8c1ad6cfd9ab0216d81664
     },
     {
       path: '/RecoveryProfile/:UID/:QID',
