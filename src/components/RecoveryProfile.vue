@@ -55,7 +55,7 @@
         </el-menu>
       </el-aside>
       <el-main class="display-flex">
-        <span id="myChartTitle">{{title}}<span id="totalrecovery">回收总量：{{total}}</span> </span>      
+        <span id="myChartTitle">{{title}}<span id="totalrecovery">回收总量：{{total}}</span> </span>
         <div id="main" style="width: 100%;height:400px;position:relative;top:10px;"></div>
       </el-main>
     </el-container>
@@ -89,7 +89,7 @@ export default {
           type: 'line',
           data: []
         }]
-       }
+      }
     }
   },
   methods: {
@@ -119,9 +119,9 @@ export default {
       let myChart = echarts.init(document.getElementById('main'))
       this.$nextTick(() => {
         myChart.setOption(this.option)
-        loading.close() 
-      }  
-    )
+        loading.close()
+      }
+      )
     })
       .catch((error) => {
         console.log(error)

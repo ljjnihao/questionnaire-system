@@ -39,33 +39,36 @@ const router = new Router({
       path: '/fillQuestionnaire/:questionnaireID',
       name: 'fillQuestionnaire',
       component: FillQuestionnaire
+      // for local test: localhost/#/fillQuestionnaire/5e8c1ad6cfd9ab0216d81664
     },
     {
       path: '/DataAnalysis/:UID/:QID',
       name: 'DataAnalysis',
       component: DataAnalysis
+      // for local test: localhost/#/DataAnalysis/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     {
-<<<<<<< HEAD
       path: '/issue',
       name: 'issue',
       component: Issue
+    },
+    {
+      path: '/RecoveryProfile/:UID/:QID',
+      name: 'RecoveryProfile',
+      component: RecoveryProfile
+      // for local test: localhost/#/RecoveryProfile/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
+    },
+    {
+      path: '/CheckQuestionnaire/:UID/:QID',
+      name: 'CheckQuestionnaire',
+      component: CheckQuestionnaire
+      // for local test: localhost/#/CheckQuestionnaire/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     // ! keep it at last
     {
       path: '*',
       name: '404',
       component: NotFound
-=======
-      path: '/RecoveryProfile/:UID/:QID',
-      name: 'RecoveryProfile',
-      component: RecoveryProfile
-    },
-    {
-      path: '/CheckQuestionnaire/:UID/:QID',
-      name: 'CheckQuestionnaire',
-      component: CheckQuestionnaire
->>>>>>> b4dee5df93ba4b481a7284593b0f7b09ca66898c
     }
   ]
 })
