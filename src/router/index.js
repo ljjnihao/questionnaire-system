@@ -10,6 +10,8 @@ import Issue from '@/components/Issue'
 import NotFound from '@/components/NotFound'
 import RecoveryProfile from '@/components/RecoveryProfile'
 import CheckQuestionnaire from '@/components/CheckQuestionnaire'
+import filledCheck from '@/components/filledCheck'
+import preview from '@/components/preview'
 
 Vue.use(Router)
 
@@ -64,6 +66,18 @@ const router = new Router({
       name: 'CheckQuestionnaire',
       component: CheckQuestionnaire
       // for local test: localhost/#/CheckQuestionnaire/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
+    },
+    {
+      path: '/filledCheck/:questionnaireID/:answerUID',
+      name: 'filledCheck',
+      component: filledCheck
+      // for local test: localhost/#/filledCheck/5e8c1ad6cfd9ab0216d81664/5e8c1be865e6f70222803e1b
+    },
+    {
+      path: '/preview/:questionnaireID',
+      name: 'preview',
+      component: preview
+      // for local test: localhost/#/preview/5e8c1ad6cfd9ab0216d81664
     },
     // ! keep it at last
     {

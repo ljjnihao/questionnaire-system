@@ -14,7 +14,7 @@
                       </p>
                       <el-radio-group v-model="answerSet[order].ans.choice" @change="computerPercentage">
                           <div v-for="(choiceItem,index) in questItem.content.choice" :key=index class="choiceItem">
-                              <el-radio :label=index+1>{{choiceItem}}</el-radio>
+                              <el-radio :label=index>{{choiceItem}}</el-radio>
                           </div>
                       </el-radio-group>
                   </div>
@@ -25,7 +25,7 @@
                       </p>
                       <el-radio-group v-model="answerSet[order].ans.choice" @change="computerPercentage">
                           <div v-for="(choiceItem,index) in questItem.content.choice" :key=index class="choiceItem">
-                              <el-radio :label=index+1>{{choiceItem}}</el-radio>
+                              <el-radio :label=index>{{choiceItem}}</el-radio>
                           </div>
                       </el-radio-group>
                   </div>
@@ -101,7 +101,7 @@
                                   <span>{{titleBlank}}<el-input v-model="answerSet[order].ans.text[index]" placeholder="" class="blank"></el-input></span>
                               </span>
                               <span v-else>
-                                  <span>{{titleBlank}}(必填)<br></span>
+                                  <span>{{titleBlank}}</span><span style="color: red">*</span>
                               </span>
                           </span>
                       </p>
@@ -114,7 +114,7 @@
                                   <span>{{titleBlank}}<el-input v-model="answerSet[order].ans.text[index]" placeholder="" class="blank"></el-input></span>
                               </span>
                               <span v-else>
-                                  <span>{{titleBlank}}(选填)</span>
+                                  <span>{{titleBlank}}</span>
                               </span>
                           </span>
                       </p>
@@ -154,55 +154,66 @@ export default {
         let answer = this.answerSet[i]
         switch (this.answerSet[i].type) {
           case 0:
-            if (answer.ans.choice !== '') 
+            if (answer.ans.choice !== '') {
               cnt++
+            }
             break
           case 1:
-            if (answer.ans.choice !== '')
+            if (answer.ans.choice !== '') {
               cnt++
+            }
             break
           case 2:
-            if (answer.ans.choice.length !== 0)
+            if (answer.ans.choice.length !== 0) {
               cnt++
+            }
             break
           case 3:
-            if (answer.ans.choice.length !== 0)
+            if (answer.ans.choice.length !== 0) {
               cnt++
+            }
             break
           case 4:
-            if (answer.ans.text !== '')
+            if (answer.ans.text !== '') {
               cnt++
+            }
             break
           case 5:
-            if (answer.ans.text !== '')
+            if (answer.ans.text !== '') {
               cnt++
+            }
             break
           case 6:
-            if (answer.ans.text !== '')
+            if (answer.ans.text !== '') {
               cnt++
+            }
             break
           case 7:
-            if (answer.ans.text !== '')
+            if (answer.ans.text !== '') {
               cnt++
+            }
             break
           case 8:
-            if (answer.ans.mark !== 0)
+            if (answer.ans.mark !== 0) {
               cnt++
+            }
             break
           case 9:
-            if (answer.ans.mark !== 0)
+            if (answer.ans.mark !== 0) {
               cnt++
+            }
             break
           default:
             let flag = 0
             for (let j = 0; j < answer.ans.text.length; j++) {
-              if (answer.ans.text[j] == '') {
+              if (answer.ans.text[j] === '') {
                 flag = 1
                 break
               }
             }
-            if (flag == 0)
+            if (flag === 0) {
               cnt++
+            }
             break
         }
       }
@@ -315,24 +326,6 @@ export default {
     }
   },
   created: function () {
-    // let qid = this.getqid()
-    // let qid = this.questionnaireID
-    // ? questionnairedID returned might not always be 24-bit
-    // if (qid.length !== 24) {
-    //   const loading = this.$loading({
-    //     lock: true,
-    //     text: 'Loading',
-    //     spinner: 'el-icon-loading',
-    //     background: 'rgba(0, 0, 0, 0.7)'
-    //   })
-    //   this.$message({
-    //     showClose: true,
-    //     message: '问卷不存在1',
-    //     type: 'error'
-    //   })
-    //   console.log(loading)
-    //   return
-    // }
     let request = {
       questionnaireID: this.questionnaireID
     }
@@ -416,10 +409,10 @@ export default {
             this.answerSet.push({ans: {mark: null}, mustfill: 'false', type: this.questionnaireData[i].questionType})
             break
           case 10:
-            this.answerSet.push({ans: {test: new Array(this.questionnaireData[i].content.title.length - 1)}, mustfill: 'true', type: this.questionnaireData[i].questionType})
+            this.answerSet.push({ans: {text: new Array(this.questionnaireData[i].content.title.length - 1)}, mustfill: 'true', type: this.questionnaireData[i].questionType})
             break
           case 11:
-            this.answerSet.push({ans: {test: new Array(this.questionnaireData[i].content.title.length - 1)}, mustfill: 'false', type: this.questionnaireData[i].questionType})
+            this.answerSet.push({ans: {text: new Array(this.questionnaireData[i].content.title.length - 1)}, mustfill: 'false', type: this.questionnaireData[i].questionType})
             break
           default:
             break
