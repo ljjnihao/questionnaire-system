@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import axios from 'axios'
+import VCharts from 'v-charts'
 import 'element-ui/lib/theme-chalk/index.css'
 import './plugins/element.js'
 import md5 from 'md5'
@@ -13,7 +14,7 @@ Object.defineProperty(Vue.prototype, '$axios', { value: axios })
 Object.defineProperty(Vue.prototype, '$md5', { value: md5 })
 
 Vue.use(ElementUI)
-
+Vue.use(VCharts)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

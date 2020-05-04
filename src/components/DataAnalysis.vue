@@ -70,6 +70,7 @@
                 </template>
               </el-table-column>
             </el-table>
+            <ve-pie :data="chartData[index]"></ve-pie>
           </div>
           <div v-else-if="item.type==1" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
@@ -84,6 +85,7 @@
                 </template>
               </el-table-column>
             </el-table>
+            <ve-pie :data="chartData[index]"></ve-pie>
           </div>
           <div v-else-if="item.type==2" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
@@ -98,6 +100,7 @@
                 </template>
               </el-table-column>
             </el-table>
+            <ve-pie :data="chartData[index]"></ve-pie>
           </div>
           <div v-else-if="item.type==3" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
@@ -112,6 +115,7 @@
                 </template>
               </el-table-column>
             </el-table>
+            <ve-pie :data="chartData[index]"></ve-pie>
           </div>
           <div v-else-if="item.type==4" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
@@ -244,7 +248,7 @@ export default {
       answers: '',
       processed: [],
       tabeldata: [],
-      option: []
+      chartData: []
     }
   },
   methods: {
@@ -407,40 +411,17 @@ export default {
       }
       for (let i = 0; i < this.processed.length; i++) {
         this.tabeldata.push([])
-        this.option.push({})
+        this.chartData.push({})
         switch (this.processed[i].type) {
           case 0:
-            this.option[i] = {
-              legend: {
-                orient: 'horizontal',
-                left: 'middle',
-                top: 'bottom',
-                data: this.processed[i].choice
-              },
-              series: [{
-                type: 'pie',
-                radius: '55%',
-                itemStyle: {
-                  normal: {
-                    label: {
-                      show: true,
-                      formatter: '{b}:  ({d}%)'
-                    },
-                    labelLine: {
-                      show: true
-                    },
-                    borderWidth: 2,
-                    borderColor: '#fff'
-                  }
-                },
-                data: [
-                ]
-              }]
+            this.chartData[i] = {
+              columns: ['选项', '小计'],
+              rows: []
             }
             for (let j = 0; j < this.processed[i].choiceNum.length; j++) {
-              this.option[i].series[0].data.push({
-                value: this.processed[i].choiceNum[j],
-                name: this.processed[i].choice[j]
+              this.chartData[i].rows.push({
+                '小计': this.processed[i].choiceNum[j],
+                '选项': this.processed[i].choice[j]
               })
               let percent = 0
               if (this.processed[i].sum !== 0) {
@@ -454,37 +435,14 @@ export default {
             }
             break
           case 1:
-            this.option[i] = {
-              legend: {
-                orient: 'horizontal',
-                left: 'middle',
-                top: 'bottom',
-                data: this.processed[i].choice
-              },
-              series: [{
-                type: 'pie',
-                radius: '55%',
-                itemStyle: {
-                  normal: {
-                    label: {
-                      show: true,
-                      formatter: '{b}:  ({d}%)'
-                    },
-                    labelLine: {
-                      show: true
-                    },
-                    borderWidth: 2,
-                    borderColor: '#fff'
-                  }
-                },
-                data: [
-                ]
-              }]
+            this.chartData[i] = {
+              columns: ['选项', '小计'],
+              rows: []
             }
             for (let j = 0; j < this.processed[i].choiceNum.length; j++) {
-              this.option[i].series[0].data.push({
-                value: this.processed[i].choiceNum[j],
-                name: this.processed[i].choice[j]
+              this.chartData[i].rows.push({
+                '小计': this.processed[i].choiceNum[j],
+                '选项': this.processed[i].choice[j]
               })
               let percent = 0
               if (this.processed[i].sum !== 0) {
@@ -498,7 +456,15 @@ export default {
             }
             break
           case 2:
+            this.chartData[i] = {
+              columns: ['选项', '小计'],
+              rows: []
+            }
             for (let j = 0; j < this.processed[i].choiceNum.length; j++) {
+              this.chartData[i].rows.push({
+                '小计': this.processed[i].choiceNum[j],
+                '选项': this.processed[i].choice[j]
+              })
               let percent = 0
               if (this.processed[i].sum !== 0) {
                 percent = (this.processed[i].choiceNum[j] / this.processed[i].sum) * 100
@@ -511,7 +477,15 @@ export default {
             }
             break
           case 3:
+            this.chartData[i] = {
+              columns: ['选项', '小计'],
+              rows: []
+            }
             for (let j = 0; j < this.processed[i].choiceNum.length; j++) {
+              this.chartData[i].rows.push({
+                '小计': this.processed[i].choiceNum[j],
+                '选项': this.processed[i].choice[j]
+              })
               let percent = 0
               if (this.processed[i].sum !== 0) {
                 percent = (this.processed[i].choiceNum[j] / this.processed[i].sum) * 100
@@ -569,7 +543,7 @@ export default {
             break
         }
       }
-      console.log(this.processed)
+      loading.close()
     }))
       .catch((error) => {
         console.log(error)
@@ -578,11 +552,9 @@ export default {
           message: '与远程服务器的连接发生错误',
           type: 'error'
         })
+        loading.close()
         this.$router.push('/non-existing')
       })
-    loading.close()
-  },
-  watch: {
   }
 }
 </script>
