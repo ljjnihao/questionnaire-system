@@ -34,23 +34,24 @@
           </el-col>
           <el-col :span="1" :offset="6">
             <div class="grid-content bg-purple">
-              <el-button type="primary" plain icon="el-icon-view">预览</el-button>
+              <el-button type="primary" plain icon="el-icon-view" @click="preview">预览</el-button>
             </div>
           </el-col>
         </el-row>
       </el-header>
     </el-container>
-    <el-container>
-      <el-aside width="200px" style="background-color: #F3F5F6">
-        <el-menu default-active="1">
+        <el-container style="padding-top: 1.5vw;">
+      <el-aside width="15vw" style="background-color: #d3dce6;text-align: center;">
+        <el-menu  default-active="2"
+                class="el-menu-vertical-demo" @select="handleSelect2">
           <el-menu-item index="1">
-            <span slot="title" class="asidefont">回收概况</span>
+            <span slot="title" class="hyc">回收概况</span>
           </el-menu-item>
           <el-menu-item index="2">
-            <span slot="title" class="asidefont">查看问卷</span>
+            <span slot="title" class="hyc">查看问卷</span>
           </el-menu-item>
           <el-menu-item index="3">
-            <span slot="title" class="asidefont">数据分析</span>
+            <span slot="title" class="hyc">数据分析</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -93,8 +94,20 @@ export default {
     }
   },
   methods: {
+    preview () {
+      let routeData = this.$router.resolve({path: `/preview/${this.qid}`})
+      window.open(routeData.href, '_blank')
+    },
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    },
+    handleSelect2 (key, keyPath) {
+      if (key === '2') {
+        this.$router.push({path: `/CheckQuestionnaire/${this.UID}/${this.qid}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/DataAnalysis/${this.UID}/${this.qid}`})
+      }
     }
   },
   created: function () {
@@ -115,7 +128,6 @@ export default {
         this.option.xAxis.data.push(response.data.status[i].date.substring(0, 10))
         this.option.series[0].data.push(response.data.status[i].number)
       }
-      console.log(this.option)
       let myChart = echarts.init(document.getElementById('main'))
       this.$nextTick(() => {
         myChart.setOption(this.option)
@@ -130,6 +142,7 @@ export default {
           message: '与远程服务器的连接发生错误',
           type: 'error'
         })
+        this.$router.push('/non-existing')
       })
   }
 }

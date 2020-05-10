@@ -34,34 +34,38 @@
           </el-col>
           <el-col :span="1" :offset="6">
             <div class="grid-content bg-purple">
-              <el-button type="primary" plain icon="el-icon-view">预览</el-button>
+              <el-button type="primary" plain icon="el-icon-view" @click="preview">预览</el-button>
             </div>
           </el-col>
         </el-row>
       </el-header>
     </el-container>
-    <el-container>
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu default-active="2">
+        <el-container style="padding-top: 1.5vw;">
+      <el-aside width="15vw" style="background-color: #d3dce6;text-align: center;">
+        <el-menu  default-active="2"
+                class="el-menu-vertical-demo" @select="handleSelect2">
           <el-menu-item index="1">
-            <span slot="title" class="asidefont">回收概况</span>
+            <span slot="title" class="hyc">回收概况</span>
           </el-menu-item>
           <el-menu-item index="2">
-            <span slot="title" class="asidefont">查看问卷</span>
+            <span slot="title" class="hyc">查看问卷</span>
           </el-menu-item>
           <el-menu-item index="3">
-            <span slot="title" class="asidefont">数据分析</span>
+            <span slot="title" class="hyc">数据分析</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main class="display-flex">
-          <span class="QuestionNaireTitle">{{QTitle}}       回收量：{{RecoveryNum}}</span>
-          <el-table :data="tableData" max-height="590" style="width: 500px" class="QuestionNaireTable">
-            <el-table-column prop="date" label="查看" width="100">
+          <span id="myChartTitle">{{title}}<span id="totalrecovery">回收总量：{{total}}</span> </span>
+          <el-table :data="tableData" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="QuestionNaireTable">
+            <el-table-column label="查看" width="100">
+              <template slot-scope="scope">
+                <i @click="handleCheck(scope.row.ansUid)" class="el-icon-view">前往</i>
+              </template>
             </el-table-column>
-            <el-table-column prop="name" label="序号" width="100">
+            <el-table-column prop="No" label="序号" width="100">
             </el-table-column>
-            <el-table-column prop="address" label="提交时间" width="300">
+            <el-table-column prop="admitTime" label="提交时间" width="300">
             </el-table-column>
           </el-table>
       </el-main>
@@ -74,19 +78,81 @@ export default {
   data () {
     return {
       activeIndex: '2',
-      QTitle: '问卷标题',
-      RecoveryNum: null,
+      title: '问卷标题',
+      total: null,
       qid: this.$router.history.current.params.QID,
       UID: this.$router.history.current.params.UID,
       tableData: []
     }
   },
   methods: {
+    getAnswersNum: function () {
+      return this.$axios({
+        url: 'https://afo3wm.toutiao15.com/getAnswersNum',
+        method: 'get',
+        params: {
+          questionnaireID: this.qid
+        }
+      })
+    },
+    getAns: function () {
+      return this.$axios({
+        url: 'https://afo3wm.toutiao15.com/getAnsByQnID',
+        method: 'get',
+        params: {
+          questionnaireID: this.qid
+        }
+      })
+    },
+    preview () {
+      let routeData = this.$router.resolve({path: `/preview/${this.qid}`})
+      window.open(routeData.href, '_blank')
+    },
+    handleCheck (ansUid) {
+      let routeData = this.$router.resolve({path: `/filledcheck/${this.qid}/${ansUid}`})
+      window.open(routeData.href, '_blank')
+    },
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    },
+    handleSelect2 (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/RecoveryProfile/${this.UID}/${this.qid}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/DataAnalysis/${this.UID}/${this.qid}`})
+      }
     }
   },
   created: function () {
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+    this.$axios.all([this.getAnswersNum(), this.getAns()]).then(this.$axios.spread((response1, response2) => {
+      this.title = response1.data.title
+      this.total = response1.data.total
+      for (let i = 0; i < this.total; i++) {
+        this.tableData.push({
+          ansUid: response2.data.result[i].answerUID,
+          No: i + 1,
+          admitTime: response2.data.result[i].answers[0].AnsCreateAt.substring(0, 10)
+        })
+      }
+      loading.close()
+    }))
+      .catch((error) => {
+        console.log(error)
+        loading.close()
+        this.$message({
+          showClose: true,
+          message: '与远程服务器的连接发生错误',
+          type: 'error'
+        })
+        this.$router.push('/non-existing')
+      })
   },
   mounted: function () {
   }
@@ -94,9 +160,19 @@ export default {
 </script>
 
 <style scoped>
+  #myChartTitle{
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+  }
+  .el-icon-view:hover{
+    color: blue;
+    cursor: pointer;
+  }
   .QuestionNaireTable{
     position: relative;
     left: 10%;
+    font-size: 20px;
   }
   .QuestionNaireTitle{
     float:left;
@@ -105,6 +181,7 @@ export default {
     display: flex;
     flex-direction: column;
     float: left;
+    background-color: #F3F5F6;
   }
   .asidefont{
     font-size: 22px;
@@ -121,6 +198,15 @@ export default {
   .title-item{
     font-size: 20px;
     text-color: "#000000";
+  }
+  #totalrecovery{
+    position: relative;
+    left: 20px;
+    top: 4px;
+    font-size: 10px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: row;
   }
   #logo{
     font-size: 35px;

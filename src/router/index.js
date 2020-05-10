@@ -11,7 +11,8 @@ import NotFound from '@/components/NotFound'
 import RecoveryProfile from '@/components/RecoveryProfile'
 import CheckQuestionnaire from '@/components/CheckQuestionnaire'
 import check from '@/components/Checkbox'
-
+import filledCheck from '@/components/filledCheck'
+import preview from '@/components/preview'
 Vue.use(Router)
 
 const router = new Router({
@@ -34,7 +35,61 @@ const router = new Router({
     {
       path: '/create/:UID',
       name: 'create',
-      component: Create
+      component: Create,
+      children: [
+        {
+          path: '/one',
+          component: () => import('./../components/question/one.vue')
+        },
+        {
+          path: '/two',
+          component: () => import('./../components/question/two.vue')
+        },
+        {
+          path: '/three',
+          component: () => import('./../components/question/three.vue')
+        },
+        {
+          path: '/four',
+          component: () => import('./../components/question/four.vue')
+        },
+        {
+          path: '/five',
+          component: () => import('./../components/question/five.vue')
+        },
+        {
+          path: '/six',
+          component: () => import('./../components/question/six.vue')
+        },
+        {
+          path: '/seven',
+          component: () => import('./../components/question/seven.vue')
+        },
+        {
+          path: '/eight',
+          component: () => import('./../components/question/eight.vue')
+        },
+        {
+          path: '/nine',
+          component: () => import('./../components/question/nine.vue')
+        },
+        {
+          path: '/ten',
+          component: () => import('./../components/question/ten.vue')
+        },
+        {
+          path: '/eleven',
+          component: () => import('./../components/question/eleven.vue')
+        },
+        {
+          path: '/twelve',
+          component: () => import('./../components/question/twelve.vue')
+        },
+        {
+          path: '/thirteen',
+          component: () => import('./../components/question/thirteen.vue')
+        }
+      ]
     },
     {
       path: '/fillQuestionnaire/:questionnaireID',
@@ -67,8 +122,21 @@ const router = new Router({
       // for local test: localhost/#/CheckQuestionnaire/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     {
+<<<<<<< HEAD
       path: '/checkbox',
       component: check
+=======
+      path: '/filledCheck/:questionnaireID/:answerUID',
+      name: 'filledCheck',
+      component: filledCheck
+      // for local test: localhost/#/filledCheck/5e8c1ad6cfd9ab0216d81664/5e8c1be865e6f70222803e1b
+    },
+    {
+      path: '/preview/:questionnaireID',
+      name: 'preview',
+      component: preview
+      // for local test: localhost/#/preview/5e8c1ad6cfd9ab0216d81664
+>>>>>>> d40b49828abbe7610f07019bdaf21dc29aadc42c
     },
     // ! keep it at last
     {
