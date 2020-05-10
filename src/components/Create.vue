@@ -49,55 +49,55 @@
                 class="el-menu-vertical-demo"
               >
                 <el-menu-item index="13">
-                  <span slot="title"><router-link to="/one" class="hyc">单选题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/one" class="hyc">单选题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="1">
 
-                  <span slot="title"><router-link to="/two" class="hyc">下拉题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/two" class="hyc">下拉题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="2">
 
-                  <span slot="title"><router-link to="/three" class="hyc">多选题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/three" class="hyc">多选题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="3">
 
-                  <span slot="title"><router-link to="/four" class="hyc">单行题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/four" class="hyc">单行题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="4">
 
-                  <span slot="title"><router-link to="/five" class="hyc">多行题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/five" class="hyc">多行题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="5">
 
-                  <span slot="title"><router-link to="/six" class="hyc">量表题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/six" class="hyc">量表题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="6">
 
-                  <span slot="title"><router-link to="/seven" class="hyc">矩阵单选题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/seven" class="hyc">矩阵单选题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="7">
 
-                  <span slot="title"><router-link to="/eight" class="hyc">矩阵多选题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/eight" class="hyc">矩阵多选题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="8">
 
-                  <span slot="title"><router-link to="/nine" class="hyc">排序题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/nine" class="hyc">排序题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="9">
 
-                  <span slot="title"><router-link to="/ten" class="hyc">联动题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/ten" class="hyc">联动题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="10">
 
-                  <span slot="title"><router-link to="/eleven" class="hyc">附件题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/eleven" class="hyc">附件题</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="11">
 
-                  <span slot="title"><router-link to="/twelve" class="hyc">文件描述</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/twelve" class="hyc">文件描述</router-link></span>
                 </el-menu-item>
                 <el-menu-item index="12">
 
-                  <span slot="title"><router-link to="/thirteen" class="hyc">填空题</router-link></span>
+                  <span slot="title"><router-link to="/create/:UID/thirteen" class="hyc">填空题</router-link></span>
                 </el-menu-item>
               </el-menu>
           </el-aside>
@@ -142,12 +142,12 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      activeIndex: "1",
-      activeIndex2: "1",
-      input0:'',
-      input1:'',
+      activeIndex: '1',
+      activeIndex2: '1',
+      input0: '',
+      input1: '',
       value: '',
       url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       options: [{
@@ -156,12 +156,12 @@ export default {
       }, {
         value: '选项2',
         label: '提前结束'
-      }],
-    };
+      }]
+    }
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    handleSelect (key, keyPath) {
+      console.log(key, keyPath)
     },
     logout () {
       //! don't use arrow function here
@@ -171,7 +171,7 @@ export default {
       this.$router.push({path: `/login`})
     }
   }
-};
+}
 </script>
 
 <style scoped>

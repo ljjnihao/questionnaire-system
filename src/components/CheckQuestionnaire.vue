@@ -40,17 +40,18 @@
         </el-row>
       </el-header>
     </el-container>
-    <el-container>
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu default-active="2" @select="handleSelect2">
+        <el-container style="padding-top: 1.5vw;">
+      <el-aside width="15vw" style="background-color: #d3dce6;text-align: center;">
+        <el-menu  default-active="2"
+                class="el-menu-vertical-demo" @select="handleSelect2">
           <el-menu-item index="1">
-            <span slot="title" class="asidefont">回收概况</span>
+            <span slot="title" class="hyc">回收概况</span>
           </el-menu-item>
           <el-menu-item index="2">
-            <span slot="title" class="asidefont">查看问卷</span>
+            <span slot="title" class="hyc">查看问卷</span>
           </el-menu-item>
           <el-menu-item index="3">
-            <span slot="title" class="asidefont">数据分析</span>
+            <span slot="title" class="hyc">数据分析</span>
           </el-menu-item>
         </el-menu>
       </el-aside>

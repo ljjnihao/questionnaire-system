@@ -38,192 +38,189 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       num: 1,
-      dynamicTags: [],//提供的选项
+      dynamicTags: [], // 提供的选项
       inputVisible: false,
-      inputValue: "",
-      input1: "",
-      input2: "",
-      options1:[
+      inputValue: '',
+      input1: '',
+      input2: '',
+      options1: [
         {
-          value: "满意度",
-          label: "满意度"
+          value: '满意度',
+          label: '满意度'
         },
         {
-          value: "认同度",
-          label: "认同度"
+          value: '认同度',
+          label: '认同度'
         },
         {
-          value: "重要度",
-          label: "重要度"
+          value: '重要度',
+          label: '重要度'
         },
         {
-          value: "愿意度",
-          label: "愿意度"
+          value: '愿意度',
+          label: '愿意度'
         },
         {
-          value: "符合度",
-          label: "符合度"
+          value: '符合度',
+          label: '符合度'
         }
       ],
-      value: "量表题",
+      value: '量表题',
       options: [
         {
-          value: "单选题",
-          label: "单选题"
+          value: '单选题',
+          label: '单选题'
         },
         {
-          value: "下拉题",
-          label: "下拉题"
+          value: '下拉题',
+          label: '下拉题'
         },
         {
-          value: "多选题",
-          label: "多选题"
+          value: '多选题',
+          label: '多选题'
         },
         {
-          value: "单行题",
-          label: "单行题"
+          value: '单行题',
+          label: '单行题'
         },
         {
-          value: "多行题",
-          label: "多行题"
-        }
-        ,
+          value: '多行题',
+          label: '多行题'
+        },
+
         {
-          value: "量表题",
-          label: "量表题"
-        }
-        ,
+          value: '量表题',
+          label: '量表题'
+        },
+
         {
-          value: "矩阵单选题",
-          label: "矩阵单选题"
-        }
-        ,
+          value: '矩阵单选题',
+          label: '矩阵单选题'
+        },
+
         {
-          value: "矩阵多选题",
-          label: "矩阵多选题"
-        }
-        ,
+          value: '矩阵多选题',
+          label: '矩阵多选题'
+        },
+
         {
-          value: "排序题",
-          label: "排序题"
-        }
-        ,
+          value: '排序题',
+          label: '排序题'
+        },
+
         {
-          value: "联动题",
-          label: "联动题"
-        }
-        ,
+          value: '联动题',
+          label: '联动题'
+        },
         {
-          value: "附件题",
-          label: "附件题"
-        }
-        ,
+          value: '附件题',
+          label: '附件题'
+        },
         {
-          value: "文件描述",
-          label: "文件描述"
-        }
-        ,
+          value: '文件描述',
+          label: '文件描述'
+        },
         {
-          value: "填空题",
-          label: "填空题"
+          value: '填空题',
+          label: '填空题'
         }
       ]
-    };
+    }
   },
-  watch:{
-    value(newvalue,oldvalue) {
-      if(newvalue == "单选题") {
+  watch: {
+    value (newvalue, oldvalue) {
+      if (newvalue === '单选题') {
         this.$router.push({
-          path:"/"
+          path: '/'
         })
       }
-      if(newvalue == "下拉题") {
+      if (newvalue === '下拉题') {
         this.$router.push({
-          path:"/two"
+          path: '/two'
         })
       }
-      if(newvalue == "多选题") {
+      if (newvalue === '多选题') {
         this.$router.push({
-          path:"/three"
+          path: '/three'
         })
       }
-      if(newvalue == "单行题") {
+      if (newvalue === '单行题') {
         this.$router.push({
-          path:"/four"
+          path: '/four'
         })
       }
-      if(newvalue == "多行题") {
+      if (newvalue === '多行题') {
         this.$router.push({
-          path:"/five"
+          path: '/five'
         })
       }
-      if(newvalue == "量表题") {
+      if (newvalue === '量表题') {
         this.$router.push({
-          path:"/six"
+          path: '/six'
         })
       }
-      if(newvalue == "矩阵单选题") {
+      if (newvalue === '矩阵单选题') {
         this.$router.push({
-          path:"/seven"
+          path: '/seven'
         })
       }
-      if(newvalue == "矩阵多选题") {
+      if (newvalue === '矩阵多选题') {
         this.$router.push({
-          path:"/eight"
+          path: '/eight'
         })
       }
-      if(newvalue == "排序题") {
+      if (newvalue === '排序题') {
         this.$router.push({
-          path:"/nine"
+          path: '/nine'
         })
       }
-      if(newvalue == "联动题") {
+      if (newvalue === '联动题') {
         this.$router.push({
-          path:"/ten"
+          path: '/ten'
         })
       }
-      if(newvalue == "附件题") {
+      if (newvalue === '附件题') {
         this.$router.push({
-          path:"/eleven"
+          path: '/eleven'
         })
       }
-      if(newvalue == "文件描述") {
+      if (newvalue === '文件描述') {
         this.$router.push({
-          path:"/twelve"
+          path: '/twelve'
         })
       }
-      if(newvalue == "填空题") {
+      if (newvalue === '填空题') {
         this.$router.push({
-          path:"/thirteen"
+          path: '/thirteen'
         })
       }
     }
   },
   methods: {
-    handleClose(tag) {
-      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+    handleClose (tag) {
+      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
     },
 
-    showInput() {
-      this.inputVisible = true;
+    showInput () {
+      this.inputVisible = true
       this.$nextTick(_ => {
-        this.$refs.saveTagInput.$refs.input.focus();
-      });
+        this.$refs.saveTagInput.$refs.input.focus()
+      })
     },
 
-    handleInputConfirm() {
-      let inputValue = this.inputValue;
+    handleInputConfirm () {
+      let inputValue = this.inputValue
       if (inputValue) {
-        this.dynamicTags.push(inputValue);
+        this.dynamicTags.push(inputValue)
       }
-      this.inputVisible = false;
-      this.inputValue = "";
+      this.inputVisible = false
+      this.inputValue = ''
     }
   }
-};
+}
 </script>
 <style scoped>
 .title {
