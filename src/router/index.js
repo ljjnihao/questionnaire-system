@@ -10,6 +10,7 @@ import Issue from '@/components/Issue'
 import NotFound from '@/components/NotFound'
 import RecoveryProfile from '@/components/RecoveryProfile'
 import CheckQuestionnaire from '@/components/CheckQuestionnaire'
+import check from '@/components/Checkbox'
 
 Vue.use(Router)
 
@@ -64,6 +65,10 @@ const router = new Router({
       name: 'CheckQuestionnaire',
       component: CheckQuestionnaire
       // for local test: localhost/#/CheckQuestionnaire/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
+    },
+    {
+      path: '/checkbox',
+      component: check
     },
     // ! keep it at last
     {
