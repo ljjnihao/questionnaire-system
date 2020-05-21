@@ -124,7 +124,7 @@ export default {
           console.log(response.data)
           if (response.data.state) {
             console.log('success')
-            // this.$router.push({ path: `/issue2/${this.QID}` })
+            this.$router.push({ path: `/ShareQuestionnaire/${this.UID}/${this.QID}` })
           } else {
             this.$message('发布失败')
           }

@@ -9,12 +9,14 @@ import VCharts from 'v-charts'
 import 'element-ui/lib/theme-chalk/index.css'
 import './plugins/element.js'
 import md5 from 'md5'
+import {message} from './plugins/resetmessage.js'
 
 Object.defineProperty(Vue.prototype, '$axios', { value: axios })
 Object.defineProperty(Vue.prototype, '$md5', { value: md5 })
 
 Vue.use(ElementUI)
 Vue.use(VCharts)
+Vue.prototype.$message = message
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
