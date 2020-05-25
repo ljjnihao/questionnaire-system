@@ -46,58 +46,58 @@
               <h5>题目控件</h5>
               <el-menu
                 default-active="2"
-                class="el-menu-vertical-demo"
+                class="el-menu-vertical-demo" @select="choose"
               >
-                <el-menu-item index="13">
-                  <span slot="title"><router-link to="/create/:UID/one" class="hyc">单选题</router-link></span>
-                </el-menu-item>
                 <el-menu-item index="1">
-
-                  <span slot="title"><router-link to="/create/:UID/two" class="hyc">下拉题</router-link></span>
+                  <span slot="title">单选题</span>
                 </el-menu-item>
                 <el-menu-item index="2">
 
-                  <span slot="title"><router-link to="/create/:UID/three" class="hyc">多选题</router-link></span>
+                  <span slot="title">下拉题</span>
                 </el-menu-item>
                 <el-menu-item index="3">
 
-                  <span slot="title"><router-link to="/create/:UID/four" class="hyc">单行题</router-link></span>
+                  <span slot="title">多选题</span>
                 </el-menu-item>
                 <el-menu-item index="4">
 
-                  <span slot="title"><router-link to="/create/:UID/five" class="hyc">多行题</router-link></span>
+                  <span slot="title">单行题</span>
                 </el-menu-item>
                 <el-menu-item index="5">
 
-                  <span slot="title"><router-link to="/create/:UID/six" class="hyc">量表题</router-link></span>
+                  <span slot="title">多行题</span>
                 </el-menu-item>
                 <el-menu-item index="6">
 
-                  <span slot="title"><router-link to="/create/:UID/seven" class="hyc">矩阵单选题</router-link></span>
+                  <span slot="title">量表题</span>
                 </el-menu-item>
                 <el-menu-item index="7">
 
-                  <span slot="title"><router-link to="/create/:UID/eight" class="hyc">矩阵多选题</router-link></span>
+                  <span slot="title">矩阵单选题</span>
                 </el-menu-item>
                 <el-menu-item index="8">
 
-                  <span slot="title"><router-link to="/create/:UID/nine" class="hyc">排序题</router-link></span>
+                  <span slot="title">矩阵多选题</span>
                 </el-menu-item>
                 <el-menu-item index="9">
 
-                  <span slot="title"><router-link to="/create/:UID/ten" class="hyc">联动题</router-link></span>
+                  <span slot="title">排序题</span>
                 </el-menu-item>
                 <el-menu-item index="10">
 
-                  <span slot="title"><router-link to="/create/:UID/eleven" class="hyc">附件题</router-link></span>
+                  <span slot="title">联动题</span>
                 </el-menu-item>
                 <el-menu-item index="11">
 
-                  <span slot="title"><router-link to="/create/:UID/twelve" class="hyc">文件描述</router-link></span>
+                  <span slot="title">附件题</span>
                 </el-menu-item>
                 <el-menu-item index="12">
 
-                  <span slot="title"><router-link to="/create/:UID/thirteen" class="hyc">填空题</router-link></span>
+                  <span slot="title">文件描述</span>
+                </el-menu-item>
+                <el-menu-item index="13">
+
+                  <span slot="title">填空题</span>
                 </el-menu-item>
               </el-menu>
           </el-aside>
@@ -149,6 +149,7 @@ export default {
       input0: '',
       input1: '',
       value: '',
+      UID: this.$router.history.current.params.UID,
       url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       options: [{
         value: '选项1',
@@ -169,6 +170,47 @@ export default {
       localStorage.setItem('user-token', '')
       localStorage.setItem('user-id', '')
       this.$router.push({path: `/login`})
+    },
+    choose (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}/one`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/create/${this.UID}/two`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/create/${this.UID}/three`})
+      }
+      if (key === '4') {
+        this.$router.push({path: `/create/${this.UID}/four`})
+      }
+      if (key === '5') {
+        this.$router.push({path: `/create/${this.UID}/five`})
+      }
+      if (key === '6') {
+        this.$router.push({path: `/create/${this.UID}/six`})
+      }
+      if (key === '7') {
+        this.$router.push({path: `/create/${this.UID}/seven`})
+      }
+      if (key === '8') {
+        this.$router.push({path: `/create/${this.UID}/eight`})
+      }
+      if (key === '9') {
+        this.$router.push({path: `/create/${this.UID}/nine`})
+      }
+      if (key === '10') {
+        this.$router.push({path: `/create/${this.UID}/ten`})
+      }
+      if (key === '11') {
+        this.$router.push({path: `/create/${this.UID}/eleven`})
+      }
+      if (key === '12') {
+        this.$router.push({path: `/create/${this.UID}/twelve`})
+      }
+      if (key === '13') {
+        this.$router.push({path: `/create/${this.UID}/thirteen`})
+      }
     }
   }
 }
