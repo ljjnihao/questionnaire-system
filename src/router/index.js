@@ -38,55 +38,55 @@ const router = new Router({
       component: Create,
       children: [
         {
-          path: '/one',
+          path: '/create/:UID/one',
           component: () => import('./../components/question/one.vue')
         },
         {
-          path: '/two',
+          path: '/create/:UID/two',
           component: () => import('./../components/question/two.vue')
         },
         {
-          path: '/three',
+          path: '/create/:UID/three',
           component: () => import('./../components/question/three.vue')
         },
         {
-          path: '/four',
+          path: '/create/:UID/four',
           component: () => import('./../components/question/four.vue')
         },
         {
-          path: '/five',
+          path: '/create/:UID/five',
           component: () => import('./../components/question/five.vue')
         },
         {
-          path: '/six',
+          path: '/create/:UID/six',
           component: () => import('./../components/question/six.vue')
         },
         {
-          path: '/seven',
+          path: '/create/:UID/seven',
           component: () => import('./../components/question/seven.vue')
         },
         {
-          path: '/eight',
+          path: '/create/:UID/eight',
           component: () => import('./../components/question/eight.vue')
         },
         {
-          path: '/nine',
+          path: '/create/:UID/nine',
           component: () => import('./../components/question/nine.vue')
         },
         {
-          path: '/ten',
+          path: '/create/:UID/ten',
           component: () => import('./../components/question/ten.vue')
         },
         {
-          path: '/eleven',
+          path: '/create/:UID/eleven',
           component: () => import('./../components/question/eleven.vue')
         },
         {
-          path: '/twelve',
+          path: '/create/:UID/twelve',
           component: () => import('./../components/question/twelve.vue')
         },
         {
-          path: '/thirteen',
+          path: '/create/:UID/thirteen',
           component: () => import('./../components/question/thirteen.vue')
         }
       ]
