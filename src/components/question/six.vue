@@ -76,10 +76,6 @@ export default {
           label: '单选题'
         },
         {
-          value: '下拉题',
-          label: '下拉题'
-        },
-        {
           value: '多选题',
           label: '多选题'
         },
@@ -91,38 +87,9 @@ export default {
           value: '多行题',
           label: '多行题'
         },
-
         {
           value: '量表题',
           label: '量表题'
-        },
-
-        {
-          value: '矩阵单选题',
-          label: '矩阵单选题'
-        },
-
-        {
-          value: '矩阵多选题',
-          label: '矩阵多选题'
-        },
-
-        {
-          value: '排序题',
-          label: '排序题'
-        },
-
-        {
-          value: '联动题',
-          label: '联动题'
-        },
-        {
-          value: '附件题',
-          label: '附件题'
-        },
-        {
-          value: '文件描述',
-          label: '文件描述'
         },
         {
           value: '填空题',
@@ -136,9 +103,6 @@ export default {
       if (newvalue === '单选题') {
         this.$router.push({path: `/create/${this.UID}/one`})
       }
-      if (newvalue === '下拉题') {
-        this.$router.push({path: `/create/${this.UID}/two`})
-      }
       if (newvalue === '多选题') {
         this.$router.push({path: `/create/${this.UID}/three`})
       }
@@ -150,24 +114,6 @@ export default {
       }
       if (newvalue === '量表题') {
         this.$router.push({path: `/create/${this.UID}/six`})
-      }
-      if (newvalue === '矩阵单选题') {
-        this.$router.push({path: `/create/${this.UID}/seven`})
-      }
-      if (newvalue === '矩阵多选题') {
-        this.$router.push({path: `/create/${this.UID}/eight`})
-      }
-      if (newvalue === '排序题') {
-        this.$router.push({path: `/create/${this.UID}/nine`})
-      }
-      if (newvalue === '联动题') {
-        this.$router.push({path: `/create/${this.UID}/ten`})
-      }
-      if (newvalue === '附件题') {
-        this.$router.push({path: `/create/${this.UID}/eleven`})
-      }
-      if (newvalue === '文件描述') {
-        this.$router.push({path: `/create/${this.UID}/twelve`})
       }
       if (newvalue === '填空题') {
         this.$router.push({path: `/create/${this.UID}/thirteen`})

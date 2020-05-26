@@ -39,7 +39,6 @@
         effect="plain"
         style="width:20vw"
       ></el-input>
-      <el-button v-else class="button-new-tag" size="small" @click="showInput" style="width:20vw" effect="plain">+输入选项</el-button>
     </div>
     <div class="title">
         <el-button type="primary">确认提交</el-button>
@@ -57,16 +56,12 @@ export default {
       inputValue: '',
       input1: '',
       input2: '',
-      value: '文件描述',
+      value: '填空题',
       UID: this.$router.history.current.params.UID,
       options: [
         {
           value: '单选题',
           label: '单选题'
-        },
-        {
-          value: '下拉题',
-          label: '下拉题'
         },
         {
           value: '多选题',
@@ -80,39 +75,9 @@ export default {
           value: '多行题',
           label: '多行题'
         },
-
         {
           value: '量表题',
           label: '量表题'
-        },
-
-        {
-          value: '矩阵单选题',
-          label: '矩阵单选题'
-        },
-
-        {
-          value: '矩阵多选题',
-          label: '矩阵多选题'
-        },
-
-        {
-          value: '排序题',
-          label: '排序题'
-        },
-
-        {
-          value: '联动题',
-          label: '联动题'
-        },
-
-        {
-          value: '附件题',
-          label: '附件题'
-        },
-        {
-          value: '文件描述',
-          label: '文件描述'
         },
         {
           value: '填空题',
@@ -126,9 +91,6 @@ export default {
       if (newvalue === '单选题') {
         this.$router.push({path: `/create/${this.UID}/one`})
       }
-      if (newvalue === '下拉题') {
-        this.$router.push({path: `/create/${this.UID}/two`})
-      }
       if (newvalue === '多选题') {
         this.$router.push({path: `/create/${this.UID}/three`})
       }
@@ -141,24 +103,6 @@ export default {
       if (newvalue === '量表题') {
         this.$router.push({path: `/create/${this.UID}/six`})
       }
-      if (newvalue === '矩阵单选题') {
-        this.$router.push({path: `/create/${this.UID}/seven`})
-      }
-      if (newvalue === '矩阵多选题') {
-        this.$router.push({path: `/create/${this.UID}/eight`})
-      }
-      if (newvalue === '排序题') {
-        this.$router.push({path: `/create/${this.UID}/nine`})
-      }
-      if (newvalue === '联动题') {
-        this.$router.push({path: `/create/${this.UID}/ten`})
-      }
-      if (newvalue === '附件题') {
-        this.$router.push({path: `/create/${this.UID}/eleven`})
-      }
-      if (newvalue === '文件描述') {
-        this.$router.push({path: `/create/${this.UID}/twelve`})
-      }
       if (newvalue === '填空题') {
         this.$router.push({path: `/create/${this.UID}/thirteen`})
       }
@@ -167,13 +111,6 @@ export default {
   methods: {
     handleClose (tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1)
-    },
-
-    showInput () {
-      this.inputVisible = true
-      this.$nextTick(_ => {
-        this.$refs.saveTagInput.$refs.input.focus()
-      })
     },
 
     handleInputConfirm () {
