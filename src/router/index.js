@@ -42,10 +42,6 @@ const router = new Router({
           component: () => import('./../components/question/one.vue')
         },
         {
-          path: '/create/:UID/two',
-          component: () => import('./../components/question/two.vue')
-        },
-        {
           path: '/create/:UID/three',
           component: () => import('./../components/question/three.vue')
         },
@@ -60,30 +56,6 @@ const router = new Router({
         {
           path: '/create/:UID/six',
           component: () => import('./../components/question/six.vue')
-        },
-        {
-          path: '/create/:UID/seven',
-          component: () => import('./../components/question/seven.vue')
-        },
-        {
-          path: '/create/:UID/eight',
-          component: () => import('./../components/question/eight.vue')
-        },
-        {
-          path: '/create/:UID/nine',
-          component: () => import('./../components/question/nine.vue')
-        },
-        {
-          path: '/create/:UID/ten',
-          component: () => import('./../components/question/ten.vue')
-        },
-        {
-          path: '/create/:UID/eleven',
-          component: () => import('./../components/question/eleven.vue')
-        },
-        {
-          path: '/create/:UID/twelve',
-          component: () => import('./../components/question/twelve.vue')
         },
         {
           path: '/create/:UID/thirteen',
