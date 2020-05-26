@@ -51,52 +51,24 @@
                 <el-menu-item index="1">
                   <span slot="title">单选题</span>
                 </el-menu-item>
-                <el-menu-item index="2">
 
-                  <span slot="title">下拉题</span>
-                </el-menu-item>
                 <el-menu-item index="3">
-
                   <span slot="title">多选题</span>
                 </el-menu-item>
-                <el-menu-item index="4">
 
+                <el-menu-item index="4">
                   <span slot="title">单行题</span>
                 </el-menu-item>
-                <el-menu-item index="5">
 
+                <el-menu-item index="5">
                   <span slot="title">多行题</span>
                 </el-menu-item>
-                <el-menu-item index="6">
 
+                <el-menu-item index="6">
                   <span slot="title">量表题</span>
                 </el-menu-item>
-                <el-menu-item index="7">
 
-                  <span slot="title">矩阵单选题</span>
-                </el-menu-item>
-                <el-menu-item index="8">
-
-                  <span slot="title">矩阵多选题</span>
-                </el-menu-item>
-                <el-menu-item index="9">
-
-                  <span slot="title">排序题</span>
-                </el-menu-item>
-                <el-menu-item index="10">
-
-                  <span slot="title">联动题</span>
-                </el-menu-item>
-                <el-menu-item index="11">
-
-                  <span slot="title">附件题</span>
-                </el-menu-item>
-                <el-menu-item index="12">
-
-                  <span slot="title">文件描述</span>
-                </el-menu-item>
                 <el-menu-item index="13">
-
                   <span slot="title">填空题</span>
                 </el-menu-item>
               </el-menu>
@@ -175,9 +147,6 @@ export default {
       if (key === '1') {
         this.$router.push({path: `/create/${this.UID}/one`})
       }
-      if (key === '2') {
-        this.$router.push({path: `/create/${this.UID}/two`})
-      }
       if (key === '3') {
         this.$router.push({path: `/create/${this.UID}/three`})
       }
@@ -189,24 +158,6 @@ export default {
       }
       if (key === '6') {
         this.$router.push({path: `/create/${this.UID}/six`})
-      }
-      if (key === '7') {
-        this.$router.push({path: `/create/${this.UID}/seven`})
-      }
-      if (key === '8') {
-        this.$router.push({path: `/create/${this.UID}/eight`})
-      }
-      if (key === '9') {
-        this.$router.push({path: `/create/${this.UID}/nine`})
-      }
-      if (key === '10') {
-        this.$router.push({path: `/create/${this.UID}/ten`})
-      }
-      if (key === '11') {
-        this.$router.push({path: `/create/${this.UID}/eleven`})
-      }
-      if (key === '12') {
-        this.$router.push({path: `/create/${this.UID}/twelve`})
       }
       if (key === '13') {
         this.$router.push({path: `/create/${this.UID}/thirteen`})
