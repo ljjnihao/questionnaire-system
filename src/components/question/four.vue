@@ -5,10 +5,6 @@
       <el-input v-model="input1" placeholder="请输入题目" style="width:30vw"></el-input>
     </div>
     <div class="title">
-      <div>备注：</div>
-      <el-input v-model="input2" placeholder="请输入题目" style="width:30vw"></el-input>
-    </div>
-    <div class="title">
       <el-select v-model="value" placeholder="请选择">
         <el-option
           v-for="item in options"
@@ -19,8 +15,7 @@
       </el-select>
     </div>
     <div class="title">
-        <el-button type="primary">确认提交</el-button>
-         <el-button type="info">取消提交</el-button>
+        <el-button type="primary">提交</el-button>
       </div>
   </div>
 </template>
@@ -67,22 +62,22 @@ export default {
   watch: {
     value (newvalue, oldvalue) {
       if (newvalue === '单选题') {
-        this.$router.push({path: `/create/${this.UID}/one`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/one`})
       }
       if (newvalue === '多选题') {
-        this.$router.push({path: `/create/${this.UID}/three`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/three`})
       }
       if (newvalue === '单行题') {
-        this.$router.push({path: `/create/${this.UID}/four`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/four`})
       }
       if (newvalue === '多行题') {
-        this.$router.push({path: `/create/${this.UID}/five`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/five`})
       }
       if (newvalue === '量表题') {
-        this.$router.push({path: `/create/${this.UID}/six`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/six`})
       }
       if (newvalue === '填空题') {
-        this.$router.push({path: `/create/${this.UID}/thirteen`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/thirteen`})
       }
     }
   },
