@@ -3,11 +3,10 @@
     <el-container>
       <el-header>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" text-color="#000000">
-          <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
+ <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
           <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px" route="">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px" route="">消息中心</el-menu-item>
-          <el-menu-item index="4" style="font-size: 20px" route="">个人信息</el-menu-item>
+          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
+          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
           <div class="demo-image">
                <el-image style="border-radius: 100%;width: 50px;height: 50px; float: right; margin-right: 100px" :src="url"></el-image>
           </div>
@@ -108,6 +107,17 @@ export default {
     }
   },
   methods: {
+    handleSelect (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/information/${this.UID}`})
+      }
+    },
     preview () {
       this.$router.push({path: `/fillQuestionnaire/${this.QID}`})
     },

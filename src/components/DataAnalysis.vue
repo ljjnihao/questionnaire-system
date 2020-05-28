@@ -3,11 +3,10 @@
     <el-container>
       <el-header>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#000000">
-          <el-menu-item id="logo" style="color: #409EFF;">LOGO</el-menu-item>
-          <el-menu-item index="1" class="title-item">创建问卷</el-menu-item>
-          <el-menu-item index="2" class="title-item">我的问卷</el-menu-item>
-          <el-menu-item index="3" class="title-item">消息中心</el-menu-item>
-          <el-menu-item index="4" class="title-item">个人信息</el-menu-item>
+           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
+          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
+          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
+          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
           <el-menu-item class="title-item">
             <div class="demo-image">
               <div class="block">
@@ -253,6 +252,17 @@ export default {
     }
   },
   methods: {
+    handleSelect (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/information/${this.UID}`})
+      }
+    },
     getAnswersNum: function () {
       return this.$axios({
         url: 'https://afo3wm.toutiao15.com/getAnswersNum',
@@ -283,9 +293,6 @@ export default {
     preview () {
       let routeData = this.$router.resolve({path: `/preview/${this.qid}`})
       window.open(routeData.href, '_blank')
-    },
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
     },
     handleSelect2 (key, keyPath) {
       if (key === '1') {

@@ -6,8 +6,7 @@
           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
           <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
           <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">消息中心</el-menu-item>
-          <el-menu-item index="4" style="font-size: 20px">个人信息</el-menu-item>
+          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
           <el-menu-item index="5">
             <div class="demo-image">
               <div class="block">
@@ -102,27 +101,34 @@
   </div>
 </template>
 
-
 <script>
-  export default {
-    data() {
-      return {
-        pickerOptions: {
-          disabledDate(time) {
-            return time.getTime() > Date.now();
-          }},
-        activeIndex: '1',
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-        value: 0,
-        value1: ''
-      };
-    },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+export default {
+  data () {
+    return {
+      pickerOptions: {
+        disabledDate (time) {
+          return time.getTime() > Date.now()
+        }},
+      activeIndex: '1',
+      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+      value: 0,
+      value1: ''
+    }
+  },
+  methods: {
+    handleSelect (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/information/${this.UID}`})
       }
     }
   }
+}
 </script>
 
 <style scoped>

@@ -8,13 +8,10 @@
         @select="handleSelect"
         style="width:100vw"
       >
-        <el-menu-item index="0">
-          <div class="logo">LOGO</div>
-        </el-menu-item>
-        <el-menu-item index="1" class="title">创建问卷</el-menu-item>
-        <el-menu-item index="2" class="title">我的问卷</el-menu-item>
-        <el-menu-item index="3" class="title">消息中心</el-menu-item>
-        <el-menu-item index="4" class="title">个人信息</el-menu-item>
+         <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
+          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
+          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
+          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
         <el-menu-item index="4" style="float: right;">
           <img style="border-radius: 100%;width: 50px;height: 50px" :src="url" alt class="imgs" />
         </el-menu-item>
@@ -162,8 +159,17 @@ export default {
   },
   methods: {
     handleSelect (key, keyPath) {
-      console.log(key, keyPath)
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/information/${this.UID}`})
+      }
     },
+
     logout () {
       //! don't use arrow function here
       console.log(this.$router)

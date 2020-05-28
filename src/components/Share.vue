@@ -7,9 +7,10 @@
                 <el-col :span="16">
                   <div class="grid-content ">
                     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                        <el-menu-item index="1">创建问卷</el-menu-item>
-                        <el-menu-item index="2">我的问卷</el-menu-item>
-                        <el-menu-item index="3">消息中心</el-menu-item>
+                         <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
+          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
+          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
+          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
                 </el-menu></div></el-col>
                     <el-col :span="6"><div class="grid-content">
                         <el-col :span="12"><div class="grid-content"></div></el-col>
@@ -72,7 +73,7 @@ import Clipboard from 'clipboard'
 export default {
   data () {
     return {
-      activeIndex: '1',
+      activeIndex: '2',
       UID: this.$router.history.current.params.UID,
       QID: this.$router.history.current.params.QID,
       url: '123',
@@ -80,6 +81,17 @@ export default {
     }
   },
   methods: {
+    handleSelect (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/information/${this.UID}`})
+      }
+    },
     preview () {
       this.$router.push({path: `/fillQuestionnaire/${this.QID}`})
     },

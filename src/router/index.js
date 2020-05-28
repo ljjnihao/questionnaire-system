@@ -13,6 +13,8 @@ import CheckQuestionnaire from '@/components/CheckQuestionnaire'
 import filledCheck from '@/components/filledCheck'
 import preview from '@/components/preview'
 import ShareQuestionnaire from '@/components/Share'
+import information from '@/components/information'
+import myQuestionnaire from '@/components/myQuestionnaire'
 Vue.use(Router)
 
 const router = new Router({
@@ -139,6 +141,18 @@ const router = new Router({
       component: ShareQuestionnaire
     // for local test: localhost/#/ShareQuestionnaire/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
+    {
+      path: '/information/:UID',
+      name: 'information',
+      component: information
+    },
+    // for local test: localhost/#/information/5eb7a93fc0a07c000b4488e9
+    {
+      path: '/myQuestionnaire/:UID',
+      name: 'myQuestionnaire',
+      component: myQuestionnaire
+    },
+    // for local test: localhost/#/myQuestionnaire/5e8c1be865e6f70222803e1b
     // ! keep it at last
     {
       path: '*',
