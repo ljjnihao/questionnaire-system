@@ -8,8 +8,7 @@
           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
           <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
           <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">消息中心</el-menu-item>
-          <el-menu-item index="4" style="font-size: 20px">个人信息</el-menu-item>
+          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
         </el-menu>
       </el-header>
 
@@ -121,6 +120,17 @@ export default {
     }
   },
   methods: {
+    handleSelect (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/information/${this.UID}`})
+      }
+    },
     register (form) {
       this.loading = true
       this.$refs[form].validate(valid => {

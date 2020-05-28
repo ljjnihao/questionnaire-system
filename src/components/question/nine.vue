@@ -58,6 +58,7 @@ export default {
       input1: '',
       input2: '',
       value: '排序题',
+      UID: this.$router.history.current.params.UID,
       options: [
         {
           value: '单选题',
@@ -123,69 +124,43 @@ export default {
   watch: {
     value (newvalue, oldvalue) {
       if (newvalue === '单选题') {
-        this.$router.push({
-          path: '/'
-        })
+        this.$router.push({path: `/create/${this.UID}/one`})
       }
       if (newvalue === '下拉题') {
-        this.$router.push({
-          path: '/two'
-        })
+        this.$router.push({path: `/create/${this.UID}/two`})
       }
       if (newvalue === '多选题') {
-        this.$router.push({
-          path: '/three'
-        })
+        this.$router.push({path: `/create/${this.UID}/three`})
       }
       if (newvalue === '单行题') {
-        this.$router.push({
-          path: '/four'
-        })
+        this.$router.push({path: `/create/${this.UID}/four`})
       }
       if (newvalue === '多行题') {
-        this.$router.push({
-          path: '/five'
-        })
+        this.$router.push({path: `/create/${this.UID}/five`})
       }
       if (newvalue === '量表题') {
-        this.$router.push({
-          path: '/six'
-        })
+        this.$router.push({path: `/create/${this.UID}/six`})
       }
       if (newvalue === '矩阵单选题') {
-        this.$router.push({
-          path: '/seven'
-        })
+        this.$router.push({path: `/create/${this.UID}/seven`})
       }
       if (newvalue === '矩阵多选题') {
-        this.$router.push({
-          path: '/eight'
-        })
+        this.$router.push({path: `/create/${this.UID}/eight`})
       }
       if (newvalue === '排序题') {
-        this.$router.push({
-          path: '/nine'
-        })
+        this.$router.push({path: `/create/${this.UID}/nine`})
       }
       if (newvalue === '联动题') {
-        this.$router.push({
-          path: '/ten'
-        })
+        this.$router.push({path: `/create/${this.UID}/ten`})
       }
       if (newvalue === '附件题') {
-        this.$router.push({
-          path: '/eleven'
-        })
+        this.$router.push({path: `/create/${this.UID}/eleven`})
       }
       if (newvalue === '文件描述') {
-        this.$router.push({
-          path: '/twelve'
-        })
+        this.$router.push({path: `/create/${this.UID}/twelve`})
       }
       if (newvalue === '填空题') {
-        this.$router.push({
-          path: '/thirteen'
-        })
+        this.$router.push({path: `/create/${this.UID}/thirteen`})
       }
     }
   },

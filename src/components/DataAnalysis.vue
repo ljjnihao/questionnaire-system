@@ -3,11 +3,10 @@
     <el-container>
       <el-header>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#000000">
-          <el-menu-item id="logo" style="color: #409EFF;">LOGO</el-menu-item>
-          <el-menu-item index="1" class="title-item">创建问卷</el-menu-item>
-          <el-menu-item index="2" class="title-item">我的问卷</el-menu-item>
-          <el-menu-item index="3" class="title-item">消息中心</el-menu-item>
-          <el-menu-item index="4" class="title-item">个人信息</el-menu-item>
+           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
+          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
+          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
+          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
           <el-menu-item class="title-item">
             <div class="demo-image">
               <div class="block">
@@ -41,17 +40,17 @@
       </el-header>
     </el-container>
     <el-container style="padding-top: 1.5vw;">
-      <el-aside width="15vw" style="background-color: #d3dce6;text-align: center;">
-        <el-menu  default-active="2"
-                class="el-menu-vertical-demo" @select="handleSelect2">
+      <el-aside width="10.26vw" >
+        <el-menu  default-active="3"
+                class="el-menu-vertical-demo" @select="handleSelect2" style="position:fixed;top: 15vw;left: 4vw">
           <el-menu-item index="1">
-            <span slot="title" class="hyc">回收概况</span>
+            <span slot="title" class="hyc" style="font-size: 20px">回收概况</span>
           </el-menu-item>
           <el-menu-item index="2">
-            <span slot="title" class="hyc">查看问卷</span>
+            <span slot="title" class="hyc" style="font-size: 20px">查看问卷</span>
           </el-menu-item>
           <el-menu-item index="3">
-            <span slot="title" class="hyc">数据分析</span>
+            <span slot="title" class="hyc" style="font-size: 20px">数据分析</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -60,7 +59,7 @@
         <div v-for="(item,index) in processed" :key=index class="Item">
           <div v-if="item.type==0" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="choice" label="选项" width="100">
               </el-table-column>
               <el-table-column prop="choiceNum" label="小计" width="100">
@@ -75,7 +74,7 @@
           </div>
           <div v-else-if="item.type==1" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="choice" label="选项" width="100">
               </el-table-column>
               <el-table-column prop="choiceNum" label="小计" width="100">
@@ -90,7 +89,7 @@
           </div>
           <div v-else-if="item.type==2" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="choice" label="选项" width="100">
               </el-table-column>
               <el-table-column prop="choiceNum" label="小计" width="100">
@@ -105,7 +104,7 @@
           </div>
           <div v-else-if="item.type==3" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="choice" label="选项" width="100">
               </el-table-column>
               <el-table-column prop="choiceNum" label="小计" width="100">
@@ -120,7 +119,7 @@
           </div>
           <div v-else-if="item.type==4" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="No" label="序号" width="100">
               </el-table-column>
               <el-table-column prop="fintime" label="提交答卷时间" width="100">
@@ -131,7 +130,7 @@
           </div>
           <div v-else-if="item.type==5" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="No" label="序号" width="100">
               </el-table-column>
               <el-table-column prop="fintime" label="提交答卷时间" width="100">
@@ -142,7 +141,7 @@
           </div>
           <div v-else-if="item.type==6" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="No" label="序号" width="100">
               </el-table-column>
               <el-table-column prop="fintime" label="提交答卷时间" width="100">
@@ -153,7 +152,7 @@
           </div>
           <div v-else-if="item.type==7" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="No" label="序号" width="100">
               </el-table-column>
               <el-table-column prop="fintime" label="提交答卷时间" width="100">
@@ -165,7 +164,7 @@
           <div v-else-if="item.type==8" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
             <p>本题平均分:<span>{{item.avg}}</span></p>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="mark" label="分数" width="100">
               </el-table-column>
               <el-table-column prop="marknum" label="小计" width="100">
@@ -180,7 +179,7 @@
           <div v-else-if="item.type==9" class="unit">
             <span style="font-weight: bold">{{index+1}}、 </span><span v-text="item.title"></span>
             <p>本题平均分:<span>{{item.avg}}</span></p>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="mark" label="分数" width="100">
               </el-table-column>
               <el-table-column prop="marknum" label="小计" width="100">
@@ -202,7 +201,7 @@
                     <span>{{titleBlank}}</span>
                 </span>
             </span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="No" label="序号" width="100">
               </el-table-column>
               <el-table-column prop="fintime" label="提交答卷时间" width="100">
@@ -221,7 +220,7 @@
                     <span>{{titleBlank}}</span>
                 </span>
             </span>
-            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;box-shadow: 1px -1px 7px #888888;" class="Table">
+            <el-table :data="tabeldata[index]" max-height="590" style="width: 500px;" class="Table">
               <el-table-column prop="No" label="序号" width="100">
               </el-table-column>
               <el-table-column prop="fintime" label="提交答卷时间" width="100">
@@ -253,6 +252,17 @@ export default {
     }
   },
   methods: {
+    handleSelect (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/information/${this.UID}`})
+      }
+    },
     getAnswersNum: function () {
       return this.$axios({
         url: 'https://afo3wm.toutiao15.com/getAnswersNum',
@@ -283,9 +293,6 @@ export default {
     preview () {
       let routeData = this.$router.resolve({path: `/preview/${this.qid}`})
       window.open(routeData.href, '_blank')
-    },
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
     },
     handleSelect2 (key, keyPath) {
       if (key === '1') {

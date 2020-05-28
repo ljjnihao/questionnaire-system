@@ -145,6 +145,17 @@ export default {
     }
   },
   methods: {
+    handleSelect (key, keyPath) {
+      if (key === '1') {
+        this.$router.push({path: `/create/${this.UID}`})
+      }
+      if (key === '2') {
+        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
+      }
+      if (key === '3') {
+        this.$router.push({path: `/information/${this.UID}`})
+      }
+    },
     getQuesnaire: function () {
       return this.$axios({
         url: 'https://afo3wm.toutiao15.com/getQuesnaire',

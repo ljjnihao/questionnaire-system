@@ -5,10 +5,6 @@
       <el-input v-model="input1" placeholder="请输入题目" style="width:30vw"></el-input>
     </div>
     <div class="title">
-      <div>备注：</div>
-      <el-input v-model="input2" placeholder="请输入题目" style="width:30vw"></el-input>
-    </div>
-    <div class="title">
       <el-select v-model="value" placeholder="请选择">
         <el-option
           v-for="item in options"
@@ -19,8 +15,7 @@
       </el-select>
     </div>
     <div class="title">
-        <el-button type="primary">确认提交</el-button>
-         <el-button type="info">取消提交</el-button>
+        <el-button type="primary" @click="createquestion('input1')">提交</el-button>
       </div>
   </div>
 </template>
@@ -35,14 +30,11 @@ export default {
       input1: '',
       input2: '',
       value: '多行题',
+      UID: this.$router.history.current.params.UID,
       options: [
         {
           value: '单选题',
           label: '单选题'
-        },
-        {
-          value: '下拉题',
-          label: '下拉题'
         },
         {
           value: '多选题',
@@ -56,39 +48,9 @@ export default {
           value: '多行题',
           label: '多行题'
         },
-
         {
           value: '量表题',
           label: '量表题'
-        },
-
-        {
-          value: '矩阵单选题',
-          label: '矩阵单选题'
-        },
-
-        {
-          value: '矩阵多选题',
-          label: '矩阵多选题'
-        },
-
-        {
-          value: '排序题',
-          label: '排序题'
-        },
-
-        {
-          value: '联动题',
-          label: '联动题'
-        },
-
-        {
-          value: '附件题',
-          label: '附件题'
-        },
-        {
-          value: '文件描述',
-          label: '文件描述'
         },
         {
           value: '填空题',
@@ -100,69 +62,22 @@ export default {
   watch: {
     value (newvalue, oldvalue) {
       if (newvalue === '单选题') {
-        this.$router.push({
-          path: '/'
-        })
-      }
-      if (newvalue === '下拉题') {
-        this.$router.push({
-          path: '/two'
-        })
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/one`})
       }
       if (newvalue === '多选题') {
-        this.$router.push({
-          path: '/three'
-        })
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/three`})
       }
       if (newvalue === '单行题') {
-        this.$router.push({
-          path: '/four'
-        })
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/four`})
       }
       if (newvalue === '多行题') {
-        this.$router.push({
-          path: '/five'
-        })
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/five`})
       }
       if (newvalue === '量表题') {
-        this.$router.push({
-          path: '/six'
-        })
-      }
-      if (newvalue === '矩阵单选题') {
-        this.$router.push({
-          path: '/seven'
-        })
-      }
-      if (newvalue === '矩阵多选题') {
-        this.$router.push({
-          path: '/eight'
-        })
-      }
-      if (newvalue === '排序题') {
-        this.$router.push({
-          path: '/nine'
-        })
-      }
-      if (newvalue === '联动题') {
-        this.$router.push({
-          path: '/ten'
-        })
-      }
-      if (newvalue === '附件题') {
-        this.$router.push({
-          path: '/eleven'
-        })
-      }
-      if (newvalue === '文件描述') {
-        this.$router.push({
-          path: '/twelve'
-        })
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/six`})
       }
       if (newvalue === '填空题') {
-        this.$router.push({
-          path: '/thirteen'
-        })
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/thirteen`})
       }
     }
   },
@@ -185,6 +100,29 @@ export default {
       }
       this.inputVisible = false
       this.inputValue = ''
+    },
+    createquestion (form) {
+      let obj = {'title': this.input1}
+      var order = parseInt(window.parent.document.getElementById('order').value)
+      this.loading = true
+      this.$axios
+        .post('https://afo3wm.toutiao15.com/createQuestion', {
+          content: obj,
+          order: order,
+          questionnaireID: this.$router.history.current.params.questionnaireID,
+          type: 4
+        })
+        .then(response => {
+          this.loading = false
+          console.log(response)
+          if (response.data.success) {
+            this.$alert('第' + order + '题提交成功')
+            order = order + 1
+            window.parent.document.getElementById('order').value = order
+          } else {
+            this.$alert(response.data.msg)
+          }
+        })
     }
   }
 }
