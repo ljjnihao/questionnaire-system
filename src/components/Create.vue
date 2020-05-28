@@ -104,7 +104,7 @@ export default {
             .then(response => {
               this.loading = false
               console.log(response.data)
-              if (response.data.state) {
+              if (response.data.state === 'vaild') {
                 this.$axios
                   .post('https://afo3wm.toutiao15.com/createQuesnaire', {
                     title: this.formForQuesionnaire.title,
