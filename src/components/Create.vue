@@ -42,7 +42,7 @@
           </div>
         </el-header>
         <el-container style="padding-top: 1.5vw;">
-          <el-main style="background-color: #e9eef3;">
+          <el-main>
             <div>
               <div>
               <el-form :model = "formForQuesionnaire" status-icon :rules="rules" ref="formForQuesionnaire" v-loading="loading" element-loading-text="创建中">
@@ -97,21 +97,36 @@ export default {
           })
         } else {
           this.$axios
-            .post('https://afo3wm.toutiao15.com/createQuesnaire', {
+            .post('https://afo3wm.toutiao15.com/checkTitle', {
               title: this.formForQuesionnaire.title,
-              description: this.formForQuesionnaire.description,
               UID: this.$router.history.current.params.UID
             })
             .then(response => {
               this.loading = false
-              console.log(response)
-              this.questionnaireID = response.data.questionnaireID
-              this.$alert('开始创建你的问题吧', '创建问卷成功', {
-                confirmButtonText: '确定',
-                callback: action => {
-                  this.$router.push({ path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/one` })
-                }
-              })
+              console.log(response.data)
+              if (response.data.state) {
+                this.$axios
+                  .post('https://afo3wm.toutiao15.com/createQuesnaire', {
+                    title: this.formForQuesionnaire.title,
+                    description: this.formForQuesionnaire.description,
+                    UID: this.$router.history.current.params.UID
+                  })
+                  .then(response => {
+                    this.loading = false
+                    console.log(response)
+                    this.questionnaireID = response.data.questionnaireID
+                    this.$alert('开始创建你的问题吧', '创建问卷成功', {
+                      confirmButtonText: '确定',
+                      callback: action => {
+                        this.$router.push({ path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/one` })
+                      }
+                    })
+                  })
+              } else {
+                this.$alert('该问卷已存在', '创建问卷失败', {
+                  confirmButtonText: '确定'
+                })
+              }
             })
         }
       })
