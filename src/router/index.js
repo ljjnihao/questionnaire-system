@@ -13,6 +13,7 @@ import CheckQuestionnaire from '@/components/CheckQuestionnaire'
 import filledCheck from '@/components/filledCheck'
 import preview from '@/components/preview'
 import ShareQuestionnaire from '@/components/Share'
+import CreateQuestion from '@/components/CreateQuestion'
 Vue.use(Router)
 
 const router = new Router({
@@ -35,30 +36,35 @@ const router = new Router({
     {
       path: '/create/:UID',
       name: 'create',
-      component: Create,
+      component: Create
+    },
+    {
+      path: '/CreateQuestion/:UID/:questionnaireID',
+      name: 'CreateQuestion',
+      component: CreateQuestion,
       children: [
         {
-          path: '/create/:UID/one',
+          path: '/CreateQuestion/:UID/:questionnaireID/one',
           component: () => import('./../components/question/one.vue')
         },
         {
-          path: '/create/:UID/three',
+          path: '/CreateQuestion/:UID/:questionnaireID/three',
           component: () => import('./../components/question/three.vue')
         },
         {
-          path: '/create/:UID/four',
+          path: '/CreateQuestion/:UID/:questionnaireID/four',
           component: () => import('./../components/question/four.vue')
         },
         {
-          path: '/create/:UID/five',
+          path: '/CreateQuestion/:UID/:questionnaireID/five',
           component: () => import('./../components/question/five.vue')
         },
         {
-          path: '/create/:UID/six',
+          path: '/CreateQuestion/:UID/:questionnaireID/six',
           component: () => import('./../components/question/six.vue')
         },
         {
-          path: '/create/:UID/thirteen',
+          path: '/CreateQuestion/:UID/:questionnaireID/thirteen',
           component: () => import('./../components/question/thirteen.vue')
         }
       ]
