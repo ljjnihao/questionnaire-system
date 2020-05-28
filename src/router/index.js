@@ -10,7 +10,7 @@ import Issue from '@/components/Issue'
 import NotFound from '@/components/NotFound'
 import RecoveryProfile from '@/components/RecoveryProfile'
 import CheckQuestionnaire from '@/components/CheckQuestionnaire'
-import check from '@/components/Checkbox'
+// import check from '@/components/Checkbox'
 import filledCheck from '@/components/filledCheck'
 import preview from '@/components/preview'
 Vue.use(Router)
@@ -122,10 +122,6 @@ const router = new Router({
       // for local test: localhost/#/CheckQuestionnaire/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     {
-<<<<<<< HEAD
-      path: '/checkbox',
-      component: check
-=======
       path: '/filledCheck/:questionnaireID/:answerUID',
       name: 'filledCheck',
       component: filledCheck
@@ -136,7 +132,6 @@ const router = new Router({
       name: 'preview',
       component: preview
       // for local test: localhost/#/preview/5e8c1ad6cfd9ab0216d81664
->>>>>>> d40b49828abbe7610f07019bdaf21dc29aadc42c
     },
     // ! keep it at last
     {

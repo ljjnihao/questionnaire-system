@@ -230,6 +230,15 @@ export default {
       }
       return {choice: rs}
     },
+    multirowToArray: function (text) {
+      let snsArr=text.split(/[(\r\n)\r\n]+/)
+      snsArr.forEach((item,index) => {
+        if (!item) {
+          snsArr.splice(index,1)
+        }
+      })
+      return {text: snsArr}
+    },
     commited: function () {
       console.log(this.answerUID)
       let rs = JSON.parse(JSON.stringify(this.answerSet))
@@ -278,6 +287,10 @@ export default {
               })
               return
             }
+            rs[i].ans = this.multirowToArray(rs[i].ans.text)
+            break
+          case 7:
+            rs[i].ans = this.multirowToArray(rs[i].ans.text)
             break
           case 8:
             if (this.answerSet[i].ans.mark === 0) {
