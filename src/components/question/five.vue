@@ -102,11 +102,12 @@ export default {
       this.inputValue = ''
     },
     createquestion (form) {
+      let obj = {'title': this.input1}
       var order = parseInt(window.parent.document.getElementById('order').value)
       this.loading = true
       this.$axios
         .post('https://afo3wm.toutiao15.com/createQuestion', {
-          title: this.input1,
+          content: obj,
           order: order,
           questionnaireID: this.$router.history.current.params.questionnaireID,
           type: 4

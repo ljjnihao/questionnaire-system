@@ -143,7 +143,7 @@ export default {
       this.loading = true
       this.$axios
         .post('https://afo3wm.toutiao15.com/createQuestion', {
-          title: obj,
+          content: obj,
           order: order,
           questionnaireID: this.$router.history.current.params.questionnaireID,
           type: 5
