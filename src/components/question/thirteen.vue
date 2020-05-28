@@ -37,7 +37,7 @@
       ></el-input>
     </div>
     <div class="title">
-        <el-button type="primary">提交</el-button>
+        <el-button type="primary" @click="createquestion('input1')">提交</el-button>
       </div>
   </div>
 </template>
@@ -115,6 +115,28 @@ export default {
       }
       this.inputVisible = false
       this.inputValue = ''
+    },
+    createquestion (form) {
+      var order = parseInt(window.parent.document.getElementById('order').value)
+      this.loading = true
+      this.$axios
+        .post('https://afo3wm.toutiao15.com/createQuestion', {
+          title: this.input1,
+          order: order,
+          questionnaireID: this.$router.history.current.params.questionnaireID,
+          type: 6
+        })
+        .then(response => {
+          this.loading = false
+          console.log(response)
+          if (response.data.success) {
+            this.$alert('第' + order + '题提交成功')
+            order = order + 1
+            window.parent.document.getElementById('order').value = order
+          } else {
+            this.$alert(response.data.msg)
+          }
+        })
     }
   }
 }

@@ -38,7 +38,7 @@
       <el-button v-else class="button-new-tag" size="small" @click="showInput" style="width:20vw" effect="plain">+输入选项</el-button>
     </div>
     <div class="title">
-        <el-button type="primary">提交</el-button>
+        <el-button type="primary" @click="createquestion('input1')">提交</el-button>
       </div>
   </div>
 </template>
@@ -54,6 +54,7 @@ export default {
       input2: '',
       value: '单选题',
       UID: this.$router.history.current.params.UID,
+      order: this.$router.history.current.params.order,
       options: [
         {
           value: '单选题',
@@ -123,6 +124,30 @@ export default {
       }
       this.inputVisible = false
       this.inputValue = ''
+    },
+    createquestion (form) {
+      let obj = {'title': this.input1, 'choice': this.dynamicTags}
+      console.log(obj)
+      var order = parseInt(window.parent.document.getElementById('order').value)
+      this.loading = true
+      this.$axios
+        .post('https://afo3wm.toutiao15.com/createQuestion', {
+          title: obj,
+          order: order,
+          questionnaireID: this.$router.history.current.params.questionnaireID,
+          type: 1
+        })
+        .then(response => {
+          this.loading = false
+          console.log(response)
+          if (response.data.success) {
+            this.$alert('第' + order + '题提交成功')
+            order = order + 1
+            window.parent.document.getElementById('order').value = order
+          } else {
+            this.$alert(response.data.msg)
+          }
+        })
     }
   }
 }

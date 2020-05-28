@@ -79,6 +79,7 @@
             </div>
             <router-view/>
           </el-main>
+          <input type="hidden" id="order" value=1>
         </el-container>
       </el-container>
     </div>
@@ -95,15 +96,9 @@ export default {
       input1: '',
       value: '',
       UID: this.$router.history.current.params.UID,
+      order: this.$router.history.current.params.order,
       questionnaireID: this.$router.history.current.params.questionnaireID,
-      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-      options: [{
-        value: '选项1',
-        label: '正常完成'
-      }, {
-        value: '选项2',
-        label: '提前结束'
-      }]
+      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
     }
   },
   methods: {
