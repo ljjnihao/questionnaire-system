@@ -15,6 +15,7 @@ import preview from '@/components/preview'
 import ShareQuestionnaire from '@/components/Share'
 import information from '@/components/information'
 import myQuestionnaire from '@/components/myQuestionnaire'
+import CreateQuestion from '@/components/CreateQuestion'
 Vue.use(Router)
 
 const router = new Router({
@@ -37,58 +38,35 @@ const router = new Router({
     {
       path: '/create/:UID',
       name: 'create',
-      component: Create,
+      component: Create
+    },
+    {
+      path: '/CreateQuestion/:UID/:questionnaireID',
+      name: 'CreateQuestion',
+      component: CreateQuestion,
       children: [
         {
-          path: '/create/:UID/one',
+          path: '/CreateQuestion/:UID/:questionnaireID/one',
           component: () => import('./../components/question/one.vue')
         },
         {
-          path: '/create/:UID/two',
-          component: () => import('./../components/question/two.vue')
-        },
-        {
-          path: '/create/:UID/three',
+          path: '/CreateQuestion/:UID/:questionnaireID/three',
           component: () => import('./../components/question/three.vue')
         },
         {
-          path: '/create/:UID/four',
+          path: '/CreateQuestion/:UID/:questionnaireID/four',
           component: () => import('./../components/question/four.vue')
         },
         {
-          path: '/create/:UID/five',
+          path: '/CreateQuestion/:UID/:questionnaireID/five',
           component: () => import('./../components/question/five.vue')
         },
         {
-          path: '/create/:UID/six',
+          path: '/CreateQuestion/:UID/:questionnaireID/six',
           component: () => import('./../components/question/six.vue')
         },
         {
-          path: '/create/:UID/seven',
-          component: () => import('./../components/question/seven.vue')
-        },
-        {
-          path: '/create/:UID/eight',
-          component: () => import('./../components/question/eight.vue')
-        },
-        {
-          path: '/create/:UID/nine',
-          component: () => import('./../components/question/nine.vue')
-        },
-        {
-          path: '/create/:UID/ten',
-          component: () => import('./../components/question/ten.vue')
-        },
-        {
-          path: '/create/:UID/eleven',
-          component: () => import('./../components/question/eleven.vue')
-        },
-        {
-          path: '/create/:UID/twelve',
-          component: () => import('./../components/question/twelve.vue')
-        },
-        {
-          path: '/create/:UID/thirteen',
+          path: '/CreateQuestion/:UID/:questionnaireID/thirteen',
           component: () => import('./../components/question/thirteen.vue')
         }
       ]

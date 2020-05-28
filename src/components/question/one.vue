@@ -5,10 +5,6 @@
       <el-input v-model="input1" placeholder="请输入题目" style="width:30vw"></el-input>
     </div>
     <div class="title">
-      <div>备注：</div>
-      <el-input v-model="input2" placeholder="请输入题目" style="width:30vw"></el-input>
-    </div>
-    <div class="title">
       <el-select v-model="value" placeholder="请选择">
         <el-option
           v-for="item in options"
@@ -42,8 +38,7 @@
       <el-button v-else class="button-new-tag" size="small" @click="showInput" style="width:20vw" effect="plain">+输入选项</el-button>
     </div>
     <div class="title">
-        <el-button type="primary">确认提交</el-button>
-         <el-button type="info">取消提交</el-button>
+        <el-button type="primary">提交</el-button>
       </div>
   </div>
 </template>
@@ -65,10 +60,6 @@ export default {
           label: '单选题'
         },
         {
-          value: '下拉题',
-          label: '下拉题'
-        },
-        {
           value: '多选题',
           label: '多选题'
         },
@@ -80,39 +71,9 @@ export default {
           value: '多行题',
           label: '多行题'
         },
-
         {
           value: '量表题',
           label: '量表题'
-        },
-
-        {
-          value: '矩阵单选题',
-          label: '矩阵单选题'
-        },
-
-        {
-          value: '矩阵多选题',
-          label: '矩阵多选题'
-        },
-
-        {
-          value: '排序题',
-          label: '排序题'
-        },
-
-        {
-          value: '联动题',
-          label: '联动题'
-        },
-
-        {
-          value: '附件题',
-          label: '附件题'
-        },
-        {
-          value: '文件描述',
-          label: '文件描述'
         },
         {
           value: '填空题',
@@ -124,43 +85,22 @@ export default {
   watch: {
     value (newvalue, oldvalue) {
       if (newvalue === '单选题') {
-        this.$router.push({path: `/create/${this.UID}/one`})
-      }
-      if (newvalue === '下拉题') {
-        this.$router.push({path: `/create/${this.UID}/two`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/one`})
       }
       if (newvalue === '多选题') {
-        this.$router.push({path: `/create/${this.UID}/three`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/three`})
       }
       if (newvalue === '单行题') {
-        this.$router.push({path: `/create/${this.UID}/four`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/four`})
       }
       if (newvalue === '多行题') {
-        this.$router.push({path: `/create/${this.UID}/five`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/five`})
       }
       if (newvalue === '量表题') {
-        this.$router.push({path: `/create/${this.UID}/six`})
-      }
-      if (newvalue === '矩阵单选题') {
-        this.$router.push({path: `/create/${this.UID}/seven`})
-      }
-      if (newvalue === '矩阵多选题') {
-        this.$router.push({path: `/create/${this.UID}/eight`})
-      }
-      if (newvalue === '排序题') {
-        this.$router.push({path: `/create/${this.UID}/nine`})
-      }
-      if (newvalue === '联动题') {
-        this.$router.push({path: `/create/${this.UID}/ten`})
-      }
-      if (newvalue === '附件题') {
-        this.$router.push({path: `/create/${this.UID}/eleven`})
-      }
-      if (newvalue === '文件描述') {
-        this.$router.push({path: `/create/${this.UID}/twelve`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/six`})
       }
       if (newvalue === '填空题') {
-        this.$router.push({path: `/create/${this.UID}/thirteen`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/thirteen`})
       }
     }
   },
