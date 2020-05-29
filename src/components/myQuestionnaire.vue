@@ -20,14 +20,14 @@
 <div class="subtitle">
     <span>问卷列表</span>
 </div>
-    <el-container v-for="questionnaire in Questionnaires" :key="questionnaire" class='container'>
+    <el-container v-for="questionnaire in Questionnaires" :key="questionnaire._id" class='container'>
     <el-card class="box-card">
   <div slot="header" class="clearfix title" style='margin-bottom:2%'>
     <el-col :span="6" >{{questionnaire.title}}</el-col>
     <el-col :span="6">id:{{questionnaire._id}}</el-col>
-    <el-col :span="3" v-if=state class='el-icon-success' style='color:#3894FF'>已发布</el-col>
+    <el-col :span="3" v-if="questionnaire.state" class='el-icon-success' style='color:#3894FF'>已发布</el-col>
     <el-col :span="3" v-else class='el-icon-error'>未发布</el-col>
-    <el-col :span="3">答卷份数：{{answerCount}}</el-col>
+    <el-col :span="3">答卷份数：{{questionnaire.answeredNum}}</el-col>
     <el-col :span="6">{{questionnaire.createdAt}}</el-col>
   </div>
   <div class='text'>
@@ -36,7 +36,8 @@
     <el-col :span="1"><img class='img' src="./../assets/imgs/icon-spread@2x.png" /></el-col>
     <el-col :span="3"><el-button type="text" style="font-size:20px" @click="share(questionnaire._id)">问卷发放</el-button></el-col>
     <el-col :span="1"><img class='img' src="./../assets/imgs/icon-data@2x.png" /></el-col>
-    <el-col :span="12"><el-button type="text" style="font-size:20px;" @click="analysis(questionnaire._id)">问卷分析</el-button></el-col>
+    <el-col :span="10"><el-button type="text" style="font-size:20px;" @click="analysis(questionnaire._id)">问卷分析</el-button></el-col>
+    <el-col :span="2"><el-button type="primary" icon="el-icon-view" @click="preview(questionnaire._id)">预览</el-button></el-col>
     <el-col :span="2"><el-button type="danger" icon="el-icon-delete" @click="drop(questionnaire._id)">删除</el-button></el-col>
   </div>
 </el-card>
@@ -54,9 +55,7 @@ export default {
       activeIndex: '2',
       UID: this.$router.history.current.params.UID,
       url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-      Questionnaires: [],
-      state: 1,
-      answerCount: 0
+      Questionnaires: []
     }
   },
   mounted: function () {
@@ -81,9 +80,6 @@ export default {
       localStorage.setItem('user-id', '')
       this.$router.push({path: `/login`})
     },
-    preview () {
-      this.$router.push({path: `/myQuestionnaire/${this.UID}`})
-    },
     getQuestionnaire: function () {
       this.$axios
         .get('https://afo3wm.toutiao15.com/getAllQuesnaires', {
@@ -96,8 +92,10 @@ export default {
         })
         .catch(function (error) {
           console.log(error)
-          this.$router.push('/non-existing')
         })
+    },
+    preview (QID) {
+      this.$router.push({path: `/preview/${QID}`})
     },
     drop (QID) {
       console.log(QID)

@@ -15,7 +15,37 @@
       </el-select>
     </div>
     <div class="title">
-  量表范围：<el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+      <el-select v-model="value1" placeholder="请选择">
+        <el-option
+          v-for="item1 in options1"
+          :key="item1.value"
+          :label="item1.label"
+          :value="item1.value"
+        ></el-option>
+      </el-select>
+    </div>
+    <div class="title">
+      <el-tag
+        :key="tag"
+        v-for="tag in dynamicTags"
+        closable
+        :disable-transitions="false"
+        @close="handleClose(tag)"
+        style="width:20vw"
+        effect="plain"
+      >{{tag}}</el-tag>
+      <el-input
+        class="input-new-tag"
+        v-if="inputVisible"
+        v-model="inputValue"
+        ref="saveTagInput"
+        size="small"
+        @keyup.enter.native="handleInputConfirm"
+        @blur="handleInputConfirm"
+        effect="plain"
+        style="width:20vw"
+      ></el-input>
+      <el-button v-else class="button-new-tag" size="small" @click="showInput" style="width:20vw" effect="plain">+输入选项</el-button>
     </div>
     <div class="title">
         <el-button type="primary" @click="createquestion('input1')">提交</el-button>
@@ -27,15 +57,15 @@
 export default {
   data () {
     return {
-      num: 1,
       dynamicTags: [], // 提供的选项
       inputVisible: false,
       inputValue: '',
       input1: '',
       input2: '',
+      value: '单选题',
+      value1: ' 必填',
       UID: this.$router.history.current.params.UID,
-      value1: '满意度',
-      value: '量表题',
+      order: this.$router.history.current.params.order,
       options: [
         {
           value: '单选题',
@@ -61,28 +91,38 @@ export default {
           value: '填空题',
           label: '填空题'
         }
+      ],
+      options1: [
+        {
+          value: '必填',
+          label: '必填'
+        },
+        {
+          value: '选填',
+          label: '选填'
+        }
       ]
     }
   },
   watch: {
     value (newvalue, oldvalue) {
       if (newvalue === '单选题') {
-        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/one`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.$router.history.current.params.questionnaireID}/one`})
       }
       if (newvalue === '多选题') {
-        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/three`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.$router.history.current.params.questionnaireID}/three`})
       }
       if (newvalue === '单行题') {
-        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/four`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.$router.history.current.params.questionnaireID}/four`})
       }
       if (newvalue === '多行题') {
-        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/five`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.$router.history.current.params.questionnaireID}/five`})
       }
       if (newvalue === '量表题') {
-        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/six`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.$router.history.current.params.questionnaireID}/six`})
       }
       if (newvalue === '填空题') {
-        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/thirteen`})
+        this.$router.push({path: `/CreateQuestion/${this.UID}/${this.$router.history.current.params.questionnaireID}/thirteen`})
       }
     }
   },
@@ -107,7 +147,13 @@ export default {
       this.inputValue = ''
     },
     createquestion (form) {
-      let obj = {'title': this.input1, 'mark': this.num}
+      var type
+      if (this.value1 === '必填') {
+        type = 0
+      } else {
+        type = 1
+      }
+      let obj = {'title': this.input1, 'choice': this.dynamicTags}
       console.log(obj)
       var order = parseInt(window.parent.document.getElementById('order').value)
       this.loading = true
@@ -116,13 +162,13 @@ export default {
           content: obj,
           order: order,
           questionnaireID: this.$router.history.current.params.questionnaireID,
-          type: 5
+          type: type
         })
         .then(response => {
           this.loading = false
           console.log(response)
           if (response.data.success) {
-            this.$alert('第' + order + '题提交成功')
+            this.$alert('第' + (order + 1) + '题提交成功')
             order = order + 1
             window.parent.document.getElementById('order').value = order
           } else {

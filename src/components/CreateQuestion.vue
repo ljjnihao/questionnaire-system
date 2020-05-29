@@ -36,8 +36,8 @@
               </el-steps>
             </div>
             <div>
-              <el-button type="primary" plain icon="el-icon-view">预览</el-button>
-              <el-button type="primary" icon="el-icon-check">完成编辑</el-button>
+              <el-button type="primary" plain icon="el-icon-view" @click="preview">预览</el-button>
+              <el-button type="primary" icon="el-icon-check" @click="gotoissue">完成编辑</el-button>
             </div>
           </div>
         </el-header>
@@ -73,13 +73,13 @@
                 </el-menu-item>
               </el-menu>
           </el-aside>
-          <el-main style="background-color: #e9eef3;">
+          <el-main style="background-color: #e9eef3;height: 77.2vh">
             <div>
               <!-- 显示题目 -->
             </div>
             <router-view/>
           </el-main>
-          <input type="hidden" id="order" value=1>
+          <input type="hidden" id="order" value=0>
         </el-container>
       </el-container>
     </div>
@@ -131,6 +131,14 @@ export default {
       if (key === '13') {
         this.$router.push({path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/thirteen`})
       }
+    },
+    preview () {
+      console.log(this.$router)
+      this.$router.push({ path: `/preview/${this.questionnaireID}` })
+    },
+    gotoissue () {
+      console.log(this.$router)
+      this.$router.push({ path: `/issue/${this.questionnaireID}` })
     }
   }
 }
