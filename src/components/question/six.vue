@@ -15,14 +15,6 @@
       </el-select>
     </div>
     <div class="title">
-      量表类型：<el-select v-model="value1" placeholder="请选择">
-    <el-option
-      v-for="item1 in options1"
-      :key="item1.value"
-      :label="item1.label"
-      :value="item1.value">
-    </el-option>
-  </el-select>
   量表范围：<el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
     </div>
     <div class="title">
@@ -42,28 +34,6 @@ export default {
       input1: '',
       input2: '',
       UID: this.$router.history.current.params.UID,
-      options1: [
-        {
-          value: '满意度',
-          label: '满意度'
-        },
-        {
-          value: '认同度',
-          label: '认同度'
-        },
-        {
-          value: '重要度',
-          label: '重要度'
-        },
-        {
-          value: '愿意度',
-          label: '愿意度'
-        },
-        {
-          value: '符合度',
-          label: '符合度'
-        }
-      ],
       value1: '满意度',
       value: '量表题',
       options: [
@@ -137,7 +107,7 @@ export default {
       this.inputValue = ''
     },
     createquestion (form) {
-      let obj = {'title': this.input1, 'scaletype': this.value1, 'scalerange': this.num}
+      let obj = {'title': this.input1, 'mark': this.num}
       console.log(obj)
       var order = parseInt(window.parent.document.getElementById('order').value)
       this.loading = true
