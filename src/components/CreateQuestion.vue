@@ -73,13 +73,13 @@
                 </el-menu-item>
               </el-menu>
           </el-aside>
-          <el-main style="background-color: #e9eef3;">
+          <el-main style="background-color: #e9eef3;height: 77.2vh">
             <div>
               <!-- 显示题目 -->
             </div>
             <router-view/>
           </el-main>
-          <input type="hidden" id="order" value=1>
+          <input type="hidden" id="order" value=0>
         </el-container>
       </el-container>
     </div>
