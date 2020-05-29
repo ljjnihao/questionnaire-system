@@ -2,6 +2,7 @@
     <div class="question">
       <el-container v-if="seen" style="background-color: rgba(242,242,242,1)">
           <el-main>
+            <el-button type="primary" class="return" icon="el-icon-arrow-left" @click="back()">返回</el-button>
            <h1 id="title">{{title}}</h1>
            <p class="description">{{description}}</p>
            <el-col style="background-color: #ffffff; margin-top: 100px; padding: 30px" :xs="{span:22, offset: 1}" :sm="{span:20, offset: 2}" :md="{span: 18, offset: 3}" :lg="{span: 12, offset: 6}" :xl="{span: 12, offset: 6}">
@@ -144,6 +145,9 @@ export default {
     }
   },
   methods: {
+    back: function () {
+      this.$router.go(-1)
+    }
   },
   created: function () {
     const loading = this.$loading({
@@ -231,16 +235,12 @@ export default {
 }
 </script>
 <style scoped>
-    .titleBlank{
-    }
     .blank {
         width:50px;
         border-top-width: 0px;
         border-left-width: 0px;
         border-right-width: 0px;
         border-bottom-width: 1px;
-    }
-    .question{
     }
     .description {
         margin-left: auto;
@@ -256,8 +256,6 @@ export default {
         width: 90%;
         text-align: left;
     }
-    .choiceItem{
-    }
     #commitedButton{
         font-size: 20px;
         width: 50%;
@@ -268,6 +266,8 @@ export default {
     .el-checkbox {
       margin-bottom: 20px;
     }
-    .el-rate {
+    .return {
+      margin-top:20px;
+      margin-left:0px;
     }
 </style>
