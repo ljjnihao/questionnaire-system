@@ -4,14 +4,8 @@
       v-bind:style="{ 'background-image': 'url(' + require('../assets/imgs/login_bg.jpg') + ')'}"
     >
       <el-header style="text-align: left; font-size: 20px; padding: 0px !important">
-        <el-menu class="el-menu" mode="horizontal">
-          <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
-          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
-        </el-menu>
+        <Header v-bind:logged="false"></Header>
       </el-header>
-
       <el-main>
         <el-row class="content">
           <el-col :xs="24" :sm="24" :md="24" :lg="{span: 8, offset: 16}" :xl="{span: 8, offset: 12}">
@@ -52,6 +46,9 @@
 <script>
 export default {
   name: 'Register',
+  components: {
+    Header: require('./Header.vue').default
+  },
   data () {
     return {
       formForLogin: {

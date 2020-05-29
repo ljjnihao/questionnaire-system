@@ -1,27 +1,7 @@
 <template>
   <div>
-    <div class="head">
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        style="width:100vw"
-      >
-        <el-menu-item index="0">
-          <div class="logo">LOGO</div>
-        </el-menu-item>
-        <el-menu-item index="1" class="title">创建问卷</el-menu-item>
-        <el-menu-item index="2" class="title">我的问卷</el-menu-item>
-        <el-menu-item index="3" class="title">消息中心</el-menu-item>
-        <el-menu-item index="4" class="title">个人信息</el-menu-item>
-        <el-menu-item index="4" style="float: right;">
-          <img style="border-radius: 100%;width: 50px;height: 50px" :src="url" alt class="imgs" />
-        </el-menu-item>
-        <el-menu-item style="float: right;">
-          <el-button type="text" @click="logout">退出</el-button>
-        </el-menu-item>
-      </el-menu>
+    <div>
+      <Header v-bind:logged="true" v-bind:uid=this.UID></Header>
     </div>
     <div>
       <el-container>
@@ -64,6 +44,9 @@
 
 <script>
 export default {
+  components: {
+    Header: require('./Header.vue').default
+  },
   data () {
     return {
       activeIndex: '1',

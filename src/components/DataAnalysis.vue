@@ -1,23 +1,7 @@
 <template>
   <div class="DataAnalysis">
-    <el-container>
-      <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#000000">
-           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
-          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
-          <el-menu-item class="title-item">
-            <div class="demo-image">
-              <div class="block">
-                {{ fit }}
-                <el-image :src="url" class="profilePhoto"></el-image>
-              </div>
-            </div>
-          </el-menu-item>
-        </el-menu>
-      </el-header>
-    </el-container>
+    <Header logged="true"></Header>
+    <!-- <Subheader funcname="问卷分析"></Subheader> -->
     <el-container>
       <el-header style="position: relative;top: 10px">
         <el-row>
@@ -237,6 +221,10 @@
 
 <script>
 export default {
+  components: {
+    Header: require('./Header.vue').default,
+    Subheader: require('./Subheader.vue').default
+  },
   data () {
     return {
       total: '',

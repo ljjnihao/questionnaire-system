@@ -231,16 +231,12 @@ export default {
 }
 </script>
 <style scoped>
-    .titleBlank{
-    }
     .blank {
         width:50px;
         border-top-width: 0px;
         border-left-width: 0px;
         border-right-width: 0px;
         border-bottom-width: 1px;
-    }
-    .question{
     }
     .description {
         margin-left: auto;
@@ -256,8 +252,6 @@ export default {
         width: 90%;
         text-align: left;
     }
-    .choiceItem{
-    }
     #commitedButton{
         font-size: 20px;
         width: 50%;
@@ -268,6 +262,11 @@ export default {
     .el-checkbox {
       margin-bottom: 20px;
     }
-    .el-rate {
+    .el-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
 </style>
