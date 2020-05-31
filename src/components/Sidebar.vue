@@ -16,6 +16,14 @@
             <i class="el-icon-tickets" style="font-size:40px; position: relative; width:100%;display:block"></i>
             <span slot="title" class="hyc icon-name">数据分析</span>
           </el-menu-item>
+          <el-menu-item index="4">
+            <i class="el-icon-s-data" style="font-size:40px; position: relative; width:100%;display:block"></i>
+            <span slot="title" class="hyc icon-name">关联分析</span>
+          </el-menu-item>
+          <el-menu-item index="5">
+            <i class="el-icon-data-line" style="font-size:40px; position: relative; width:100%;display:block"></i>
+            <span slot="title" class="hyc icon-name">交叉分析</span>
+          </el-menu-item>
         </el-menu>
   </div>
 </template>
@@ -41,6 +49,12 @@ export default {
       }
       if (key === '3') {
         this.$router.push({path: `/Statistic/${this.UID}/${this.QID}`})
+      }
+      if (key === '4') {
+        this.$router.push({path: `/relation/${this.UID}/${this.QID}`})
+      }
+      if (key === '5') {
+        this.$router.push({path: `/cross/${this.UID}/${this.QID}`})
       }
     }
   }

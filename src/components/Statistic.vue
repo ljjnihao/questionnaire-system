@@ -2,7 +2,7 @@
   <div id="statistic">
     <el-container class="content">
         <el-header  height="80px" v-bind:activeindex="2">
-      <Header logged="true" v-bind:uid="this.UID"></Header>
+          <Header logged="true" v-bind:uid="this.UID"></Header>
         </el-header>
       <el-header height="80px">
         <Subheader funcname="问卷分析" step="3"></Subheader>
