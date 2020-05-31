@@ -7,7 +7,6 @@
           mode="horizontal"
           text-color="#000000"
           @select="handleSelect"
-          style="height: 80px"
         >
           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
           <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
@@ -67,9 +66,9 @@ export default {
 
 <style scoped>
 .header-row {
-    height: 80px;
+    /* height: 80px; */
     background-color: white;
     /* padding: 5px; */
-    border-bottom: 5px solid rgb(94, 91, 91)
+    /* border-bottom: 5px solid rgb(94, 91, 91) */
 }
 </style>

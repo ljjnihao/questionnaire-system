@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <Header v-bind:logged="true" v-bind:uid=this.UID></Header>
+      <Header v-bind:logged="true" v-bind:uid=this.UID  v-bind:activeindex=1></Header>
     </div>
     <div>
       <el-container>

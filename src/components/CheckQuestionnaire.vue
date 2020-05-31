@@ -1,8 +1,8 @@
 <template>
   <div class="CheckQuestionnaire">
     <el-container class="content">
-       <el-header  height="80px" v-bind:activeindex="2">
-          <Header logged="true" v-bind:uid="this.UID"></Header>
+       <el-header>
+          <Header logged="true" v-bind:uid="this.UID" activeindex="2"></Header>
         </el-header>
       <el-header height="80px">
         <Subheader funcname="问卷分析" step="3"></Subheader>
@@ -119,6 +119,7 @@ export default {
 }
 .el-header {
   padding: 0px;
+  /* margin: 0px; */
 }
 .el-aside {
   width: 150px !important;

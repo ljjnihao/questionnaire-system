@@ -2,7 +2,7 @@
   <div class="information">
     <el-container>
       <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" text-color="#000000" @select="handleSelect">
+        <!-- <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" text-color="#000000" @select="handleSelect">
           <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
           <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
           <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
@@ -14,7 +14,8 @@
         <el-menu-item style="float: right;">
           <el-button type="text" @click="logout">退出</el-button>
         </el-menu-item>
-        </el-menu>
+        </el-menu> -->
+        <Header logged="true" v-bind:uid="this.UID"  activeindex='2'></Header>
       </el-header>
       <el-main>
 <div class="subtitle">
@@ -50,6 +51,11 @@
 <script>
 export default {
   name: 'information',
+  components: {
+    Header: require('./Header.vue').default,
+    Subheader: require('./Subheader.vue').default,
+    Sidebar: require('./Sidebar.vue').default
+  },
   data () {
     return {
       activeIndex: '2',
@@ -175,5 +181,8 @@ export default {
   .img {
       width:1.57em;
       height:2em;
+  }
+  .el-header {
+    padding: 0px
   }
 </style>
