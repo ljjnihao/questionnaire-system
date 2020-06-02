@@ -6,5 +6,7 @@ steps:
   entrypoint: npm
   args: ["run", "build"]
 - name: "gcr.io/cloud-builders/gcloud"
-  args: ["app", "deploy"]
+  args: ["app", "deploy", 'questionnaire-system', '--image', 'gcr.io/test123-252308/questionnaire-system', '--region', 'asia-east1', '--platform', 'managed', '--allow-unauthenticated']
 timeout: "1600s"
+images:
+- gcr.io/test123-252308/questionnaire-system
