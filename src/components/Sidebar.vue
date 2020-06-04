@@ -51,7 +51,7 @@ export default {
         this.$router.push({path: `/Statistic/${this.UID}/${this.QID}`})
       }
       if (key === '4') {
-        this.$router.push({path: `/relation/${this.UID}/${this.QID}`})
+        this.$router.push({path: `/relative/${this.UID}/${this.QID}`})
       }
       if (key === '5') {
         this.$router.push({path: `/cross/${this.UID}/${this.QID}`})
