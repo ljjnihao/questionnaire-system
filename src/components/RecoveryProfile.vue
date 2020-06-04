@@ -1,8 +1,8 @@
 <template>
   <div class="RecoveryProfile">
     <el-container class="content">
-      <el-header height="80px" v-bind:activeindex="2">
-        <Header logged="true" v-bind:uid="this.UID"></Header>
+      <el-header>
+        <Header logged="true" v-bind:uid="this.UID" activeindex='2'></Header>
       </el-header>
       <el-header height="80px">
         <Subheader funcname="问卷分析" step="3"></Subheader>
@@ -62,44 +62,44 @@ export default {
     }
   },
   methods: {
-    created: function () {
-      let url = 'https://afo3wm.toutiao15.com/getAnswersNum'
-      let request = {
-        questionnaireID: this.qid
-      }
-      const loading = this.$loading({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      })
-      this.$axios
-        .post(url, request)
-        .then(response => {
-          this.total = response.data.total
-          this.title = response.data.title
-          for (let i = 0; i < response.data.status.length; i++) {
-            this.option.xAxis.data.push(
-              response.data.status[i].date.substring(0, 10)
-            )
-            this.option.series[0].data.push(response.data.status[i].number)
-          }
-          let myChart = echarts.init(document.getElementById('main'))
-          this.$nextTick(() => {
-            myChart.setOption(this.option)
-            loading.close()
-          })
-        })
-        .catch(error => {
-          console.log(error)
-          this.$message({
-            showClose: true,
-            message: '与远程服务器的连接发生错误',
-            type: 'error'
-          })
-          this.$router.push('/non-existing')
-        })
+  },
+  created: function () {
+    let url = 'https://afo3wm.toutiao15.com/getAnswersNum'
+    let request = {
+      questionnaireID: this.qid
     }
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+    this.$axios
+      .post(url, request)
+      .then(response => {
+        this.total = response.data.total
+        this.title = response.data.title
+        for (let i = 0; i < response.data.status.length; i++) {
+          this.option.xAxis.data.push(
+            response.data.status[i].date.substring(0, 10)
+          )
+          this.option.series[0].data.push(response.data.status[i].number)
+        }
+        let myChart = echarts.init(document.getElementById('main'))
+        this.$nextTick(() => {
+          myChart.setOption(this.option)
+          loading.close()
+        })
+      })
+      .catch(error => {
+        console.log(error)
+        this.$message({
+          showClose: true,
+          message: '与远程服务器的连接发生错误',
+          type: 'error'
+        })
+        this.$router.push('/non-existing')
+      })
   }
 }
 </script>
