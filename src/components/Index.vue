@@ -38,7 +38,7 @@
       </el-header>
 
       <el-main>
-        <el-row class="content" :gutter="20">
+        <el-row class="content2" :gutter="20">
           <el-col :xs="24" :sm="{span: 6}">
             <router-link to="/login">
               <el-button type="primary" class="wider-button">马上使用</el-button>
@@ -72,7 +72,7 @@ export default {
   width: 100%;
   position: fixed;
 }
-.content {
+.content2 {
   margin-top: 500px;
 }
 .el-button {
