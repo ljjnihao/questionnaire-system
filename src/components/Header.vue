@@ -8,10 +8,10 @@
           text-color="#000000"
           @select="handleSelect"
         >
-          <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
-          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
+          <el-menu-item index="0" style="font-size: 35px;color: #409EFF">问调网</el-menu-item>
+          <el-menu-item index="1" style="font-size: 15px">创建问卷</el-menu-item>
+          <el-menu-item index="2" style="font-size: 15px">我的问卷</el-menu-item>
+          <el-menu-item index="3" style="font-size: 15px">个人信息</el-menu-item>
           <el-menu-item v-if="seem" style="float: right; margin-right: 40px">
              <el-popover placement="bottom" title="蜡笔小新" width="150" trigger="hover">
               <el-button type="text" icon="el-icon-question
@@ -20,7 +20,7 @@
               <el-button type="text" icon="el-icon-back" @click="logout">退出</el-button>
               <el-image
                 slot="reference"
-                style="border-radius: 100%;width: 60px;height: 50px;"
+                style="border-radius: 100%;width: 50px;height: 50px;"
                 :src="url"
                 :fit="fill"
               ></el-image>

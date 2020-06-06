@@ -1,31 +1,29 @@
 <template>
   <div class="information">
-    <el-container>
+     <div>
+      <Header v-bind:logged="true" v-bind:uid=this.UID  v-bind:activeindex=1></Header>
+    </div>
+    <div>
       <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" text-color="#000000" @select="handleSelect">
-          <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
-          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px" >我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px" >个人信息</el-menu-item>
-          <div class="demo-image">
-               <el-image style="border-radius: 100%;width: 50px;height: 50px; float: right; margin-right: 100px" :src="url"></el-image>
+          <div class="">
+                <el-col :span="7"><div class="edit_questionnaire">注册信息</div></el-col>
+                <el-col :span="17"></el-col>
           </div>
-        <el-menu-item style="float: right;">
-          <el-button type="text" @click="logout">退出</el-button>
-        </el-menu-item>
-        </el-menu>
-      </el-header>
-      <el-main style='
-background-color: rgba(243, 245, 246, 1);'>
-<div class="subtitle">
-<span style='font-size:3em;'>注册信息</span>
-</div>
+        </el-header>
+      <el-main>
 <el-card class="box-card1">
-    <el-row class="item">
+  <div class="wrap">
+    <div class="left">
+      <img src="../assets/imgs/1.png" width="400px" height="400px"/>
+                </div>
+                <div class="center">
+                </div>
+                <div class="right">
+                   <el-row class="item">
         <el-col :span="6"><div class="text1">注册ID</div></el-col>
         <el-col :span="6"><div class="text2">{{UID}}</div></el-col>
     </el-row>
-    <el-row class="item">
+                     <el-row class="item">
         <el-col :span="6"><div class="text1">用户名</div></el-col>
         <el-col :span="6"><div class="text2">{{userName}}</div></el-col>
     </el-row>
@@ -35,21 +33,26 @@ background-color: rgba(243, 245, 246, 1);'>
     </el-row>
     <el-row class="item">
         <el-col :span="6"><div class="text1">创建日期</div></el-col>
-        <el-col :span="6"><div class="text2">{{createdAt}}</div></el-col>
+        <el-col :span="6"><div class="text2">{{createdAt.substring(0,19).replace('T',' ')}}</div></el-col>
     </el-row>
     <el-row class="item">
         <el-col :span="6"><div class="text1">更新日期</div></el-col>
-        <el-col :span="6"><div class="text2">{{createdAt}}</div></el-col>
+        <el-col :span="6"><div class="text2">{{createdAt.substring(0,19).replace('T',' ')}}</div></el-col>
     </el-row>
+                </div>
+            </div>
 </el-card>
-      </el-main>
-    </el-container>
 
+      </el-main>
+    </div>
   </div>
 </template>
 <script>
 export default {
   name: 'information',
+  components: {
+    Header: require('./Header.vue').default
+  },
   data () {
     return {
       activeIndex: '3',
@@ -117,6 +120,7 @@ export default {
     font-size: 26px;
     text-align: left;
     margin-left: 5%;
+    width:300px;
   }
 
   .item {
@@ -125,14 +129,52 @@ export default {
   }
 
   .box-card1 {
-    width: 38.2%;
-    border-radius: 30px;
-    margin-left:5%;
+    margin-left: 10%;
+    margin-top: 3%;
+    margin-right: 10%;
+    width: 80%;
+    border-radius: 10px;
   }
   .subtitle {
       margin-bottom: 3%;
-      margin-left:5%;
+      margin-left:3%;
       text-align: left;
   }
-
+  .edit_questionnaire{
+  padding-top: 20px;
+  text-align: left;
+  padding-left:10%;
+}
+.information{
+  height: 100%;
+    width:100%;
+    margin:0;
+    padding:0;
+}
+.el-main{
+  background-color: rgba(244, 243, 243, 0.97);
+    width:100%;
+    position: absolute;
+    top:120px;
+    left: 0;
+    bottom:0;
+    padding:20px;
+}
+.wrap{
+  display:flex;
+  flex-direction:row;
+  margin:20px;
+  }
+.center{
+width:2px;
+text-align:center;
+background:#ccc;
+}
+.left,.right{
+flex-grow: 1;
+line-height: 30px;
+}
+.right{
+  margin-left:20px;
+}
 </style>
