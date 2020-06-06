@@ -16,20 +16,20 @@
         </el-menu-item>
         </el-menu> -->
         <Header logged="true" v-bind:uid="this.UID"  activeindex='2'></Header>
+        <div class="subtitle">问卷列表</div>
+        <el-divider></el-divider>
       </el-header>
       <el-main>
-<div class="subtitle">
-    <span>问卷列表</span>
-</div>
     <el-container v-for="questionnaire in Questionnaires" :key="questionnaire._id" class='container'>
-    <el-card class="box-card">
+    <el-card class="box-card" shadow="hover">
   <div slot="header" class="clearfix title" style='margin-bottom:2%'>
-    <el-col :span="6" >{{questionnaire.title}}</el-col>
-    <el-col :span="6">id:{{questionnaire._id}}</el-col>
-    <el-col :span="3" v-if="questionnaire.state" class='el-icon-success' style='color:#3894FF'>已发布</el-col>
-    <el-col :span="3" v-else class='el-icon-error'>未发布</el-col>
-    <el-col :span="3">答卷份数：{{questionnaire.answeredNum}}</el-col>
-    <el-col :span="6">{{questionnaire.createdAt}}</el-col>
+    <el-col :span="5">{{questionnaire.title}}</el-col>
+    <el-col :span="7" class="add_padding">id:{{questionnaire._id}}</el-col>
+    <el-col :span="3" v-if="questionnaire.state==1" class='el-icon-success add_padding' style='color:#3894FF'>已发布</el-col>
+    <el-col :span="3" v-else-if="questionnaire.state==0" class='el-icon-error add_padding'>未发布</el-col>
+    <el-col :span="3" v-else class='el-icon-error add_padding' style='color:#F56C6C'>已过期</el-col>
+    <el-col :span="4">答卷份数：{{questionnaire.answeredNum}}</el-col>
+    <el-col :span="5" class="add_padding">{{questionnaire.createdAt.substring(0,19).replace('T',' ')}}</el-col>
   </div>
   <div class='text'>
     <el-col :span="1"><img class='img' src="./../assets/imgs/icon-design@2x.png" /></el-col>
@@ -79,6 +79,36 @@ export default {
         this.$router.push({path: `/information/${this.UID}`})
       }
     },
+    drop (QID) {
+      this.$confirm('此操作将永久删除该问卷, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteTheQuestionnaire(QID)
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    deleteTheQuestionnaire (QID) {
+      this.$axios
+        .post('https://afo3wm.toutiao15.com/deleteQuesnaire', {
+          questionnaireID: QID
+        })
+        .then(response => {
+          this.getQuestionnaire()
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
     logout () {
       //! don't use arrow function here
       console.log(this.$router)
@@ -103,19 +133,6 @@ export default {
     preview (QID) {
       this.$router.push({path: `/preview/${QID}`})
     },
-    drop (QID) {
-      console.log(QID)
-      this.$axios
-        .post('https://afo3wm.toutiao15.com/deleteQuesnaire', {
-          questionnaireID: QID
-        })
-        .then(response => {
-          this.getQuestionnaire()
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    },
     create () {
       this.$router.push(`/create/${this.UID}`)
     },
@@ -130,6 +147,11 @@ export default {
 
 </script>
 <style>
+  .box{
+    margin-left: 2%;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+  }
   .title {
       text-align: left;
       margin-left: 2%;
@@ -168,21 +190,39 @@ export default {
     margin-bottom: 1.5%;
   }
   .subtitle {
-      margin-bottom: 1%;
-      margin-left:3%;
-      text-align: left;
-      font-size:20px
+    text-align: left;
+    font-size: 20px;
+    margin: 20px 25px;
   }
   .container {
         width: 100%;
-        background-color: rgba(244, 243, 243, 0.97);
-        border: 0.06em solid rgba(187, 187, 187, 1);
   }
   .img {
       width:1.57em;
       height:2em;
   }
   .el-header {
-    padding: 0px
+    padding: 0px;
+    height:120px;
+  }
+  .add_padding {
+    padding: 3px 0 0 0
+  }
+  .el-divider--horizontal {
+    margin: 24px 0 0 0;
+  }
+  .el-main {
+    background-color: rgba(244, 243, 243, 0.97);
+    width:100%;
+    position: absolute;
+    top:132px;
+    left: 0;
+    bottom:0;
+  }
+  .information{
+    height: 100%;
+    width:100%;
+    margin:0;
+    padding:0;
   }
 </style>

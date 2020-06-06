@@ -17,6 +17,7 @@ import information from '@/components/information'
 import myQuestionnaire from '@/components/myQuestionnaire'
 import CreateQuestion from '@/components/CreateQuestion'
 import Statistic from '@/components/Statistic'
+import Relative from '@/components/Relative'
 Vue.use(Router)
 
 const router = new Router({
@@ -90,6 +91,12 @@ const router = new Router({
       name: 'statistic',
       component: Statistic
       // for local test: localhost/#/statistic/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
+    },
+    {
+      path: '/relative/:UID/:QID',
+      name: 'relative',
+      component: Relative
+      // for local test: localhost/#/relative/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     {
       path: '/issue/:questionnaireID',
