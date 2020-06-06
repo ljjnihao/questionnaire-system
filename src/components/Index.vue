@@ -37,7 +37,7 @@
         </el-row>
       </el-header>
 
-      <el-main>
+      <el-main class="default">
         <el-row class="content2" :gutter="20">
           <el-col :xs="24" :sm="{span: 6}">
             <router-link to="/login">
@@ -81,5 +81,7 @@ export default {
 .wider-button {
   width: 200px;
   height: 50px;
+}
+.default{
 }
 </style>
