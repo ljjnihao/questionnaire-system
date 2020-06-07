@@ -1,60 +1,17 @@
 <template>
-  <div id="app" class="app">
+  <div class="information">
      <el-container>
-        <el-header style="height:124px ">
-            <el-row>
-                <el-col :span="2"><div class="grid-content logo">LOGO</div></el-col>
-                <el-col :span="16">
-                  <div class="grid-content ">
-                    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                         <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
-          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
-                </el-menu></div></el-col>
-                    <el-col :span="6"><div class="grid-content">
-                        <el-col :span="12"><div class="grid-content"></div></el-col>
-                        <el-col :span="12"><div class="grid-content">
-                        <el-popover
-                        placement="bottom"
-                        title="蜡笔小新"
-                        width="150"
-                        trigger="hover"
-                        >
-            <div class="line"></div>
-            <el-button type="text" icon="el-icon-question
-        ">帮助</el-button>
-            <div class="line"></div>
-                <el-button type="text" icon="el-icon-back" @click="logout">退出</el-button>
-            <el-image slot="reference"
-            style="border-radius: 100%;width: 60px;height: 60px;"
-            :src="url"
-            :fit="fill">
-            </el-image>
-        </el-popover>
-            </div>
-            </el-col>
-            </div></el-col>
-        </el-row>
-        <div class="line"></div>
-        <div class="sub-header"><el-row>
-            <el-col :span="2"><div class="grid-content share">发布问卷</div></el-col>
-            <el-col :span="19">
-  <div class="test">
-  <el-steps :active="2" simple>
-  <el-step title="编辑" icon="el-icon-edit"></el-step>
-  <el-step title="发布" icon="el-icon-upload"></el-step>
-  <el-step title="分析" icon="el-icon-picture"></el-step>
-</el-steps>
-    </div>
-       </el-col>
-  <el-col :span="3" style="margin-top:10px"><el-button type="primary" plain icon="el-icon-view" @click="preview"> 预 览</el-button></el-col>
-</el-row>
-    </div>
+        <el-header>
+          <div>
+            <Header v-bind:logged="true" v-bind:uid=this.UID  v-bind:activeindex=1></Header>
+            <el-driver></el-driver>
+          </div>
     </el-header>
+     <el-header>
+        <Subheader funcname="分享问卷" step="2"></Subheader>
+      </el-header>
     <el-main>
     <div class="main">
-    <div class="line"></div>
     <div class="share-box">
     <div class="share-link-word"><h2><b>分享链接</b></h2></div>
     <el-row>
@@ -71,13 +28,17 @@
 <script>
 import Clipboard from 'clipboard'
 export default {
+  components: {
+    Header: require('./Header.vue').default,
+    Subheader: require('./Subheader.vue').default
+  },
   data () {
     return {
       activeIndex: '2',
       UID: this.$router.history.current.params.UID,
       QID: this.$router.history.current.params.QID,
       url: '123',
-      input: '1321871406@qq.com'
+      input: window.location.href.split('#')[0] + '#/' + 'fillQuestionnaire/' + this.$router.history.current.params.QID
     }
   },
   methods: {
@@ -102,7 +63,6 @@ export default {
     },
     copy () {
       var clipboard = new Clipboard('#copy_button')
-      console.log(clipboard)
       clipboard.on('success', e => {
         console.log('复制成功')
         this.$message({
@@ -124,15 +84,19 @@ export default {
 
 </script>
 <style scoped>
-
   .el-header{
     background-color: #ffffff;
-  }
-  .el-main{
+    margin-top:1px;
     padding-left:0px;
     padding-right:0px;
-    padding-top:0px;
-    padding-bottom: 0px;
+  }
+ .el-main {
+    background-color: rgba(244, 243, 243, 0.97);
+    width:100%;
+    position: absolute;
+    top:120px;
+    left: 0;
+    bottom:0;
   }
   .el-row {
       margin-bottom: 0;
@@ -179,17 +143,16 @@ export default {
 }
 .share-box{
   width: 80%;
-  height: 20%;
+  height: 25%;
   line-height: 20px;
   border-radius: 5px 5px 5px 5px;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(187, 187, 187, 1);
-  margin: auto;
+  margin-left: 10%;
+  margin-right:10%;
+  margin-top:10%;
   position: absolute;
-  top:0;
-  bottom:0;
-  right:0;
-  left:0;
+  background-color: #ffffff;
 }
 .share-link{
   margin-left:10%;
@@ -216,4 +179,10 @@ export default {
   color:#000000;
   margin-left:8%;
 }
+.information{
+    height: 100%;
+    width:100%;
+    margin:0;
+    padding:0;
+  }
 </style>

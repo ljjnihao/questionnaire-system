@@ -1,20 +1,21 @@
 <template>
   <div id="subheader">
     <el-row class="header-row">
-      <el-col :span="4">
-        <div style="font-size:20px;margin-top:10px">{{ funcname }}</div>
+      <el-col :span="6">
+        <div class="funcname">{{ funcname }}</div>
       </el-col>
-      <el-col :span="15">
+      <el-col :span="12">
               <el-steps :active="currentstep" simple>
                   <el-step title="编辑" icon="el-icon-edit"></el-step>
                   <el-step title="发布" icon="el-icon-upload"></el-step>
                   <el-step title="分析" icon="el-icon-picture"></el-step>
               </el-steps>
       </el-col>
-      <el-col :span="5" style="margin-top:10px">
-        <el-button type="primary" plain icon="el-icon-view" @click="preview">预 览</el-button>
+      <el-col :span="6" style="margin-top:10px">
+        <el-button calss="button" type="primary" plain icon="el-icon-view" @click="preview">预 览</el-button>
       </el-col>
     </el-row>
+    <el-driver></el-driver>
   </div>
 </template>
 
@@ -46,14 +47,21 @@ export default {
 
 <style scoped>
 .header-row {
-    height: 80px;
+    height: 60px;
     background-color: white;
-    padding: 15px;
-    border-bottom: 3px solid rgba(240,240,240,1)
 }
 .el-steps--simple {
     padding: 13px 8%;
     border-radius: 4px;
     background: #FFFFFF;
+    margin-top:1%;
+}
+.funcname{
+  padding-top: 20px;
+  text-align: left;
+  padding-left:10%;
+}
+.el-button{
+  margin-left: 40%;
 }
 </style>

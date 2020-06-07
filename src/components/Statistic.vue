@@ -1,10 +1,10 @@
 <template>
   <div id="statistic">
     <el-container class="content">
-        <el-header  height="80px" v-bind:activeindex="2">
+        <el-header v-bind:activeindex="2">
           <Header logged="true" v-bind:uid="this.UID"></Header>
         </el-header>
-      <el-header height="80px">
+      <el-header>
         <Subheader funcname="问卷分析" step="3"></Subheader>
       </el-header>
       <el-container>
@@ -443,6 +443,7 @@ export default {
 }
 .el-header {
   padding: 0px;
+  margin-top:1px;
 }
 .el-aside {
   width: 150px !important;
