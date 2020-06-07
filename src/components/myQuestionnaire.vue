@@ -2,24 +2,30 @@
   <div class="information">
     <el-container>
       <el-header>
-        <!-- <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" text-color="#000000" @select="handleSelect">
-          <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
-          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
-          <div class="demo-image">
-               <el-image style="border-radius: 100%;width: 50px;height: 50px; float: right; margin-right: 100px" :src="url"></el-image>
-          </div>
-
-        <el-menu-item style="float: right;">
-          <el-button type="text" @click="logout">退出</el-button>
-        </el-menu-item>
-        </el-menu> -->
         <Header logged="true" v-bind:uid="this.UID"  activeindex='2'></Header>
-        <div class="subtitle">问卷列表</div>
+        <div v-if="Questionnaires.length">
+        <div class="subtitle"><a style="margin-right:70%">问卷列表</a>
+        <el-select
+    v-if="!deleteState"
+    v-model="value"
+    multiple
+    collapse-tags
+    style=""
+    placeholder="请选择">
+    <el-option
+      v-for="(questionnaire,index) in Questionnaires"
+      :key="questionnaire._id"
+      :label="questionnaire.title"
+      :value="index">
+    </el-option>
+  </el-select>
+  <el-button v-if="!deleteState" type="danger" style="" @click=deleteAll()>确认删除</el-button>
+  <el-button v-if="deleteState" type="danger" style="margin-left:15%" @click=changeDeleteState()>批量删除</el-button>
+        </div>
+        </div>
         <el-divider></el-divider>
       </el-header>
-      <el-main>
+      <el-main v-if="Questionnaires.length">
     <el-container v-for="questionnaire in Questionnaires" :key="questionnaire._id" class='container'>
     <el-card class="box-card" shadow="hover">
   <div slot="header" class="clearfix title" style='margin-bottom:2%'>
@@ -44,8 +50,11 @@
 </el-card>
     </el-container>
       </el-main>
+<el-main v-else>
+<h1 style="text-align:center">您还没有问卷噢，点击下方按钮去创建吧</h1>
+<el-button type="primary" class="createButton" @click="create ()">创建问卷</el-button>
+</el-main>
     </el-container>
-
   </div>
 </template>
 <script>
@@ -58,10 +67,12 @@ export default {
   },
   data () {
     return {
+      deleteState: 1,
       activeIndex: '2',
       UID: this.$router.history.current.params.UID,
       url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-      Questionnaires: []
+      Questionnaires: [],
+      value: []
     }
   },
   mounted: function () {
@@ -78,6 +89,32 @@ export default {
       if (key === '3') {
         this.$router.push({path: `/information/${this.UID}`})
       }
+    },
+    changeDeleteState () {
+      if (this.deleteState) { this.deleteState = 0 } else this.deleteState = 1
+      this.value = []
+    },
+    deleteAll () {
+      this.$confirm('此操作将永久删除所选问卷, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let sz = this.value.length
+        for (let i = 0; i < sz; i++) {
+          this.deleteTheQuestionnaire(this.Questionnaires[this.value[i]]._id)
+        }
+        this.changeDeleteState()
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     drop (QID) {
       this.$confirm('此操作将永久删除该问卷, 是否继续?', '提示', {
@@ -147,6 +184,9 @@ export default {
 
 </script>
 <style>
+  .createButton{
+    margin-top:3%;
+  }
   .box{
     margin-left: 2%;
     margin-top: 1.5%;
