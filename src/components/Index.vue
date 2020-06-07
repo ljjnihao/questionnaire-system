@@ -82,6 +82,7 @@ export default {
   width: 200px;
   height: 50px;
 }
-.default{
+.default {
+  background-color:transparent;
 }
 </style>
