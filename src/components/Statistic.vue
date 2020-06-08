@@ -5,7 +5,7 @@
           <Header logged="true" v-bind:uid="this.UID"></Header>
         </el-header>
       <el-header>
-        <Subheader funcname="问卷分析" step="3"></Subheader>
+        <Subheader funcname="问卷分析" step="3" v-bind:uid="this.UID" v-bind:qid="this.qid"></Subheader>
       </el-header>
       <el-container>
         <el-aside>

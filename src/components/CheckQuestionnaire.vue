@@ -1,11 +1,11 @@
 <template>
   <div class="CheckQuestionnaire">
     <el-container class="content">
-       <el-header>
+       <div>
           <Header logged="true" v-bind:uid="this.UID" activeindex="2"></Header>
-        </el-header>
+        </div>
       <el-header height="80px">
-        <Subheader funcname="问卷分析" step="3"></Subheader>
+        <Subheader funcname="问卷分析" step="3" v-bind:uid="this.UID" v-bind:qid="this.qid"></Subheader>
       </el-header>
       <el-container>
         <el-aside>
@@ -17,14 +17,14 @@
                <el-card class="box-card">
                  <div style="margin: 100px">
                   <el-table :data="tableData" max-height="590" border width="100%">
-                    <el-table-column label="查看" width="200" align="center">
+                    <el-table-column label="查看" align="center">
                       <template slot-scope="scope">
                         <i @click="handleCheck(scope.row.ansUid)" class="el-icon-view">前往</i>
                       </template>
                     </el-table-column>
-                    <el-table-column prop="No" label="序号" width="200" align="center">
+                    <el-table-column prop="No" label="序号" align="center">
                     </el-table-column>
-                    <el-table-column prop="admitTime" label="提交时间" width="" align="center">
+                    <el-table-column prop="admitTime" label="提交时间" align="center">
                     </el-table-column>
                   </el-table>
                  </div>

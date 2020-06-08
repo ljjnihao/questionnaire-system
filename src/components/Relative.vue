@@ -1,10 +1,10 @@
 <template>
   <div class="Relative">
     <el-container class="content">
-      <el-header>
+      <div>
         <Header logged="true" v-bind:uid="this.UID" activeindex="2"></Header>
-      </el-header>
-      <el-header height="80px">
+      </div>
+      <el-header>
         <Subheader funcname="问卷分析" step="3"></Subheader>
       </el-header>
       <el-container>
@@ -116,8 +116,10 @@ export default {
   data () {
     return {
       title: '问卷标题',
-      qid: this.$router.history.current.params.QID,
-      UID: this.$router.history.current.params.UID,
+      // qid: this.$router.history.current.params.QID,
+      // UID: this.$router.history.current.params.UID,
+      qid: this.$route.params.QID,
+      UID: this.$route.params.UID,
       total: '',
       selectors: [{
         select1: 0,

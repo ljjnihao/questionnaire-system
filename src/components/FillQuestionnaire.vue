@@ -440,6 +440,7 @@ export default {
       questionnaireID: this.questionnaireID
     }
     let url = 'https://afo3wm.toutiao15.com/getQuesnaire'
+    let url2 = 'https://afo3wm.toutiao15.com/isExpired'
     const loading = this.$loading({
       lock: true,
       text: 'Loading',
@@ -447,148 +448,172 @@ export default {
       background: 'rgba(0, 0, 0, 0.7)'
     })
     this.$axios
-      .post(url, request)
+      .post(url2, request)
       .then(response => {
-        if (
-          response.data.Questionnaire === undefined ||
-          response.data.Questionnaire === null
-        ) {
+        if (response.data.status === -1) {
           this.$message({
             showClose: true,
-            message: '问卷不存在',
+            message: '问卷已过期',
             type: 'error'
           })
           loading.close()
           this.$router.push('/non-existing')
           return
         }
-        let startTime = response.data.Questionnaire.startAt
-        if (Date.parse(new Date()) < new Date(startTime).getTime()) {
-          // ? route to another page would be better
+        if (response.data.status === 0) {
           this.$message({
             showClose: true,
-            message: '问卷未发布',
-            type: 'warning'
+            message: '问卷不能查看',
+            type: 'error'
           })
           loading.close()
           this.$router.push('/non-existing')
-          return
-        }
-        let endTime = response.data.Questionnaire.endAt
-        if (Date.parse(new Date()) > new Date(endTime).getTime()) {
-          // ? route to another page would be better
-          this.$message({
-            showClose: true,
-            message: '问卷已经到期',
-            type: 'warning'
-          })
-          loading.close()
-          this.$router.push('/non-existing')
-          return
-        }
-        this.seen = true
-        this.title = response.data.Questionnaire.title
-        this.description = response.data.Questionnaire.description
-        this.questionnaireData = response.data.Questions
-        for (let i = 0; i < this.questionnaireData.length; i++) {
-          this.questionID.push(this.questionnaireData[i]._id)
-          switch (this.questionnaireData[i].questionType) {
-            case 0:
-              this.answerSet.push({
-                ans: { choice: '' },
-                mustfill: 'true',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 1:
-              this.answerSet.push({
-                ans: { choice: '' },
-                mustfill: 'false',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 2:
-              this.answerSet.push({
-                ans: { choice: [] },
-                mustfill: 'true',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 3:
-              this.answerSet.push({
-                ans: { choice: [] },
-                mustfill: 'false',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 4:
-              this.answerSet.push({
-                ans: { text: '' },
-                mustfill: 'true',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 5:
-              this.answerSet.push({
-                ans: { text: '' },
-                mustfill: 'false',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 6:
-              this.answerSet.push({
-                ans: { text: '' },
-                mustfill: 'true',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 7:
-              this.answerSet.push({
-                ans: { text: '' },
-                mustfill: 'false',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 8:
-              this.answerSet.push({
-                ans: { mark: null },
-                mustfill: 'true',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 9:
-              this.answerSet.push({
-                ans: { mark: null },
-                mustfill: 'false',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 10:
-              this.answerSet.push({
-                ans: {
-                  text: new Array(
-                    this.questionnaireData[i].content.title.length - 1
-                  )
-                },
-                mustfill: 'true',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            case 11:
-              this.answerSet.push({
-                ans: {
-                  text: new Array(
-                    this.questionnaireData[i].content.title.length - 1
-                  )
-                },
-                mustfill: 'false',
-                type: this.questionnaireData[i].questionType
-              })
-              break
-            default:
-              break
-          }
-          loading.close()
+        } else {
+          this.$axios
+            .post(url, request)
+            .then(response => {
+              if (
+                response.data.Questionnaire === undefined ||
+                response.data.Questionnaire === null
+              ) {
+                this.$message({
+                  showClose: true,
+                  message: '问卷不存在',
+                  type: 'error'
+                })
+                loading.close()
+                this.$router.push('/non-existing')
+                return
+              }
+              let startTime = response.data.Questionnaire.startAt
+              if (Date.parse(new Date()) < new Date(startTime).getTime()) {
+                // ? route to another page would be better
+                this.$message({
+                  showClose: true,
+                  message: '问卷未发布',
+                  type: 'warning'
+                })
+                loading.close()
+                this.$router.push('/non-existing')
+                return
+              }
+              let endTime = response.data.Questionnaire.endAt
+              if (Date.parse(new Date()) > new Date(endTime).getTime()) {
+                // ? route to another page would be better
+                this.$message({
+                  showClose: true,
+                  message: '问卷已经到期',
+                  type: 'warning'
+                })
+                loading.close()
+                this.$router.push('/non-existing')
+                return
+              }
+              this.seen = true
+              this.title = response.data.Questionnaire.title
+              this.description = response.data.Questionnaire.description
+              this.questionnaireData = response.data.Questions
+              for (let i = 0; i < this.questionnaireData.length; i++) {
+                this.questionID.push(this.questionnaireData[i]._id)
+                switch (this.questionnaireData[i].questionType) {
+                  case 0:
+                    this.answerSet.push({
+                      ans: { choice: '' },
+                      mustfill: 'true',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 1:
+                    this.answerSet.push({
+                      ans: { choice: '' },
+                      mustfill: 'false',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 2:
+                    this.answerSet.push({
+                      ans: { choice: [] },
+                      mustfill: 'true',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 3:
+                    this.answerSet.push({
+                      ans: { choice: [] },
+                      mustfill: 'false',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 4:
+                    this.answerSet.push({
+                      ans: { text: '' },
+                      mustfill: 'true',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 5:
+                    this.answerSet.push({
+                      ans: { text: '' },
+                      mustfill: 'false',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 6:
+                    this.answerSet.push({
+                      ans: { text: '' },
+                      mustfill: 'true',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 7:
+                    this.answerSet.push({
+                      ans: { text: '' },
+                      mustfill: 'false',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 8:
+                    this.answerSet.push({
+                      ans: { mark: null },
+                      mustfill: 'true',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 9:
+                    this.answerSet.push({
+                      ans: { mark: null },
+                      mustfill: 'false',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 10:
+                    this.answerSet.push({
+                      ans: {
+                        text: new Array(
+                          this.questionnaireData[i].content.title.length - 1
+                        )
+                      },
+                      mustfill: 'true',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  case 11:
+                    this.answerSet.push({
+                      ans: {
+                        text: new Array(
+                          this.questionnaireData[i].content.title.length - 1
+                        )
+                      },
+                      mustfill: 'false',
+                      type: this.questionnaireData[i].questionType
+                    })
+                    break
+                  default:
+                    break
+                }
+                loading.close()
+              }
+            })
         }
       })
       .catch(error => {

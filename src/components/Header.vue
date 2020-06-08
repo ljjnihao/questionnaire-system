@@ -37,7 +37,7 @@ export default {
   props: ['logged', 'uid', 'activeindex'],
   data () {
     return {
-      url: '../assets/imgs/9a8bd34cafb4a6eab0307a88eeb109ba.jpg',
+      url: require('../assets/imgs/icon.jpg'),
       seem: this.logged,
       UID: this.uid,
       activeIndex: this.activeindex

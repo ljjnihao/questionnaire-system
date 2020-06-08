@@ -110,7 +110,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   .text1 {
     font-size: 26px;
     text-align: left;

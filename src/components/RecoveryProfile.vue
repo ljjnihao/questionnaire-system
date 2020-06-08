@@ -1,11 +1,11 @@
 <template>
   <div class="RecoveryProfile">
     <el-container class="content">
-      <el-header>
+      <div>
         <Header logged="true" v-bind:uid="this.UID" activeindex='2'></Header>
-      </el-header>
-      <el-header height="80px">
-        <Subheader funcname="问卷分析" step="3"></Subheader>
+      </div>
+      <el-header>
+        <Subheader funcname="问卷分析" step="3" v-bind:uid="this.UID" v-bind:qid="this.qid"></Subheader>
       </el-header>
       <el-container>
         <el-aside>
@@ -16,6 +16,7 @@
           <div style="text-align: left">回收总量：{{total}}</div>
           <el-card class="box-card">
             <div style="margin: 100px">
+              <ve-line :data="chartData"></ve-line>
             </div>
           </el-card>
         </el-main>
@@ -25,7 +26,6 @@
 </template>
 
 <script>
-var echarts = require('echarts')
 export default {
   components: {
     Header: require('./Header.vue').default,
@@ -39,24 +39,9 @@ export default {
       qid: this.$router.history.current.params.QID,
       UID: this.$router.history.current.params.UID,
       total: '',
-      option: {
-        title: {
-          text: '问卷回收量'
-        },
-        tooltip: {},
-        legend: {
-          data: ['回收量']
-        },
-        xAxis: {
-          data: []
-        },
-        yAxis: {},
-        series: [
-          {
-            name: '回收量',
-            type: 'line',
-            data: []
-          }
+      chartData: {
+        columns: ['日期', '回收量'],
+        rows: [
         ]
       }
     }
@@ -64,32 +49,31 @@ export default {
   methods: {
   },
   created: function () {
-    let url = 'https://afo3wm.toutiao15.com/getAnswersNum'
-    let request = {
-      questionnaireID: this.qid
-    }
     const loading = this.$loading({
       lock: true,
       text: 'Loading',
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
     })
+    let url = 'https://afo3wm.toutiao15.com/getAnswersNum'
+    let request = {
+      questionnaireID: this.qid
+    }
     this.$axios
       .post(url, request)
       .then(response => {
+        loading.close()
         this.total = response.data.total
         this.title = response.data.title
         for (let i = 0; i < response.data.status.length; i++) {
-          this.option.xAxis.data.push(
-            response.data.status[i].date.substring(0, 10)
-          )
-          this.option.series[0].data.push(response.data.status[i].number)
+          const date = new Date(response.data.status[i].date)
+          const realDate = date.getDate()
+          const month = date.getMonth()
+          this.chartData.rows.push({
+            '日期': month + '月' + realDate + '日',
+            '回收量': response.data.status[i].number
+          })
         }
-        let myChart = echarts.init(document.getElementById('main'))
-        this.$nextTick(() => {
-          myChart.setOption(this.option)
-          loading.close()
-        })
       })
       .catch(error => {
         console.log(error)
@@ -121,7 +105,7 @@ export default {
 }
 .el-main {
   background-color: rgba(242,242,242,1);
-  padding: 20px;
+  padding: 50px;
 }
 .box-card {
   margin-top: 30px;

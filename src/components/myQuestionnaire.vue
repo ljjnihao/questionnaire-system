@@ -51,8 +51,8 @@
     </el-container>
       </el-main>
 <el-main v-else>
-<h1 style="text-align:center">您还没有问卷噢，点击下方按钮去创建吧</h1>
-<el-button type="primary" class="createButton" @click="create ()">创建问卷</el-button>
+<h1 v-if="seen" style="text-align:center">您还没有问卷噢，点击下方按钮去创建吧</h1>
+<el-button v-if="seen" type="primary" class="createButton" @click="create ()">创建问卷</el-button>
 </el-main>
     </el-container>
   </div>
@@ -72,11 +72,19 @@ export default {
       UID: this.$router.history.current.params.UID,
       url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
       Questionnaires: [],
-      value: []
+      value: [],
+      seen: false
     }
   },
   mounted: function () {
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
     this.getQuestionnaire()
+    loading.close()
   },
   methods: {
     handleSelect (key, keyPath) {
@@ -161,6 +169,9 @@ export default {
           }
         })
         .then(response => {
+          if (response.data.Questionaire.length === 0) {
+            this.seen = true
+          }
           this.Questionnaires = response.data.Questionaire
         })
         .catch(function (error) {
@@ -177,13 +188,13 @@ export default {
       this.$router.push(`/ShareQuestionnaire/${QID}/${this.UID}`)
     },
     analysis (QID) {
-      this.$router.push(`/DataAnalysis/${this.UID}/${QID}`)
+      this.$router.push(`/stat/${this.UID}/${QID}`)
     }
   }
 }
 
 </script>
-<style>
+<style scoped>
   .createButton{
     margin-top:3%;
   }

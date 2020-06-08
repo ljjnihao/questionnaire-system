@@ -12,7 +12,8 @@
               </el-steps>
       </el-col>
       <el-col :span="6" style="margin-top:10px">
-        <el-button calss="button" type="primary" plain icon="el-icon-view" @click="preview">预 览</el-button>
+        <el-button v-if="doPreview" type="primary" plain icon="el-icon-view" @click="preview">预 览</el-button>
+        <el-button  v-if="doCreate" type="primary" icon="el-icon-check" @click="jumpPublish">发布</el-button>
       </el-col>
     </el-row>
     <el-driver></el-driver>
@@ -22,13 +23,15 @@
 <script>
 export default {
   name: 'Subheader',
-  props: ['funcname', 'step'],
+  props: ['funcname', 'step', 'createBtn', 'previewBtn', 'qid', 'uid'],
   data () {
     return {
-      url: '../assets/imgs/9a8bd34cafb4a6eab0307a88eeb109ba.jpg',
       seem: this.logged,
       currentstep: this.step,
-      QID: this.$route.params.QID
+      QID: this.qid,
+      UID: this.uid,
+      doPreview: this.previewBtn,
+      doCreate: this.createBtn
     }
   },
   methods: {
@@ -40,6 +43,9 @@ export default {
     preview () {
       let routeData = this.$router.resolve({path: `/preview/${this.QID}`})
       window.open(routeData.href, '_blank')
+    },
+    jumpPublish () {
+      this.$router.push({ path: `/issue/${this.QID}/${this.UID}` })
     }
   }
 }
@@ -60,8 +66,5 @@ export default {
   padding-top: 20px;
   text-align: left;
   padding-left:10%;
-}
-.el-button{
-  margin-left: 40%;
 }
 </style>

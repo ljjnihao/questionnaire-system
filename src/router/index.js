@@ -5,7 +5,6 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Create from '@/components/Create'
 import FillQuestionnaire from '@/components/FillQuestionnaire'
-// import DataAnalysis from '@/components/DataAnalysis'
 import Issue from '@/components/Issue'
 import NotFound from '@/components/NotFound'
 import RecoveryProfile from '@/components/RecoveryProfile'
@@ -18,6 +17,7 @@ import myQuestionnaire from '@/components/myQuestionnaire'
 import CreateQuestion from '@/components/CreateQuestion'
 import Statistic from '@/components/Statistic'
 import Relative from '@/components/Relative'
+import CreateQn from '@/components/CreateQn'
 Vue.use(Router)
 
 const router = new Router({
@@ -72,22 +72,24 @@ const router = new Router({
           component: () => import('./../components/question/thirteen.vue')
         }
       ]
+      // for local test: localhost/#/CreateQuestion/5e8c1be865e6f70222803e1b/5edd0a20414cea000b52f78a/one
+    },
+    {
+      path: '/cqn/:QID/:UID',
+      name: 'CreateQuestionnaire',
+      component: CreateQn
+      // for local test: localhost/#/cqn/5e8c1be865e6f70222803e1b/5edd0a20414cea000b52f78a
     },
     {
       path: '/fillQuestionnaire/:questionnaireID',
       name: 'fillQuestionnaire',
       component: FillQuestionnaire
-      // for local test: localhost/#/fillQuestionnaire/5e8c1ad6cfd9ab0216d81664
+      // for local test: localhost/#/fillQuestionnaire/5e8c1ad6cfd9ab0216d81664 (valid)
+      // for local test: localhost/#/fillQuestionnaire/5ed7724ba003600009a54eeb (invalid)
+      // for local test: localhost/#/fillQuestionnaire/5edd0a20414cea000b52f78a (expired)
     },
     {
-      path: '/DataAnalysis/:UID/:QID',
-      name: 'DataAnalysis',
-      // component: DataAnalysis
-      component: Statistic
-      // for local test: localhost/#/DataAnalysis/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
-    },
-    {
-      path: '/statistic/:UID/:QID',
+      path: '/stat/:UID/:QID',
       name: 'statistic',
       component: Statistic
       // for local test: localhost/#/statistic/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
@@ -99,10 +101,10 @@ const router = new Router({
       // for local test: localhost/#/relative/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     {
-      path: '/issue/:questionnaireID',
+      path: '/issue/:questionnaireID/:UID',
       name: 'issue',
       component: Issue
-      // for local test: localhost/#/issue/5e8c1ad6cfd9ab0216d81664
+      // for local test: localhost/#/issue/5e8c1ad6cfd9ab0216d81664/5e8c1be865e6f70222803e1b
     },
     {
       path: '/RecoveryProfile/:UID/:QID',

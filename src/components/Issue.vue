@@ -1,31 +1,13 @@
 <template>
   <div class="issue">
     <el-container>
+      <div>
+        <Header logged="true" v-bind:uid="this.UID" activeindex="1"></Header>
+      </div>
       <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" text-color="#000000">
- <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
-          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
-          <div class="demo-image">
-               <el-image style="border-radius: 100%;width: 50px;height: 50px; float: right; margin-right: 100px" :src="url"></el-image>
-          </div>
-        </el-menu>
+        <Subheader funcname="发布问卷" step="2" v-bind:uid="this.UID" v-bind:qid="this.QID"></Subheader>
       </el-header>
-      <el-header style="position: relative;top: 10px; border-bottom:3px solid rgba(240,240,240,1)">
-        <el-col :span="3"><div class="grid-content bg-purple" style="font-size: 22px;position: relative;left: 28px;top: 7px">发布问卷</div></el-col>
-        <el-col :span="12" :offset="3">
-          <el-steps :active="2">
-            <el-step title="编辑" icon="el-icon-edit"></el-step>
-            <el-step title="发布" icon="el-icon-upload"></el-step>
-            <el-step title="分析" icon="el-icon-s-data"></el-step>
-          </el-steps>
-        </el-col>
-        <el-col :span="3" :offset="3">
-          <el-button type="primary" plain icon="el-icon-view" size="medium" style="margin-top:10px" @click="preview">预览</el-button>
-        </el-col>
-      </el-header>
-      <el-main style="padding: 0px; margin-top: 10px; text-align: center">
+      <el-main style="padding: 0px; text-align: center">
         <el-row class="content" style="background-color: rgba(242,242,242,1)">
           <el-col  :xs="12" :sm="12" :md="12" :lg="20" :xl="20">
             <div style="margin-top: 250px; font-size: 40px">开启发布后,即可分享问卷</div>
@@ -92,6 +74,10 @@
 <script>
 export default {
   name: 'Issue',
+  components: {
+    Header: require('./Header.vue').default,
+    Subheader: require('./Subheader.vue').default
+  },
   data () {
     return {
       switch1: false,
@@ -103,21 +89,11 @@ export default {
       endDate: '',
       endTime: '',
       QID: this.$route.params.questionnaireID,
+      UID: this.$route.params.UID,
       link: ''
     }
   },
   methods: {
-    handleSelect (key, keyPath) {
-      if (key === '1') {
-        this.$router.push({path: `/create/${this.UID}`})
-      }
-      if (key === '2') {
-        this.$router.push({path: `/myQuestionnaire/${this.UID}`})
-      }
-      if (key === '3') {
-        this.$router.push({path: `/information/${this.UID}`})
-      }
-    },
     preview () {
       this.$router.push({path: `/fillQuestionnaire/${this.QID}`})
     },
@@ -132,11 +108,11 @@ export default {
         .then(response => {
           this.loading = false
           console.log(response.data)
-          if (response.data.state) {
+          if (response.data.state === 'success') {
             console.log('success')
             this.$router.push({ path: `/ShareQuestionnaire/${this.UID}/${this.QID}` })
           } else {
-            this.$message('发布失败')
+            this.$message('发布失败,问卷不存在')
           }
         })
         .catch(function (error) {

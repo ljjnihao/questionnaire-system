@@ -8,7 +8,7 @@
           </div>
     </el-header>
      <el-header>
-        <Subheader funcname="分享问卷" step="2"></Subheader>
+        <Subheader funcname="分享问卷" step="2" v-bind:uid="this.UID" v-bind:qid="this.QID"></Subheader>
       </el-header>
     <el-main>
     <div class="main">
