@@ -2,25 +2,26 @@
   <div class="question" v-loading="loading" element-loading-text="创建题目中">
     <el-form label-width="auto">
         <el-form-item label="题目：" style="font-weight: bold; margin-top: 30px">
-          <el-input v-model="title" placeholder="请输入题目"></el-input>
+          <el-input v-if="!editAndSave" v-model="title" placeholder="请输入题目"></el-input>
+          <el-input v-if="editAndSave" v-model="propQues.content.title"></el-input>
         </el-form-item>
         <el-form-item label="题型：" style="font-weight: bold; margin-top: 30px;text-align:left">
-           <el-select v-model="type" placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+            <span>{{options[type].label}}</span>
             <el-checkbox v-model="checked">必选</el-checkbox>
         </el-form-item>
     </el-form>
-    <div v-if="type === '0' || type == '1' || type == 0 || type == 1" style="text-align: left">
-      <draggable v-model="choices" group="" @start="drag=true" @end="drag=false" style="text-align: left">
+    <div v-if="type == '0' || type == '1'" style="text-align: left">
+      <draggable v-if="!editAndSave" v-model="choices" group="" @start="drag=true" @end="drag=false" style="text-align: left">
         <div v-for="(choice, index) in choices" :key="index">
           <i class="el-icon-sort icon"></i>
           <el-input v-model="choices[index]" placeholder="请输入选项" class="choiceItem"></el-input>
+          <el-button type="text" v-on:click="del(index)" style=""><i class="el-icon-circle-close"></i></el-button>
+        </div>
+      </draggable>
+      <draggable v-if="editAndSave" v-model="propQues.content.choice" group="" @start="drag=true" @end="drag=false" style="text-align: left">
+        <div v-for="(choice, index) in propQues.content.choice" :key="index">
+          <i class="el-icon-sort icon"></i>
+          <el-input v-model="propQues.content.choice[index]" placeholder="请输入选项" class="choiceItem"></el-input>
           <el-button type="text" v-on:click="del(index)" style=""><i class="el-icon-circle-close"></i></el-button>
         </div>
       </draggable>
@@ -119,12 +120,13 @@ export default {
       this.$emit('getEditMode', false)
     },
     edit: function () {
+      this.loading = true
       var request = {
-        'type': this.questionType,
-        'order': this.order,
+        'type': this.propQues.questionType,
+        'order': this.propQues.order,
         'content': {
-          'title': this.title,
-          'choice': this.choices
+          'title': this.propQues.content.title,
+          'choice': this.propQues.content.choice
         },
         'questionID': this.propQues.questionID
       }
@@ -132,6 +134,7 @@ export default {
       this.$axios
         .post(url, request)
         .then(response => {
+          this.loading = false
           if (response.data.result.updatedCount === 0) {
             this.$message({
               showClose: true,

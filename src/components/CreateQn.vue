@@ -17,7 +17,7 @@
       </el-header>
       <el-container>
         <el-aside>
-          <QuestionsBar v-on:getType="getType" v-bind:editmode="this.editMode"></QuestionsBar>
+          <QuestionsBar v-on:getType="getType"></QuestionsBar>
         </el-aside>
         <el-main>
           <el-card class="box-card">
@@ -29,7 +29,7 @@
                       <Question
                           v-bind:uid="UID"
                           v-bind:qid="QID"
-                          v-bind:propType=questItem.questionType
+                          v-bind:propType=questItem.type
                           v-bind:quesOrder=questItem.order
                           v-bind:propQues=questItem
                           v-on:getQues="getQues"
@@ -76,6 +76,12 @@
                           <el-radio :label="index">{{choiceItem}}</el-radio>
                         </div>
                       </el-radio-group>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='2'" class="quesItem">
                       <p class="questItem-title">
@@ -93,6 +99,12 @@
                           <el-checkbox :label="index">{{choiceItem}}</el-checkbox>
                         </div>
                       </el-radio-group>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='3'" class="quesItem">
                       <p class="questItem-title">
@@ -109,6 +121,12 @@
                           <el-checkbox :label="choiceItem[index]">{{choiceItem}}</el-checkbox>
                         </div>
                       </el-radio-group>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='4'" class="quesItem">
                       <p class="questItem-title">
@@ -118,6 +136,12 @@
                         <span v-text="questItem.title"></span>
                       </p>
                       <el-input placeholder="请输入内容"></el-input>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='5'" class="quesItem">
                       <p class="questItem-title">
@@ -126,6 +150,12 @@
                         <span v-text="questItem.title"></span>
                       </p>
                       <el-input placeholder="请输入内容"></el-input>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='6'" class="quesItem">
                       <p class="questItem-title">
@@ -136,7 +166,14 @@
                       </p>
                       <el-input placeholder="请输入内容"
                                 type="textarea"
-                                :rows="5"></el-input>
+                                :rows="5">
+                      </el-input>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='7'" class="quesItem">
                       <p class="questItem-title">
@@ -146,7 +183,14 @@
                       </p>
                       <el-input placeholder="请输入内容"
                             type="textarea"
-                            :rows="5"></el-input>
+                            :rows="5">
+                      </el-input>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='8'" class="quesItem">
                       <p class="questItem-title">
@@ -156,6 +200,12 @@
                         <span v-text="questItem.title"></span>
                       </p>
                       <el-rate></el-rate>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='9'" class="quesItem">
                       <p class="questItem-title">
@@ -164,10 +214,16 @@
                         <span v-text="questItem.title"></span>
                       </p>
                       <el-rate></el-rate>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='10'" class="quesItem">
                       <p class="questItem-title">
-                        <span style="font-weight:bold">{{questItem.order+1}}、</span>
+                        <span style="font-weight:bold">{{questItem.order+1}}</span>
                         <span
                           v-for="(titleBlank,index) in questItem.content.title"
                           :key="index"
@@ -185,10 +241,16 @@
                           </span>
                         </span>
                       </p>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='11'" class="quesItem">
                       <p class="questItem-title">
-                        <span style="font-weight:bold">{{questItem.order+1}}、</span>
+                        <span style="font-weight:bold">{{questItem.order+1}}</span>
                         <span
                           v-for="(titleBlank,index) in questItem.content.title"
                           :key="index"
@@ -205,6 +267,12 @@
                           </span>
                         </span>
                       </p>
+                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                 </div>
             </draggable>
@@ -287,11 +355,6 @@ export default {
       if (this.newQuesType !== '') {
         this.editMode = true
       }
-    },
-    showEdit: function () {
-      if (this.showEdit !== '') {
-        this.editMode = true
-      }
     }
   },
   created: function () {
@@ -318,6 +381,7 @@ export default {
           }
           this.questions.push({
             questionType: response.data.Questions[i].questionType,
+            type: response.data.Questions[i].questionType / 2,
             order: response.data.Questions[i].order,
             content: content,
             questionID: response.data.Questions[i]._id
@@ -364,6 +428,7 @@ export default {
   text-align: center;
 }
 .question {
+  margin-top: 20px;
   border-bottom: 2px solid rgba(168, 168, 168, 0.5);
   border-top: 2px solid rgba(168, 168, 168, 0.5);
 }
