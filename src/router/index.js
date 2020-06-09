@@ -14,7 +14,6 @@ import preview from '@/components/preview'
 import ShareQuestionnaire from '@/components/Share'
 import information from '@/components/information'
 import myQuestionnaire from '@/components/myQuestionnaire'
-import CreateQuestion from '@/components/CreateQuestion'
 import Statistic from '@/components/Statistic'
 import Relative from '@/components/Relative'
 import CreateQn from '@/components/CreateQn'
@@ -41,38 +40,6 @@ const router = new Router({
       path: '/create/:UID',
       name: 'create',
       component: Create
-    },
-    {
-      path: '/CreateQuestion/:UID/:questionnaireID',
-      name: 'CreateQuestion',
-      component: CreateQuestion,
-      children: [
-        {
-          path: '/CreateQuestion/:UID/:questionnaireID/one'
-          // component: () => import('.././components/one.vue')
-        },
-        {
-          path: '/CreateQuestion/:UID/:questionnaireID/three',
-          component: () => import('./../components/question/three.vue')
-        },
-        {
-          path: '/CreateQuestion/:UID/:questionnaireID/four',
-          component: () => import('./../components/question/four.vue')
-        },
-        {
-          path: '/CreateQuestion/:UID/:questionnaireID/five',
-          component: () => import('./../components/question/five.vue')
-        },
-        {
-          path: '/CreateQuestion/:UID/:questionnaireID/six',
-          component: () => import('./../components/question/six.vue')
-        },
-        {
-          path: '/CreateQuestion/:UID/:questionnaireID/thirteen',
-          component: () => import('./../components/question/thirteen.vue')
-        }
-      ]
-      // for local test: localhost/#/CreateQuestion/5e8c1be865e6f70222803e1b/5edd0a20414cea000b52f78a/one
     },
     {
       path: '/cqn/:QID/:UID',

@@ -182,7 +182,7 @@ export default {
       this.$router.push({path: `/preview/${QID}`})
     },
     create () {
-      this.$router.push(`/create/${this.UID}`)
+      this.$router.push(`/cqn/${this.questionnaireID}/${this.UID}`)
     },
     share (QID) {
       this.$router.push(`/ShareQuestionnaire/${QID}/${this.UID}`)

@@ -12,6 +12,7 @@
           v-bind:qid="this.QID"
           createBtn="true"
           previewBtn="true"
+          v-bind:uploadData="this.questions"
         ></Subheader>
       </el-header>
       <el-container>
@@ -23,23 +24,42 @@
             <div style="margin-top: 50px; font-weight: bold; font-size: 20px;">{{title}}</div>
             <div style="font-size: 16px; margin-top: 30px">{{description}}</div>
             <draggable v-model="questions" group="" @start="drag=true" @end="drag=false" style="text-align: left">
-                <div v-for="questItem in questions" :key="questItem.order" class="item">
-                    <div v-if="questItem.questionType=='0'" class="quesItem">
-                      <p class="questItem-title">
-                        <span style="font-weight: bold">{{questItem.order+1}}</span>
-                        <span>{{questItem.content.title}}</span>
-                        <span style="color: red">*</span>
-                        <span v-text="questItem.title"></span>
-                      </p>
-                      <el-radio-group>
-                        <div
-                          v-for="(choiceItem,index) in questItem.content.choice"
-                          :key="index"
-                          class="choiceItem"
-                        >
-                          <el-radio :label="index">{{choiceItem}}</el-radio>
-                        </div>
-                      </el-radio-group>
+                <div v-for="(questItem, index) in questions" :key="questItem.order" class="item">
+                    <div  v-if="showEdit === index">
+                      <Question
+                          v-bind:uid="UID"
+                          v-bind:qid="QID"
+                          v-bind:propType=questItem.questionType
+                          v-bind:quesOrder=questItem.order
+                          v-bind:propQues=questItem
+                          v-on:getQues="getQues"
+                          v-on:getEditMode="getEditMode"
+                          editAndSave=true
+                          class="question"
+                      ></Question>
+                    </div>
+                    <div v-else-if="questItem.questionType=='0'" class="quesItem">
+                        <p class="questItem-title">
+                          <span style="font-weight: bold">{{questItem.order+1}}</span>
+                          <span>{{questItem.content.title}}</span>
+                          <span style="color: red">*</span>
+                          <span v-text="questItem.title"></span>
+                        </p>
+                        <el-radio-group>
+                          <div
+                            v-for="(choiceItem,index) in questItem.content.choice"
+                            :key="index"
+                            class="choiceItem"
+                          >
+                            <el-radio :label="index">{{choiceItem}}</el-radio>
+                          </div>
+                        </el-radio-group>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                          <i class="el-icon-edit-outline"></i>
+                        </el-button>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                          <i class="el-icon-delete"></i>
+                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='1'" class="quesItem">
                       <p class="questItem-title">
@@ -216,7 +236,6 @@ export default {
     Question: require('./Question.vue').default,
     draggable
   },
-  inject: ['reload'],
   data () {
     return {
       title: '问卷标题',
@@ -224,7 +243,9 @@ export default {
       QID: this.$route.params.QID,
       UID: this.$route.params.UID,
       questions: [],
-      newQuesType: ''
+      newQuesType: '',
+      showEdit: '',
+      editMode: false
     }
   },
   methods: {
@@ -236,7 +257,15 @@ export default {
     },
     getEditMode: function (val) {
       this.editMode = val
-      this.reload()
+      this.showEdit = ''
+    },
+    editQues: function (index) {
+      this.showEdit = index
+    },
+    delQues: function (index) {
+      if (this.questions[index] !== '') {
+        this.questions.splice(index, 1)
+      }
     }
   },
   computed: {
@@ -246,19 +275,22 @@ export default {
       } else {
         return this.questions.length
       }
-    },
-    editMode: {
-      get: function () {
-        return this.newQuesType !== ''
-      },
-      set: function () {
-      }
     }
   },
   watch: {
     questions: function () {
       for (let i = 0; i < this.questions.length; i++) {
         this.questions[i].order = i
+      }
+    },
+    newQuesType: function () {
+      if (this.newQuesType !== '') {
+        this.editMode = true
+      }
+    },
+    showEdit: function () {
+      if (this.showEdit !== '') {
+        this.editMode = true
       }
     }
   },
@@ -287,7 +319,8 @@ export default {
           this.questions.push({
             questionType: response.data.Questions[i].questionType,
             order: response.data.Questions[i].order,
-            content: content
+            content: content,
+            questionID: response.data.Questions[i]._id
           })
         }
         loading.close()
@@ -341,9 +374,15 @@ export default {
   width: 90%;
   text-align: left;
 }
+.quesItem > .edit {
+  opacity: 0
+}
 .quesItem:hover {
   opacity: 0.5;
   cursor: move
+}
+.quesItem:hover > .edit{
+  opacity: 1;
 }
 .choiceItem {
   margin-bottom: 20px

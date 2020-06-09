@@ -28,7 +28,8 @@
     </div>
     <div style="text-align: right; margin-top: 30px; margin-bottom: 20px">
         <el-button type="text" @click="cancel" style="width: 100px">取消</el-button>
-        <el-button type="primary" @click="submit" style="width: 100px">确认</el-button>
+        <el-button v-if="!editAndSave" type="primary" @click="submit" style="width: 100px">确认</el-button>
+        <el-button v-if="editAndSave" type="primary" @click="edit" style="width: 100px">修改</el-button>
     </div>
   </div>
 </template>
@@ -40,7 +41,7 @@ export default {
     draggable
   },
   inject: ['reload'],
-  props: ['uid', 'qid', 'propType', 'quesOrder'],
+  props: ['uid', 'qid', 'propType', 'quesOrder', 'editAndSave', 'propQues'],
   data () {
     return {
       loading: false,
@@ -80,6 +81,12 @@ export default {
     }
   },
   watch: {
+    // propQues: function () {
+    //   if (this.propQues !== '') {
+    //     this.title = this.propQues.content.title
+    //     this.choices = this.propQues.content.choice
+    //   }
+    // }
   },
   computed: {
     questionType: function () {
@@ -110,6 +117,41 @@ export default {
     },
     cancel: function () {
       this.$emit('getEditMode', false)
+    },
+    edit: function () {
+      var request = {
+        'type': this.questionType,
+        'order': this.order,
+        'content': {
+          'title': this.title,
+          'choice': this.choices
+        },
+        'questionID': this.propQues.questionID
+      }
+      var url = 'https://afo3wm.toutiao15.com/editAndSaveQuestion'
+      this.$axios
+        .post(url, request)
+        .then(response => {
+          if (response.data.result.updatedCount === 0) {
+            this.$message({
+              showClose: true,
+              message: '修改失败',
+              type: 'error'
+            })
+          } else {
+            this.$emit('getQues', request)
+            this.reload()
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.$message({
+            showClose: true,
+            message: '与远程服务器的连接发生错误',
+            type: 'error'
+          })
+          this.$router.push('/non-existing')
+        })
     },
     submit: function () {
       var request
@@ -154,7 +196,13 @@ export default {
           if (response.data.success) {
             var order = this.order + 1
             this.$alert('第' + (order) + '题提交成功')
-            this.$emit('getQues', request)
+            var ques = {
+              'type': request.ype,
+              'order': request.order,
+              'content': request.content,
+              'questionID': response.data.questionID
+            }
+            this.$emit('getQues', ques)
             this.reload()
           } else {
             this.$alert(response.data.msg)

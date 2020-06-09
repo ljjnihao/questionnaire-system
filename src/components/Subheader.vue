@@ -23,7 +23,7 @@
 <script>
 export default {
   name: 'Subheader',
-  props: ['funcname', 'step', 'createBtn', 'previewBtn', 'qid', 'uid'],
+  props: ['funcname', 'step', 'createBtn', 'previewBtn', 'qid', 'uid', 'uploadData'],
   data () {
     return {
       seem: this.logged,
@@ -31,7 +31,8 @@ export default {
       QID: this.qid,
       UID: this.uid,
       doPreview: this.previewBtn,
-      doCreate: this.createBtn
+      doCreate: this.createBtn,
+      questions: this.uploadData
     }
   },
   methods: {
@@ -45,7 +46,33 @@ export default {
       window.open(routeData.href, '_blank')
     },
     jumpPublish () {
-      this.$router.push({ path: `/issue/${this.QID}/${this.UID}` })
+      var request = {
+        questions: this.uploadData,
+        questionnaireID: this.QID
+      }
+      var url = 'https://afo3wm.toutiao15.com/saveQuesnaire'
+      this.$axios
+        .post(url, request)
+        .then(response => {
+          if (response.data.state) {
+            // this.$router.push({ path: `/issue/${this.QID}/${this.UID}` })
+          } else {
+            this.$message({
+              showClose: true,
+              message: response.data.msg,
+              type: 'error'
+            })
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.$message({
+            showClose: true,
+            message: '与远程服务器的连接发生错误',
+            type: 'error'
+          })
+          this.$router.push('/non-existing')
+        })
     }
   }
 }

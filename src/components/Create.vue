@@ -100,7 +100,7 @@ export default {
                     this.$alert('开始创建你的问题吧', '创建问卷成功', {
                       confirmButtonText: '确定',
                       callback: action => {
-                        this.$router.push({ path: `/CreateQuestion/${this.UID}/${this.questionnaireID}/one` })
+                        this.$router.push({ path: `/cqn/${this.questionnaireID}/${this.UID}` })
                       }
                     })
                   })
