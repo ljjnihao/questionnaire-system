@@ -39,7 +39,7 @@
   </div>
   <div class='text'>
     <el-col :span="1"><img class='img' src="./../assets/imgs/icon-design@2x.png" /></el-col>
-    <el-col :span="3"><el-button type="text" style="font-size:20px" @click="create()">问卷设计</el-button></el-col>
+    <el-col :span="3"><el-button type="text" style="font-size:20px" @click="create(questionnaire._id)">问卷设计</el-button></el-col>
     <el-col :span="1"><img class='img' src="./../assets/imgs/icon-spread@2x.png" /></el-col>
     <el-col :span="3"><el-button type="text" style="font-size:20px" @click="share(questionnaire._id)">问卷发放</el-button></el-col>
     <el-col :span="1"><img class='img' src="./../assets/imgs/icon-data@2x.png" /></el-col>
@@ -89,7 +89,7 @@ export default {
   methods: {
     handleSelect (key, keyPath) {
       if (key === '1') {
-        this.$router.push({path: `/cqn/${this.questionnaireID}/${this.UID}`})
+        this.$router.push({path: `/create/${this.UID}`})
       }
       if (key === '2') {
         this.$router.push({path: `/myQuestionnaire/${this.UID}`})
@@ -181,8 +181,8 @@ export default {
     preview (QID) {
       this.$router.push({path: `/preview/${QID}`})
     },
-    create () {
-      this.$router.push(`/create/${this.UID}`)
+    create (QID) {
+      this.$router.push(`/cqn/${QID}/${this.UID}`)
     },
     share (QID) {
       this.$router.push(`/ShareQuestionnaire/${QID}/${this.UID}`)
