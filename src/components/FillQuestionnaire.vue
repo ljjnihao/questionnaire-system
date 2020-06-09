@@ -158,7 +158,7 @@
             </div>
             <div v-else-if="questItem.questionType=='10'">
               <p class="questItem-title">
-                <span>{{questItem.order+1}}、</span>
+                <span style="font-weight:bold">{{questItem.order+1}}、</span>
                 <span
                   v-for="(titleBlank,index) in questItem.content.title"
                   :key="index"
@@ -183,7 +183,7 @@
             </div>
             <div v-else-if="questItem.questionType=='11'">
               <p class="questItem-title">
-                <span>{{questItem.order+1}}、</span>
+                <span style="font-weight:bold">{{questItem.order+1}}、</span>
                 <span
                   v-for="(titleBlank,index) in questItem.content.title"
                   :key="index"

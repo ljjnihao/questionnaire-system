@@ -48,8 +48,8 @@ const router = new Router({
       component: CreateQuestion,
       children: [
         {
-          path: '/CreateQuestion/:UID/:questionnaireID/one',
-          component: () => import('./../components/question/one.vue')
+          path: '/CreateQuestion/:UID/:questionnaireID/one'
+          // component: () => import('.././components/one.vue')
         },
         {
           path: '/CreateQuestion/:UID/:questionnaireID/three',
@@ -78,7 +78,8 @@ const router = new Router({
       path: '/cqn/:QID/:UID',
       name: 'CreateQuestionnaire',
       component: CreateQn
-      // for local test: localhost/#/cqn/5e8c1be865e6f70222803e1b/5edd0a20414cea000b52f78a
+      // for local test: localhost/#/cqn/5edd0a20414cea000b52f78a/5e8c1be865e6f70222803e1b
+      // for local test: localhost:8081/#/cqn/5e8c1ad6cfd9ab0216d81664/5e8c1be865e6f70222803e1b
     },
     {
       path: '/fillQuestionnaire/:questionnaireID',

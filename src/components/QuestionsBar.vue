@@ -47,16 +47,35 @@
 <script>
 export default {
   name: 'QuestionsBar',
+  props: ['editmode'],
   data () {
     return {
-      active: this.activeindex,
-      QID: this.$route.params.QID,
-      UID: this.$route.params.UID
+      editMode: this.editmode
     }
   },
   methods: {
-    handleSelect (key, keyPath) {
-      if (key === '0') {
+    handleSelect (key) {
+      if (!this.editMode) {
+        if (key === '0') {
+          this.$emit('getType', 0)
+        }
+        if (key === '1') {
+          this.$emit('getType', 1)
+        }
+        if (key === '2') {
+          this.$emit('getType', 2)
+        }
+        if (key === '3') {
+          this.$emit('getType', 3)
+        }
+        if (key === '4') {
+          this.$emit('getType', 4)
+        }
+        if (key === '5') {
+          this.$emit('getType', 5)
+        }
+      } else {
+        this.$alert('先取消此题再编辑')
       }
     }
   }
