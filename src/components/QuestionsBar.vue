@@ -47,29 +47,34 @@
 <script>
 export default {
   name: 'QuestionsBar',
+  props: ['warning'],
   data () {
     return {
     }
   },
   methods: {
     handleSelect (key) {
-      if (key === '0') {
-        this.$emit('getType', 0)
-      }
-      if (key === '1') {
-        this.$emit('getType', 1)
-      }
-      if (key === '2') {
-        this.$emit('getType', 2)
-      }
-      if (key === '3') {
-        this.$emit('getType', 3)
-      }
-      if (key === '4') {
-        this.$emit('getType', 4)
-      }
-      if (key === '5') {
-        this.$emit('getType', 5)
+      if (!this.warning) {
+        if (key === '0') {
+          this.$emit('getType', 0)
+        }
+        if (key === '1') {
+          this.$emit('getType', 1)
+        }
+        if (key === '2') {
+          this.$emit('getType', 2)
+        }
+        if (key === '3') {
+          this.$emit('getType', 3)
+        }
+        if (key === '4') {
+          this.$emit('getType', 4)
+        }
+        if (key === '5') {
+          this.$emit('getType', 5)
+        }
+      } else {
+        this.$alert('请先取消掉当前编辑的窗口哟')
       }
     }
   }

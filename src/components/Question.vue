@@ -81,14 +81,6 @@ export default {
       choices: ['', '']
     }
   },
-  watch: {
-    // propQues: function () {
-    //   if (this.propQues !== '') {
-    //     this.title = this.propQues.content.title
-    //     this.choices = this.propQues.content.choice
-    //   }
-    // }
-  },
   computed: {
     questionType: function () {
       var questionType
@@ -121,14 +113,64 @@ export default {
     },
     edit: function () {
       this.loading = true
-      var request = {
-        'type': this.propQues.questionType,
-        'order': this.propQues.order,
-        'content': {
-          'title': this.propQues.content.title,
-          'choice': this.propQues.content.choice
-        },
-        'questionID': this.propQues.questionID
+      var request
+      var type = this.propQues.questionType
+      if (this.checked && (type % 2 !== 0)) {
+        type -= 1
+      }
+      if (!this.checked && (type % 2 === 0)) {
+        type += 1
+      }
+      if (type == '0' || type == '1' || type == '2' || type == '3') {
+        request = {
+          'type': type,
+          'order': this.propQues.order,
+          'content': {
+            'title': this.propQues.content.title,
+            'choice': this.propQues.content.choice
+          },
+          'questionID': this.propQues.questionID
+        }
+      } else {
+        if (type == '10' || type == '11') {
+          let blanks = []
+          let flag = false
+          var temp = ''
+          for (let i = 0; i < this.propQues.content.title.length; i++) {
+            if (this.propQues.content.title[i] !== '_') {
+              temp += this.propQues.content.title[i]
+            } else {
+              while (this.propQues.content.title[i] === '_') {
+                flag = true
+                i++
+              }
+              blanks.push(temp)
+              temp = ''
+              temp += this.propQues.content.title[i]
+            }
+          }
+          blanks.push(temp)
+          if (!flag) {
+            this.$alert('填空题需要横线___哟')
+          }
+          request = {
+            'type': type,
+            'order': this.propQues.order,
+            'content': {
+              'title': blanks
+            },
+            'questionID': this.propQues.questionID
+          }
+        } else {
+          request = {
+            'type': type,
+            'order': this.propQues.order,
+            'content': {
+              'title': this.propQues.content.title
+            },
+            'questionID': this.propQues.questionID
+          }
+        }
       }
       var url = 'https://afo3wm.toutiao15.com/editAndSaveQuestion'
       this.$axios
@@ -169,13 +211,27 @@ export default {
           'questionnaireID': this.QID
         }
       } else {
-        if (this.type === '10' || this.type === '11' || this.type === 10 || this.type === 11) {
+        if (this.type === '5' || this.type === 5) {
+          let blanks = []
+          var temp = ''
+          for (let i = 0; i < this.title.length; i++) {
+            if (this.title[i] !== '_') {
+              temp += this.title[i]
+            } else {
+              while (this.title[i] === '_') {
+                i++
+              }
+              blanks.push(temp)
+              temp = ''
+              temp += this.title[i]
+            }
+          }
+          blanks.push(temp)
           request = {
             'type': this.questionType,
             'order': this.order,
             'content': {
-              'title': this.title
-              // 'choice': this.choices
+              'title': blanks
             },
             'questionnaireID': this.QID
           }
@@ -198,7 +254,11 @@ export default {
           this.loading = false
           if (response.data.success) {
             var order = this.order + 1
-            this.$alert('第' + (order) + '题提交成功')
+            this.$message({
+              showClose: true,
+              message: '第' + (order) + '题提交成功',
+              type: 'success'
+            })
             var ques = {
               'type': request.ype,
               'order': request.order,

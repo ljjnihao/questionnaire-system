@@ -17,7 +17,7 @@
       </el-header>
       <el-container>
         <el-aside>
-          <QuestionsBar v-on:getType="getType"></QuestionsBar>
+          <QuestionsBar v-on:getType="getType" v-bind:warning="this.warning"></QuestionsBar>
         </el-aside>
         <el-main>
           <el-card class="box-card">
@@ -129,118 +129,104 @@
                         </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='4'" class="quesItem">
-                      <p class="questItem-title">
-                        <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
-                        <span>{{questItem.content.title}}</span>
-                        <span style="color: red">*</span>
-                        <span v-text="questItem.title"></span>
-                      </p>
-                      <el-input placeholder="请输入内容"></el-input>
-                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                      <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
+                      <span>{{questItem.content.title}}</span>
+                      <span style="color: red">*</span>
+                      <span v-text="questItem.title"></span>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
                           <i class="el-icon-edit-outline"></i>
                         </el-button>
                         <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
                           <i class="el-icon-delete"></i>
                         </el-button>
+                      <el-input placeholder="请输入内容"></el-input>
                     </div>
                     <div v-else-if="questItem.questionType=='5'" class="quesItem">
-                      <p class="questItem-title">
-                        <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
-                        <span>{{questItem.content.title}}</span>
-                        <span v-text="questItem.title"></span>
-                      </p>
+                      <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
+                      <span>{{questItem.content.title}}</span>
+                      <span v-text="questItem.title"></span>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                        <i class="el-icon-edit-outline"></i>
+                      </el-button>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                        <i class="el-icon-delete"></i>
+                      </el-button>
                       <el-input placeholder="请输入内容"></el-input>
-                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
-                          <i class="el-icon-edit-outline"></i>
-                        </el-button>
-                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
-                          <i class="el-icon-delete"></i>
-                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='6'" class="quesItem">
-                      <p class="questItem-title">
-                        <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
-                        <span>{{questItem.content.title}}</span>
-                        <span style="color: red">*</span>
-                        <span v-text="questItem.title"></span>
-                      </p>
+                      <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
+                      <span>{{questItem.content.title}}</span>
+                      <span style="color: red">*</span>
+                      <span v-text="questItem.title"></span>
+                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                        <i class="el-icon-edit-outline"></i>
+                      </el-button>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                        <i class="el-icon-delete"></i>
+                      </el-button>
                       <el-input placeholder="请输入内容"
                                 type="textarea"
                                 :rows="5">
                       </el-input>
-                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
-                          <i class="el-icon-edit-outline"></i>
-                        </el-button>
-                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
-                          <i class="el-icon-delete"></i>
-                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='7'" class="quesItem">
-                      <p class="questItem-title">
-                        <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
-                        <span>{{questItem.content.title}}</span>
-                        <span v-text="questItem.title"></span>
-                      </p>
+                      <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
+                      <span>{{questItem.content.title}}</span>
+                      <span v-text="questItem.title"></span>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                        <i class="el-icon-edit-outline"></i>
+                      </el-button>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                        <i class="el-icon-delete"></i>
+                      </el-button>
                       <el-input placeholder="请输入内容"
                             type="textarea"
                             :rows="5">
                       </el-input>
-                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
-                          <i class="el-icon-edit-outline"></i>
-                        </el-button>
-                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
-                          <i class="el-icon-delete"></i>
-                        </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='8'" class="quesItem">
-                      <p class="questItem-title">
-                        <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
-                        <span>{{questItem.content.title}}</span>
-                        <span style="color: red">*</span>
-                        <span v-text="questItem.title"></span>
-                      </p>
-                      <el-rate></el-rate>
-                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                      <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
+                      <span>{{questItem.content.title}}</span>
+                      <span style="color: red">*</span>
+                      <span v-text="questItem.title"></span>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
                           <i class="el-icon-edit-outline"></i>
                         </el-button>
                         <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
                           <i class="el-icon-delete"></i>
                         </el-button>
+                      <el-rate></el-rate>
                     </div>
                     <div v-else-if="questItem.questionType=='9'" class="quesItem">
-                      <p class="questItem-title">
-                        <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
-                        <span>{{questItem.content.title}}</span>
-                        <span v-text="questItem.title"></span>
-                      </p>
+                      <span class="questionTitle" style="font-weight: bold">{{questItem.order+1}}</span>
+                      <span>{{questItem.content.title}}</span>
+                      <span v-text="questItem.title"></span>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
+                        <i class="el-icon-edit-outline"></i>
+                      </el-button>
+                      <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
+                        <i class="el-icon-delete"></i>
+                      </el-button>
                       <el-rate></el-rate>
-                       <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
-                          <i class="el-icon-edit-outline"></i>
-                        </el-button>
-                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="delQues(index)">
-                          <i class="el-icon-delete"></i>
-                        </el-button>
                     </div>
-                    <div v-else-if="questItem.questionType=='10'" class="quesItem">
-                      <p class="questItem-title">
-                        <span style="font-weight:bold">{{questItem.order+1}}</span>
-                        <span
-                          v-for="(titleBlank,index) in questItem.content.title"
-                          :key="index"
-                          class="titleBlank"
-                        >
-                          <span v-if="index!=questItem.content.title.length-1">
-                            <span>
-                              {{titleBlank}}
-                              <el-input class="blank"></el-input>
-                            </span>
-                          </span>
-                          <span v-else>
-                            <span>{{titleBlank}}</span>
-                            <span style="color: red">*</span>
+                    <div v-else-if="questItem.questionType=='10'" class="quesItem">                    
+                      <span style="font-weight:bold">{{questItem.order+1}}</span>
+                      <span
+                        v-for="(titleBlank,index) in questItem.content.title"
+                        :key="index"
+                        class="titleBlank"
+                      >
+                        <span v-if="index!=questItem.content.title.length-1">
+                          <span>
+                            {{titleBlank}}
+                            <el-input class="blank"></el-input>
                           </span>
                         </span>
-                      </p>
+                        <span v-else>
+                          <span>{{titleBlank}}</span>
+                          <span style="color: red">*</span>
+                        </span>
+                      </span>
                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
                           <i class="el-icon-edit-outline"></i>
                         </el-button>
@@ -249,24 +235,22 @@
                         </el-button>
                     </div>
                     <div v-else-if="questItem.questionType=='11'" class="quesItem">
-                      <p class="questItem-title">
-                        <span style="font-weight:bold">{{questItem.order+1}}</span>
-                        <span
-                          v-for="(titleBlank,index) in questItem.content.title"
-                          :key="index"
-                          class="titleBlank"
-                        >
-                          <span v-if="index!=questItem.content.title.length-1">
-                            <span>
-                              {{titleBlank}}
-                              <el-input class="blank"></el-input>
-                            </span>
-                          </span>
-                          <span v-else>
-                            <span>{{titleBlank}}</span>
+                      <span style="font-weight:bold">{{questItem.order+1}}</span>
+                      <span
+                        v-for="(titleBlank,index) in questItem.content.title"
+                        :key="index"
+                        class="titleBlank"
+                      >
+                        <span v-if="index!=questItem.content.title.length-1">
+                          <span>
+                            {{titleBlank}}
+                            <el-input class="blank"></el-input>
                           </span>
                         </span>
-                      </p>
+                        <span v-else>
+                          <span>{{titleBlank}}</span>
+                        </span>
+                      </span>
                        <el-button class="edit" type="text" style="float: right; font-size:30px" @click="editQues(index)">
                           <i class="el-icon-edit-outline"></i>
                         </el-button>
@@ -331,9 +315,33 @@ export default {
       this.showEdit = index
     },
     delQues: function (index) {
-      if (this.questions[index] !== '') {
-        this.questions.splice(index, 1)
+      var url = 'https://afo3wm.toutiao15.com/deleteQuestion'
+      var request = {
+        'questionID': this.questions[index].questionID
       }
+      this.$axios
+        .post(url, request)
+        .then(response => {
+          if (response.data.result.deletedCount === 1) {
+            this.$message({
+              showClose: true,
+              message: '删除成功',
+              type: 'success'
+            })
+            this.questions.splice(index, 1)
+          } else {
+            this.$alert('不明原因，删除失败')
+          }
+        })
+        .catch(error => {
+          console.log(error)
+          this.$message({
+            showClose: true,
+            message: '与远程服务器的连接发生错误',
+            type: 'error'
+          })
+          this.$router.push('/non-existing')
+        })
     }
   },
   computed: {
@@ -343,12 +351,18 @@ export default {
       } else {
         return this.questions.length
       }
+    },
+    warning: function () {
+      return this.editMode || this.showEdit !== ''
     }
   },
   watch: {
     questions: function () {
       for (let i = 0; i < this.questions.length; i++) {
-        this.questions[i].order = i
+        if (this.questions[i].order !== i) {
+          this.questions[i].order = i
+          // this.$refs.Question.$emit('orderEdit');
+        }
       }
     },
     newQuesType: function () {
@@ -381,7 +395,7 @@ export default {
           }
           this.questions.push({
             questionType: response.data.Questions[i].questionType,
-            type: response.data.Questions[i].questionType / 2,
+            type: Math.floor(response.data.Questions[i].questionType / 2),
             order: response.data.Questions[i].order,
             content: content,
             questionID: response.data.Questions[i]._id
@@ -436,6 +450,7 @@ export default {
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
   width: 90%;
   text-align: left;
 }

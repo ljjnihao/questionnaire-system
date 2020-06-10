@@ -12,8 +12,8 @@
               </el-steps>
       </el-col>
       <el-col :span="6" style="margin-top:10px">
-        <el-button v-if="doPreview" type="primary" plain icon="el-icon-view" @click="preview">预 览</el-button>
-        <el-button  v-if="doCreate" type="primary" icon="el-icon-check" @click="jumpPublish">发布</el-button>
+        <el-button v-if="previewBtn" type="primary" plain icon="el-icon-view" @click="preview">预 览</el-button>
+        <el-button  v-if="createBtn" type="primary" icon="el-icon-check" @click="jumpPublish">完成创建</el-button>
       </el-col>
     </el-row>
     <el-driver></el-driver>
@@ -30,8 +30,6 @@ export default {
       currentstep: this.step,
       QID: this.qid,
       UID: this.uid,
-      doPreview: this.previewBtn,
-      doCreate: this.createBtn,
       questions: this.uploadData
     }
   },
