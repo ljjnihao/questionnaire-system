@@ -129,11 +129,7 @@ export default {
       if (!this.checked && (type % 2 === 0)) {
         type += 1
       }
-<<<<<<< HEAD
       if (type === '0' || type === 0 || type === '1' || type === 1 || type === '2' || type === 2 || type === '3' || type === 3) {
-=======
-      if (type === '0' || type === '1' || type === '2' || type === '3') {
->>>>>>> 460121771cf122bcad0945bf344fded9637127d9
         request = {
           'questionType': type,
           'order': this.propQues.order,
@@ -144,11 +140,7 @@ export default {
           'questionID': this.propQues.questionID
         }
       } else {
-<<<<<<< HEAD
         if (type === '10' || type === '11' || type === 10 || type === 11) {
-=======
-        if (type === '10' || type === '11') {
->>>>>>> 460121771cf122bcad0945bf344fded9637127d9
           let blanks = []
           let flag = false
           var temp = ''
