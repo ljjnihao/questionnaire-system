@@ -409,14 +409,15 @@ export default {
         .then(response => {
           for (let i = 0; i < response.data.results.length; i++) {
             if (response.data.results[i].success === 0) {
-              this.$message({
-                showClose: true,
-                message: '此IP已经填写过该问卷了',
-                type: 'warning'
-              })
-              return
+              // this.$message({
+              //   showClose: true,
+              //   message: '此IP已经填写过该问卷了',
+              //   type: 'warning'
+              // })
+              // return
             }
           }
+          this.$router.push({ path: `/finish` })
           this.$message({
             showClose: true,
             message: '填写成功',

@@ -17,6 +17,7 @@ import myQuestionnaire from '@/components/myQuestionnaire'
 import Statistic from '@/components/Statistic'
 import Relative from '@/components/Relative'
 import CreateQn from '@/components/CreateQn'
+import Finish from '@/components/Finish'
 Vue.use(Router)
 
 const router = new Router({
@@ -60,7 +61,7 @@ const router = new Router({
       path: '/stat/:UID/:QID',
       name: 'statistic',
       component: Statistic
-      // for local test: localhost/#/statistic/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
+      // for local test: localhost/#/stat/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     {
       path: '/relative/:UID/:QID',
@@ -99,7 +100,7 @@ const router = new Router({
       // for local test: localhost/#/preview/5e8c1ad6cfd9ab0216d81664
     },
     {
-      path: '/ShareQuestionnaire/:UID/:QID',
+      path: '/ShareQuestionnaire/:QID/:UID',
       name: 'ShareQuestionnaire',
       component: ShareQuestionnaire
     // for local test: localhost/#/ShareQuestionnaire/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
@@ -114,6 +115,11 @@ const router = new Router({
       path: '/myQuestionnaire/:UID',
       name: 'myQuestionnaire',
       component: myQuestionnaire
+    },
+    {
+      path: '/finish',
+      name: 'finish',
+      component: Finish
     },
     // for local test: localhost/#/myQuestionnaire/5e8c1be865e6f70222803e1b
     // ! keep it at last
@@ -138,7 +144,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     // don't need to authenticate if filling questionnaire
-    if (/fillQuestionnaire*/g.test(to.path)) {
+    if (/fillQuestionnaire*/g.test(to.path) || to.path === '/non-existing' || to.path === '/finish') {
       next()
     } else {
       /* when route to other pages, check token

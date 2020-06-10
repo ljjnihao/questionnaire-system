@@ -429,7 +429,7 @@ export default {
           type: 'error'
         })
         loading.close()
-        this.$router.push('/non-existing')
+        // this.$router.push('/non-existing')
       })
   }
 }

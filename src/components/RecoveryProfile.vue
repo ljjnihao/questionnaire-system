@@ -68,7 +68,7 @@ export default {
         for (let i = 0; i < response.data.status.length; i++) {
           const date = new Date(response.data.status[i].date)
           const realDate = date.getDate()
-          const month = date.getMonth()
+          const month = date.getMonth() + 1
           this.chartData.rows.push({
             '日期': month + '月' + realDate + '日',
             '回收量': response.data.status[i].number

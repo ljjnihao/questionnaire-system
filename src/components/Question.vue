@@ -25,7 +25,7 @@
           <el-button type="text" v-on:click="del(index)" style=""><i class="el-icon-circle-close"></i></el-button>
         </div>
       </draggable>
-      <el-button type="text" v-on:click="add" style="width: 320px; border: 1px dotted #409EFF; margin-top: 10px">+添加选项</el-button>
+      <el-button type="text" v-on:click="add()" style="width: 320px; border: 1px dotted #409EFF; margin-top: 10px">+添加选项</el-button>
     </div>
     <div style="text-align: right; margin-top: 30px; margin-bottom: 20px">
         <el-button type="text" @click="cancel" style="width: 100px">取消</el-button>
@@ -102,11 +102,19 @@ export default {
   methods: {
     del: function (index) {
       if (this.choices[index] !== '') {
-        this.choices.splice(index, 1)
+        if (!this.editAndSave) {
+          this.choices.splice(index, 1)
+        } else {
+          this.propQues.content.choice.splice(index, 1)
+        }
       }
     },
     add: function () {
-      this.choices.push('')
+      if (!this.editAndSave) {
+        this.choices.push('')
+      } else {
+        this.propQues.content.choice.push('')
+      }
     },
     cancel: function () {
       this.$emit('getEditMode', false)
@@ -121,7 +129,7 @@ export default {
       if (!this.checked && (type % 2 === 0)) {
         type += 1
       }
-      if (type == '0' || type == '1' || type == '2' || type == '3') {
+      if (type === '0' || type === 0 || type === '1' || type === 1 || type === '2' || type === 2 || type === '3' || type === 3) {
         request = {
           'questionType': type,
           'order': this.propQues.order,
@@ -132,7 +140,7 @@ export default {
           'questionID': this.propQues.questionID
         }
       } else {
-        if (type == '10' || type == '11') {
+        if (type === '10' || type === '11' || type === 10 || type === 11) {
           let blanks = []
           let flag = false
           var temp = ''

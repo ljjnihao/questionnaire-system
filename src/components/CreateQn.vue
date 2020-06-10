@@ -209,7 +209,7 @@
                       </el-button>
                       <el-rate></el-rate>
                     </div>
-                    <div v-else-if="questItem.questionType=='10'" class="quesItem">                    
+                    <div v-else-if="questItem.questionType=='10'" class="quesItem">
                       <span style="font-weight:bold">{{questItem.order+1}}</span>
                       <span
                         v-for="(titleBlank,index) in questItem.content.title"
