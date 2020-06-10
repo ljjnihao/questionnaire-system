@@ -32,11 +32,11 @@
                   <el-time-select
                     v-model="startTime"
                     :picker-options="{
-                      start: '08:30',
-                      step: '00:15',
-                      end: '18:30'
+                      start: '00:00',
+                      step: '00:30',
+                      end: '23:30'
                     }"
-                    placeholder="选择时间" style="width: 150px">
+                    placeholder="选择时间" default-value="10:00" style="width: 150px">
                   </el-time-select>
                 </el-row>
               </div>
@@ -56,11 +56,11 @@
                   <el-time-select
                     v-model="endTime"
                     :picker-options="{
-                      start: '08:30',
-                      step: '00:15',
-                      end: '18:30'
+                      start: '00:00',
+                      step: '00:30',
+                      end: '23:30'
                     }"
-                    placeholder="选择时间" style="width: 150px">
+                    placeholder="选择时间" default-value="10:00" style="width: 150px">
                   </el-time-select>
                 </el-row>
               </div>
@@ -99,29 +99,39 @@ export default {
     },
     publish () {
       this.loading = true
-      if (this.startDate === '' && this.endDate === '') {
-        this.$alert('必须要填写发布或结束时间哟')
+      if (this.startDate === '' || this.endDate === '') {
+        this.$alert('必须要填写发布和结束时间哟')
       } else {
-        this.$axios
-          .post('https://afo3wm.toutiao15.com/publishWithDate', {
-            questionnaireID: this.QID,
-            startDate: this.startDate,
-            endDate: this.endDate
-          })
-          .then(response => {
-            this.loading = false
-            console.log(response.data)
-            if (response.data.state === 'success') {
-              console.log('success')
-              this.$router.push({ path: `/ShareQuestionnaire/${this.QID}/${this.UID}` })
-            } else {
-              this.$message('发布失败,问卷不存在')
-            }
-          })
-          .catch(function (error) {
-            console.log(error)
-            this.$router.push('/non-existing')
-          })
+        var end = new Date(this.endDate)
+        var start = new Date(this.startDate)
+        if (end < start) {
+          this.$alert('结束时间不可以早于发布时间哟')
+        } else {
+          if (this.endTime < this.startTime) {
+            this.$alert('结束时间不可以早于发布时间哟')
+          } else {
+            this.$axios
+              .post('https://afo3wm.toutiao15.com/publishWithDate', {
+                questionnaireID: this.QID,
+                startDate: this.startDate,
+                endDate: this.endDate
+              })
+              .then(response => {
+                this.loading = false
+                console.log(response.data)
+                if (response.data.state === 'success') {
+                  console.log('success')
+                  this.$router.push({ path: `/ShareQuestionnaire/${this.QID}/${this.UID}` })
+                } else {
+                  this.$message('发布失败,问卷不存在')
+                }
+              })
+              .catch(function (error) {
+                console.log(error)
+                this.$router.push('/non-existing')
+              })
+          }
+        }
       }
     }
   }
