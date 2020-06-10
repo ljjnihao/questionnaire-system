@@ -468,10 +468,14 @@ export default {
   margin-bottom: 20px
 }
 .blank {
-  width: 50px !important;
+  /* width: 50px !important; */
   border-top-width: 0px;
   border-left-width: 0px;
   border-right-width: 0px;
   border-bottom-width: 1px;
+  width:100px;
+  margin-left: 1%;
+  margin-right: 1%;
+
 }
 </style>

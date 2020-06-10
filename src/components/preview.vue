@@ -95,7 +95,7 @@
                   </div>
                   <div v-else-if="questItem.questionType=='10'">
                       <p class="questItem-title">
-                          <span>{{questItem.order+1}}、</span>
+                          <span>{{questItem.order+1}}</span>
                           <span v-for="(titleBlank,index) in questItem.content.title" :key=index class="titleBlank">
                               <span v-if="index!=questItem.content.title.length-1">
                                   <span>{{titleBlank}}<el-input v-model="answerSet[order].ans.text[index]" placeholder="" class="blank el-autocomplete" disabled></el-input></span>
@@ -108,7 +108,7 @@
                   </div>
                   <div v-else-if="questItem.questionType=='11'">
                       <p class="questItem-title">
-                          <span>{{questItem.order+1}}、</span>
+                          <span>{{questItem.order+1}}</span>
                           <span v-for="(titleBlank,index) in questItem.content.title" :key=index class="titleBlank">
                               <span v-if="index!=questItem.content.title.length-1">
                                   <span>{{titleBlank}}<el-input v-model="answerSet[order].ans.text[index]" placeholder="" class="blank el-autocomplete" disabled></el-input></span>
