@@ -223,7 +223,7 @@ export default {
       questionnaireData: '',
       radio: '',
       answerSet: [],
-      answerUID: this.$md5(localStorage.getItem('Ip')).substring(0, 24),
+      answerUID: '',
       questionID: [],
       customColor: '#409eff',
       percentage: 0,
@@ -436,15 +436,19 @@ export default {
   },
   created: function () {
     let request = {
-      questionnaireID: this.questionnaireID
+      questionnaireID: this.$route.params.questionnaireID
     }
     let url = 'https://afo3wm.toutiao15.com/getQuesnaire'
     let url2 = 'https://afo3wm.toutiao15.com/isExpired'
+    let urlIp = 'https://pv.sohu.com/cityjson?ie=utf-8'
     const loading = this.$loading({
       lock: true,
       text: 'Loading',
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
+    })
+    this.$axios.get(urlIp).then(response => {
+      this.answerUID = this.$md5(response.data.cip).substring(0, 24)
     })
     this.$axios
       .post(url2, request)
