@@ -121,7 +121,7 @@ export default {
       if (!this.checked && (type % 2 === 0)) {
         type += 1
       }
-      if (type == '0' || type == '1' || type == '2' || type == '3') {
+      if (type === '0' || type === '1' || type === '2' || type === '3') {
         request = {
           'questionType': type,
           'order': this.propQues.order,
@@ -132,7 +132,7 @@ export default {
           'questionID': this.propQues.questionID
         }
       } else {
-        if (type == '10' || type == '11') {
+        if (type === '10' || type === '11') {
           let blanks = []
           let flag = false
           var temp = ''

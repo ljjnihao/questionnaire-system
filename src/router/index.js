@@ -60,7 +60,7 @@ const router = new Router({
       path: '/stat/:UID/:QID',
       name: 'statistic',
       component: Statistic
-      // for local test: localhost/#/statistic/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
+      // for local test: localhost/#/stat/5e8c1be865e6f70222803e1b/5e8c1ad6cfd9ab0216d81664
     },
     {
       path: '/relative/:UID/:QID',
