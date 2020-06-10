@@ -98,7 +98,7 @@
                           <span>{{questItem.order+1}}、</span>
                           <span v-for="(titleBlank,index) in questItem.content.title" :key=index class="titleBlank">
                               <span v-if="index!=questItem.content.title.length-1">
-                                  <span>{{titleBlank}}<el-input v-model="answerSet[order].ans.text[index]" placeholder="" class="blank" disabled></el-input></span>
+                                  <span>{{titleBlank}}<el-input v-model="answerSet[order].ans.text[index]" placeholder="" class="blank el-autocomplete" disabled></el-input></span>
                               </span>
                               <span v-else>
                                   <span>{{titleBlank}}</span><span style="color: red">*</span>
@@ -111,7 +111,7 @@
                           <span>{{questItem.order+1}}、</span>
                           <span v-for="(titleBlank,index) in questItem.content.title" :key=index class="titleBlank">
                               <span v-if="index!=questItem.content.title.length-1">
-                                  <span>{{titleBlank}}<el-input v-model="answerSet[order].ans.text[index]" placeholder="" class="blank" disabled></el-input></span>
+                                  <span>{{titleBlank}}<el-input v-model="answerSet[order].ans.text[index]" placeholder="" class="blank el-autocomplete" disabled></el-input></span>
                               </span>
                               <span v-else>
                                   <span>{{titleBlank}}</span>
@@ -236,11 +236,9 @@ export default {
 </script>
 <style scoped>
     .blank {
-        width:50px;
-        border-top-width: 0px;
-        border-left-width: 0px;
-        border-right-width: 0px;
-        border-bottom-width: 1px;
+        width:100px;
+        margin-left: 1%;
+        margin-right: 1%;
     }
     .description {
         margin-left: auto;
