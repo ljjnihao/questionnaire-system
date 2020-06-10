@@ -20,10 +20,10 @@
             <i class="el-icon-s-data" style="font-size:40px; position: relative; width:100%;display:block"></i>
             <span slot="title" class="hyc icon-name">关联分析</span>
           </el-menu-item>
-          <el-menu-item index="5" class="sidebar-item">
+          <!-- <el-menu-item index="5" class="sidebar-item">
             <i class="el-icon-data-line" style="font-size:40px; position: relative; width:100%;display:block"></i>
             <span slot="title" class="hyc icon-name">交叉分析</span>
-          </el-menu-item>
+          </el-menu-item> -->
         </el-menu>
   </div>
 </template>

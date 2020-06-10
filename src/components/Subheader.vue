@@ -40,8 +40,7 @@ export default {
       this.$router.push({ path: `/login` })
     },
     preview () {
-      let routeData = this.$router.resolve({path: `/preview/${this.QID}`})
-      window.open(routeData.href, '_blank')
+      this.$router.push({path: `/preview/${this.QID}`})
     },
     jumpPublish () {
       var request = {
@@ -53,7 +52,7 @@ export default {
         .post(url, request)
         .then(response => {
           if (response.data.state) {
-            // this.$router.push({ path: `/issue/${this.QID}/${this.UID}` })
+            this.$router.push({ path: `/issue/${this.QID}/${this.UID}` })
           } else {
             this.$message({
               showClose: true,

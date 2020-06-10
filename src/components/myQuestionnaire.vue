@@ -186,6 +186,7 @@ export default {
     },
     share (QID) {
       this.$router.push(`/ShareQuestionnaire/${QID}/${this.UID}`)
+      // this.$router.push(`/issue/${QID}/${this.UID}`)
     },
     analysis (QID) {
       this.$router.push(`/stat/${this.UID}/${QID}`)

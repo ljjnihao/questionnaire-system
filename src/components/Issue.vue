@@ -9,9 +9,9 @@
       </el-header>
       <el-main style="padding: 0px; text-align: center">
         <el-row class="content" style="background-color: rgba(242,242,242,1)">
-          <el-col  :xs="12" :sm="12" :md="12" :lg="20" :xl="20">
-            <div style="margin-top: 250px; font-size: 40px">开启发布后,即可分享问卷</div>
-            <el-button type="primary" icon="el-icon-check" style="height: 80px;width: 300px;font-size: 40px;margin-top: 30px" @click="publish">发布问卷</el-button>
+          <el-col  :xs="12" :sm="12" :md="12" :lg="20" :xl="20" class="btn-area">
+            <div style="font-size: 40px">开启发布后,即可分享问卷</div>
+            <el-button type="primary" icon="el-icon-check" style="height: 70px;width: 500px;font-size: 40px;margin-top: 30px" @click="publish">获得问卷链接</el-button>
           </el-col>
           <el-col :xs="12" :sm="12" :md="12" :lg="4" :xl="4" style="background-color: #ffffff; height: 100%">
             <div style="border-bottom:1px solid rgba(240,240,240,1); height: 60px">
@@ -99,26 +99,30 @@ export default {
     },
     publish () {
       this.loading = true
-      this.$axios
-        .post('https://afo3wm.toutiao15.com/publishWithDate', {
-          questionnaireID: this.QID,
-          startDate: this.startDate,
-          endDate: this.endDate
-        })
-        .then(response => {
-          this.loading = false
-          console.log(response.data)
-          if (response.data.state === 'success') {
-            console.log('success')
-            this.$router.push({ path: `/ShareQuestionnaire/${this.UID}/${this.QID}` })
-          } else {
-            this.$message('发布失败,问卷不存在')
-          }
-        })
-        .catch(function (error) {
-          console.log(error)
-          this.$router.push('/non-existing')
-        })
+      if (this.startDate === '' && this.endDate === '') {
+        this.$alert('必须要填写发布或结束时间哟')
+      } else {
+        this.$axios
+          .post('https://afo3wm.toutiao15.com/publishWithDate', {
+            questionnaireID: this.QID,
+            startDate: this.startDate,
+            endDate: this.endDate
+          })
+          .then(response => {
+            this.loading = false
+            console.log(response.data)
+            if (response.data.state === 'success') {
+              console.log('success')
+              this.$router.push({ path: `/ShareQuestionnaire/${this.QID}/${this.UID}` })
+            } else {
+              this.$message('发布失败,问卷不存在')
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+            this.$router.push('/non-existing')
+          })
+      }
     }
   }
 }
@@ -139,5 +143,10 @@ export default {
 }
 .set-clock {
   margin-top: 10px
+}
+.btn-area {
+  /* background-color: white; */
+  margin-top: 300px;
+  /* padding: 100px; */
 }
 </style>
