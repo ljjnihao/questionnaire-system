@@ -10,7 +10,7 @@
           </el-menu-item>
           <el-menu-item index="2" class="sidebar-item">
             <i class="el-icon-odometer" style="font-size:40px; position: relative; width:100%;display:block"></i>
-            <span slot="title" class="hyc icon-name">查看问卷</span>
+            <span slot="title" class="hyc icon-name">回收详情</span>
           </el-menu-item>
           <el-menu-item index="3" class="sidebar-item">
             <i class="el-icon-tickets" style="font-size:40px; position: relative; width:100%;display:block"></i>
