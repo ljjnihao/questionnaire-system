@@ -441,15 +441,18 @@ export default {
     }
     let url = 'https://afo3wm.toutiao15.com/getQuesnaire'
     let url2 = 'https://afo3wm.toutiao15.com/isExpired'
-    let urlIp = 'https://pv.sohu.com/cityjson?ie=utf-8'
+    let urlIp = 'https://api.ipify.org?format=json'
     const loading = this.$loading({
       lock: true,
       text: 'Loading',
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
     })
-    this.$axios.get(urlIp).then(response => {
-      this.answerUID = this.$md5(response.data.cip).substring(0, 24)
+    this.$axios({
+      methods: 'get',
+      url: urlIp
+    }).then(response => {
+      this.answerUID = this.$md5(response.data.ip).substring(0, 24)
     })
     this.$axios
       .post(url2, request)
