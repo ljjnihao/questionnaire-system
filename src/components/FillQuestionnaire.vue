@@ -169,7 +169,6 @@
                       {{titleBlank}}
                       <el-input
                         v-model="answerSet[order].ans.text[index]"
-                        placeholder
                         class="blank"
                       ></el-input>
                     </span>
@@ -630,13 +629,11 @@ export default {
 }
 </script>
 <style scoped>
-.blank {
-  width: 50px;
-  border-top-width: 0px;
-  border-left-width: 0px;
-  border-right-width: 0px;
-  border-bottom-width: 1px;
-}
+    .blank {
+        width:100px;
+        margin-left: 1%;
+        margin-right: 1%;
+    }
 .description {
   margin-left: auto;
   margin-right: auto;
