@@ -123,7 +123,7 @@ export default {
       }
       if (type == '0' || type == '1' || type == '2' || type == '3') {
         request = {
-          'type': type,
+          'questionType': type,
           'order': this.propQues.order,
           'content': {
             'title': this.propQues.content.title,
@@ -154,7 +154,7 @@ export default {
             this.$alert('填空题需要横线___哟')
           }
           request = {
-            'type': type,
+            'questionType': type,
             'order': this.propQues.order,
             'content': {
               'title': blanks
@@ -163,7 +163,7 @@ export default {
           }
         } else {
           request = {
-            'type': type,
+            'questionType': type,
             'order': this.propQues.order,
             'content': {
               'title': this.propQues.content.title
