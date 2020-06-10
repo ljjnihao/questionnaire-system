@@ -185,7 +185,8 @@ export default {
       this.$router.push(`/cqn/${QID}/${this.UID}`)
     },
     share (QID) {
-      this.$router.push(`/ShareQuestionnaire/${this.UID}/${QID}`)
+      this.$router.push(`/ShareQuestionnaire/${QID}/${this.UID}`)
+      // this.$router.push(`/ShareQuestionnaire/${this.UID}/${QID}`)
       // this.$router.push(`/issue/${QID}/${this.UID}`)
     },
     analysis (QID) {

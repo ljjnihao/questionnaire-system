@@ -48,7 +48,7 @@ export default {
         this.$router.push({path: `/CheckQuestionnaire/${this.UID}/${this.QID}`})
       }
       if (key === '3') {
-        this.$router.push({path: `/Stat/${this.UID}/${this.QID}`})
+        this.$router.push({path: `/stat/${this.UID}/${this.QID}`})
       }
       if (key === '4') {
         this.$router.push({path: `/relative/${this.UID}/${this.QID}`})

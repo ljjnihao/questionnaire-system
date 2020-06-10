@@ -57,16 +57,6 @@ export default {
     }
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    logout () {
-      //! don't use arrow function here
-      console.log(this.$router)
-      localStorage.setItem('user-token', '')
-      localStorage.setItem('user-id', '')
-      this.$router.push({path: `/login`})
-    },
     createquestionnaire (form) {
       this.loading = true
       var order = 1
