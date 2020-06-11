@@ -4,14 +4,8 @@
       v-bind:style="{ 'background-image': 'url(' + require('../assets/imgs/背景.jpg') + ')' }"
     >
       <el-header style="font-size: 20px; padding: 0px !important">
-        <el-menu class="el-menu" mode="horizontal">
-          <el-menu-item index="0" style="font-size: 35px;color: #409EFF">LOGO</el-menu-item>
-          <el-menu-item index="1" style="font-size: 20px">创建问卷</el-menu-item>
-          <el-menu-item index="2" style="font-size: 20px">我的问卷</el-menu-item>
-          <el-menu-item index="3" style="font-size: 20px">个人信息</el-menu-item>
-        </el-menu>
+        <Header></Header>
       </el-header>
-
       <el-main>
         <el-row class="content">
           <el-col :xs="24" :sm="{span: 6,offset: 9}">
@@ -30,7 +24,7 @@
                   <el-input
                     v-model="formForRegister.password"
                     prefix-icon="el-icon-lock"
-                    placeholder="请输入8-20位密码(包括数字和密码)"
+                    placeholder="请输入8-20位密码(包括数字和英文)"
                     type="text"
                     show-password
                   ></el-input>
@@ -62,6 +56,9 @@
 <script>
 export default {
   name: 'Register',
+  components: {
+    Header: require('./Header.vue').default
+  },
   data () {
     var checkName = (rule, value, callback) => {
       console.log('in check:')
@@ -135,6 +132,7 @@ export default {
       this.loading = true
       this.$refs[form].validate(valid => {
         if (!valid) {
+          this.loading = false
           this.$alert('密码或用户名不符合要求', '注册失败', {
             confirmButtonText: '确定'
           })

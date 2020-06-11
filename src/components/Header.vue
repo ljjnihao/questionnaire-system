@@ -47,6 +47,8 @@ export default {
     logout () {
       localStorage.setItem('user-token', '')
       localStorage.setItem('user-id', '')
+      localStorage.setItem('user-temp-token', '')
+      localStorage.setItem('user-temp-id', '')
       this.$router.push({path: `/login`})
     },
     handleSelect (key, keyPath) {

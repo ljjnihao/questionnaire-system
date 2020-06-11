@@ -290,7 +290,7 @@ export default {
               this.tabeldata[i].push({
                 choice: this.processed[i].choice[j],
                 choiceNum: this.processed[i].choiceNum[j],
-                Percent: percent
+                Percent: percent.toFixed(1)
               })
             }
             break
@@ -311,7 +311,7 @@ export default {
               this.tabeldata[i].push({
                 choice: this.processed[i].choice[j],
                 choiceNum: this.processed[i].choiceNum[j],
-                Percent: percent
+                Percent: percent.toFixed(1)
               })
             }
             break
@@ -332,7 +332,7 @@ export default {
               this.tabeldata[i].push({
                 choice: this.processed[i].choice[j],
                 choiceNum: this.processed[i].choiceNum[j],
-                Percent: percent
+                Percent: percent.toFixed(1)
               })
             }
             break
@@ -353,7 +353,7 @@ export default {
               this.tabeldata[i].push({
                 choice: this.processed[i].choice[j],
                 choiceNum: this.processed[i].choiceNum[j],
-                Percent: percent
+                Percent: percent.toFixed(1)
               })
             }
             break
@@ -362,7 +362,7 @@ export default {
               columns: ['分数', '小计'],
               rows: []
             }
-            this.processed[i].avg = this.processed[i].totalscore / this.processed[i].sum
+            this.processed[i].avg = (this.processed[i].totalscore / this.processed[i].sum).toFixed(2)
             for (let j = 0; j < this.processed[i].marknum.length; j++) {
               let percent = 0
               if (this.processed[i].sum !== 0) {
@@ -375,7 +375,7 @@ export default {
               this.tabeldata[i].push({
                 mark: this.processed[i].mark[j],
                 marknum: this.processed[i].marknum[j],
-                Percent: percent
+                Percent: percent.toFixed(1)
               })
             }
             break
@@ -384,7 +384,7 @@ export default {
               columns: ['分数', '小计'],
               rows: []
             }
-            this.processed[i].avg = this.processed[i].totalscore / this.processed[i].sum
+            this.processed[i].avg = (this.processed[i].totalscore / this.processed[i].sum).toFixed(2)
             for (let j = 0; j < this.processed[i].marknum.length; j++) {
               let percent = 0
               if (this.processed[i].sum !== 0) {
@@ -397,7 +397,7 @@ export default {
               this.tabeldata[i].push({
                 mark: this.processed[i].mark[j],
                 marknum: this.processed[i].marknum[j],
-                Percent: percent
+                Percent: percent.toFixed(1)
               })
             }
             break

@@ -89,7 +89,11 @@ export default {
             if (this.rememPw) {
               localStorage.setItem('user-token', this.token)
               localStorage.setItem('user-id', this.UID)
+            } else {
+              sessionStorage.setItem('user-temp-token', this.token)
+              sessionStorage.setItem('user-temp-id', this.UID)
             }
+
             // ! Use a closure to capture the correct "this" or using arrow function
             this.$router.push({ path: `/create/${this.UID}` })
           } else {

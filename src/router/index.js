@@ -133,6 +133,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('user-token')
+  const tempToken = sessionStorage.getItem('user-temp-token')
   // console.log(token)
   if (to.path === '/' || to.path === '/register' || to.path === '/login') {
     //* when route to index, check whether token exists, if so, route to create
@@ -140,6 +141,10 @@ router.beforeEach((to, from, next) => {
       const uid = localStorage.getItem('user-id')
       next(`/create/${uid}`)
     } else {
+      if (tempToken !== '' && tempToken !== null) {
+        const uid = sessionStorage.getItem('user-temp-id')
+        next(`create/${uid}`)
+      }
       next()
     }
   } else {
@@ -151,7 +156,7 @@ router.beforeEach((to, from, next) => {
         safely route if exists
         otherwise， route to index
       */
-      if (token !== '' && token != null) {
+      if ((token !== '' && token != null) || (tempToken !== '' && tempToken !== null)) {
         next()
       } else {
         next('/login')
