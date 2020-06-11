@@ -107,7 +107,7 @@ export default {
         if (end < start) {
           this.$alert('结束时间不可以早于发布时间哟')
         } else {
-          if (this.endTime < this.startTime) {
+          if (this.endTime < this.startTime && end === start) {
             this.$alert('结束时间不可以早于发布时间哟')
           } else {
             this.$axios
